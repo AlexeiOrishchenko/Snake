@@ -1,9 +1,10 @@
-package com.game.snake.objects;
+package com.game.snake.objects.snake;
 
 /**
  * @author Koliadin Nikita
- * @version 1.1
- * <p>This class is the direction of the snake</p>
+ * @version 1.2
+ *
+ * This class is the direction of the snake
  */
 public enum SnakeDirection {
     UP,
