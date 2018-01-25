@@ -11,8 +11,6 @@ import org.jetbrains.annotations.Contract;
  */
 public final class Mouse {
 
-    private static Mouse mouse;
-
     /* The coordinate of the mouse */
     private final int x;
     private final int y;
@@ -20,11 +18,6 @@ public final class Mouse {
     public Mouse(int x, int y) {
         this.x = x;
         this.y = y;
-    }
-
-    @Contract(pure = true)
-    public static Mouse getMouse() {
-        return mouse;
     }
 
     @Contract(pure = true)

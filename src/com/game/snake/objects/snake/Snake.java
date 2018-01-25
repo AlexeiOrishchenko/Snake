@@ -25,7 +25,7 @@ public final class Snake {
 
     public Snake() {
         sections = new ArrayList<SnakeSection>();
-        sections.add(new SnakeSection(0, 0));
+        sections.add(new SnakeSection(1, 1));
         direction = SnakeDirection.DOWN;
         isAlive = true;
     }
@@ -130,6 +130,6 @@ public final class Snake {
      * The method checks whether the new head is within the room
      */
     private void checkBorders(@NotNull SnakeSection head) {
-        isAlive = (head.getX() >= 0 && head.getX() < Room.room.getWidth()) && (head.getY() >= 0 && head.getY() < Room.room.getHeight());
+        isAlive = (head.getX() >= 1 && head.getX() < Room.room.getWidth() + 2) && (head.getY() >= 1 && head.getY() < Room.room.getHeight() + 2);
     }
 }

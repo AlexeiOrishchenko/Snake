@@ -18,8 +18,10 @@ import java.awt.event.KeyEvent;
  */
 public class Room {
 
+    /* static object of the room - room can be only one */
     public static Room room;
 
+    /* real objects of the game */
     private Snake snake;
     private Mouse mouse;
 
@@ -71,9 +73,9 @@ public class Room {
      * Create new mouse
      */
     public void createMouse() {
-        mouse = new Mouse((int) (Math.random() * width), (int) (Math.random() * height));
-        for (SnakeSection snakez : snake.getSections()) {
-            if (snakez.getX() == mouse.getX() && snakez.getY() == mouse.getY()) {
+        mouse = new Mouse((int) (Math.random() * width + 1), (int) (Math.random() * height + 1));
+        for (SnakeSection snakeSection : snake.getSections()) {
+            if (snakeSection.getX() == mouse.getX() && snakeSection.getY() == mouse.getY()) {
                 createMouse();
             }
         }
@@ -95,15 +97,20 @@ public class Room {
         KeyboardObserver keyboardObserver = new KeyboardObserver();
         keyboardObserver.start();
 
-        /* while snake is alive */
+        /* Wait for loading */
+        try { // FIXME: 24.01.2018
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        /* While snake is alive */
         while (snake.isAlive()) {
             /* "Observer" contains events about keystrokes? */
             if (keyboardObserver.hasKeyEvents()) {
                 KeyEvent event = keyboardObserver.getEventFromTop();
                 /* if equals 'q' -> exit */
-                if (event.getKeyChar() == 'q') {
-                    return;
-                }  else if (event.getKeyChar() == 'p') { /* PAUSE */
+                if (event.getKeyChar() == 'p') { /* PAUSE */
                     while (true) {
                         try {
                             Thread.sleep(1000);
@@ -117,9 +124,11 @@ public class Room {
                             e.printStackTrace();
                         }
                     }
+                } else if (event.getKeyChar() == 'q') {
+                    return;
                 }
 
-                /* arrow movement */
+                /* Arrow movement */
                 switch (event.getKeyCode()) {
                     case KeyEvent.VK_LEFT:
                         if (snake.getDirection() != SnakeDirection.RIGHT) {
@@ -144,9 +153,9 @@ public class Room {
                 }
             }
 
-            snake.move();   /* move the snake */
-            print();        /* to display the current state of the game */
-            sleep();        /* pause between moves */
+            snake.move();   /* Move the snake */
+            print();        /* Display the current state of the game */
+            sleep();        /* Pause between moves */
         }
 
         /* Display the message "Game Over" */

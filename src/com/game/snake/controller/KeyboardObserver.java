@@ -1,5 +1,6 @@
 package com.game.snake.controller;
 
+import com.game.snake.setting.Setting;
 import com.game.snake.objects.room.Room;
 
 import javax.swing.*;
@@ -20,30 +21,17 @@ public class KeyboardObserver extends Thread {
 
     public static JFrame frame;
 
+    static {
+        KeyboardObserver.frame = new JFrame();
+        KeyboardObserver.frame.setTitle("Snake");
+        KeyboardObserver.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        KeyboardObserver.frame.setUndecorated(false); // Frame
+        KeyboardObserver.frame.setSize(((Room.room.getWidth() + 3) * Setting.getSizeOfGame()) + 17, ((Room.room.getHeight() + 3) * Setting.getSizeOfGame()) + 40);
+        KeyboardObserver.frame.setLayout(new GridBagLayout());
+    }
+
     @Override
     public void run() {
-        frame = new JFrame("KeyPress Tester");
-        frame.setTitle("Snake");
-
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setUndecorated(false); // Frame
-        frame.setSize((Room.room.getWidth() * 10) + 17, (Room.room.getHeight() * 10) + 40);
-        frame.setLayout(new GridBagLayout());
-
-        /* do not need from version 1.1*/
-//        frame.addFocusListener(new FocusListener() {
-//
-//            @Override
-//            public void focusGained(FocusEvent e) {
-//                //do nothing
-//            }
-//
-//            @Override
-//            public void focusLost(FocusEvent e) {
-//                System.exit(0);
-//            }
-//        });
-
         frame.addKeyListener(new KeyListener() {
 
             @Override
@@ -62,7 +50,6 @@ public class KeyboardObserver extends Thread {
             }
         });
     }
-
 
     public boolean hasKeyEvents() {
         return !keyEvents.isEmpty();
