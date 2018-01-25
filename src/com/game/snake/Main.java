@@ -9,7 +9,7 @@ import com.game.snake.setting.Setting;
  * @author Koliadin Nikita
  * @version 1.3
  *
- * This class  emulate GUI
+ * This class  emulate GUI, in future will be GUI
  */
 public class Main {
     public static void main(String[] args) {
