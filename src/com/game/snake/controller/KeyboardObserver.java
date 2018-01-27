@@ -1,7 +1,6 @@
 package com.game.snake.controller;
 
 import com.game.snake.setting.Setting;
-import com.game.snake.objects.room.Room;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,27 +11,28 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * @author Koliadin Nikita
- * @version 1.2
+ * @version 1.4
  *
  * This class is listener
  */
-public class KeyboardObserver extends Thread {
-    private Queue<KeyEvent> keyEvents = new ArrayBlockingQueue<KeyEvent>(100);
+public class KeyboardObserver implements Runnable {
+    private Queue<KeyEvent> keyEvents = new ArrayBlockingQueue<KeyEvent>(1000);
 
-    public static JFrame frame;
+    public static JFrame jFrame;
 
     static {
-        KeyboardObserver.frame = new JFrame();
-        KeyboardObserver.frame.setTitle("Snake");
-        KeyboardObserver.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        KeyboardObserver.frame.setUndecorated(false); // Frame
-        KeyboardObserver.frame.setSize(((Room.room.getWidth() + 3) * Setting.getSizeOfGame()) + 17, ((Room.room.getHeight() + 3) * Setting.getSizeOfGame()) + 40);
-        KeyboardObserver.frame.setLayout(new GridBagLayout());
+        KeyboardObserver.jFrame = new JFrame("Snake");
+        KeyboardObserver.jFrame.setUndecorated(false); // Frame window
+        jFrame.setPreferredSize(new Dimension(Setting.getMainMenuWidth(), Setting.getMainMenuHeight()));
+        jFrame.setLocationRelativeTo(null); // the center of the screen
+        KeyboardObserver.jFrame.setSize(
+                ((Setting.getRoomWidth() + 3) * Setting.getSizeOfGame()) + 17,
+                ((Setting.getRoomHeight() + 3) * Setting.getSizeOfGame()) + 40);
     }
 
     @Override
     public void run() {
-        frame.addKeyListener(new KeyListener() {
+        jFrame.addKeyListener(new KeyListener() {
 
             @Override
             public void keyTyped(KeyEvent e) {
@@ -59,4 +59,3 @@ public class KeyboardObserver extends Thread {
         return keyEvents.poll();
     }
 }
-

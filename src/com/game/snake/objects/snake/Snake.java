@@ -2,6 +2,7 @@ package com.game.snake.objects.snake;
 
 import com.game.snake.objects.mouse.Mouse;
 import com.game.snake.objects.room.Room;
+import com.game.snake.setting.Setting;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -10,7 +11,7 @@ import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.2
+ * @version 1.4
  *
  * This class is the snake
  */
@@ -130,6 +131,7 @@ public final class Snake {
      * The method checks whether the new head is within the room
      */
     private void checkBorders(@NotNull SnakeSection head) {
-        isAlive = (head.getX() >= 1 && head.getX() < Room.room.getWidth() + 2) && (head.getY() >= 1 && head.getY() < Room.room.getHeight() + 2);
+        isAlive = (head.getX() >= 1 && head.getX() < Setting.getRoomWidth() + 2)
+                && (head.getY() >= 1 && head.getY() < Setting.getRoomHeight() + 2);
     }
 }

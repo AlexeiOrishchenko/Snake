@@ -1,5 +1,5 @@
 1. GUI
-    1.1. PLAY
+    1.1. PLAY +
     1.2. SETTING
         1.2.1. COLOR
             1.2.1.1 SNAKE
@@ -7,9 +7,10 @@
             1.2.1.3 FRAME
         1.2.2. FRAME
         1.2.3. SIZE
-    1.3. EXIT
+    1.3. EXIT +
 
 2. OPTIMIZE
-    2.1. createMouse();
-    2.2. Room
-    2.3. Setting
+    2.1. createMouse(); +
+    2.2. Room +
+    2.3. Setting +
+    2.4. WASD +

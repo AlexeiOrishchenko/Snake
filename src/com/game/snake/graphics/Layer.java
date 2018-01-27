@@ -10,20 +10,20 @@ import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.2
+ * @version 1.4
  *
  * This class is Graphic class
  */
-public class Layer extends JPanel {
+public final class Layer extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        int size = Setting.getSizeOfGame();
+        final int size = Setting.getSizeOfGame();
 
-        int width = Room.room.getWidth() + 2;
-        int height = Room.room.getHeight() + 2;
+        final int width = Setting.getRoomWidth() + 2;
+        final int height = Setting.getRoomHeight() + 2;
 
 
         /* Red color of face */

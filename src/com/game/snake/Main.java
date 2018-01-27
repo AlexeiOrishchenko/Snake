@@ -1,21 +1,20 @@
 package com.game.snake;
 
+import com.game.snake.gui.MainGUI;
 
-import com.game.snake.objects.room.Room;
-import com.game.snake.objects.snake.Snake;
-import com.game.snake.setting.Setting;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @author Koliadin Nikita
- * @version 1.3
+ * @version 1.4
  *
- * This class  emulate GUI, in future will be GUI
+ * Start MainGUI in SingleThreadExecutor
  */
 public class Main {
     public static void main(String[] args) {
-        Room.room = new Room(20, 20, new Snake());
-        Setting.setSizeOfGame(15);
-        Room.room.createMouse();
-        Room.room.run();
+        ExecutorService executorMainGUI = Executors.newSingleThreadExecutor();
+        executorMainGUI.execute(new MainGUI());
+        executorMainGUI.shutdown();
     }
 }
