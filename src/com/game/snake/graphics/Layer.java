@@ -10,11 +10,11 @@ import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.4
+ * @version 1.5
  *
  * This class is Graphic class
  */
-public final class Layer extends JPanel {
+public class Layer extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
@@ -27,7 +27,7 @@ public final class Layer extends JPanel {
 
 
         /* Red color of face */
-        g.setColor(java.awt.Color.RED);
+        g.setColor(Setting.getColorFace());
         /* Draw a rectangle showing the edge of the field to the right */
         g.fillRect(width * size, 0, size, (height * size));
         /* Draw a rectangle showing the edge of the field to the down */
@@ -38,12 +38,12 @@ public final class Layer extends JPanel {
         g.fillRect(0, 0, (width * size) , size);
 
         /* Gray color of the mouse */
-        g.setColor(Color.GRAY);
+        g.setColor(Setting.getColorMouse());
         /* draw rectangle showing mouse */
         g.fillRect(Room.room.getMouse().getX() * size, Room.room.getMouse().getY() * size, size, size);
 
-        /* Gray color of the mouse */
-        g.setColor(Color.GREEN);
+        /* Snake color of the Snake */
+        g.setColor(Setting.getColorSnake());
         /* Get sections of the snake */
         List<SnakeSection> getSection = Room.room.getSnake().getSections();
         for (SnakeSection aGetSection : getSection) {

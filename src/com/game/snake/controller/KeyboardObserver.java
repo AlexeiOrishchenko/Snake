@@ -11,7 +11,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * @author Koliadin Nikita
- * @version 1.4
+ * @version 1.5
  *
  * This class is listener
  */
@@ -21,7 +21,7 @@ public class KeyboardObserver implements Runnable {
     public static JFrame jFrame;
 
     static {
-        KeyboardObserver.jFrame = new JFrame("Snake");
+        KeyboardObserver.jFrame = new JFrame(Setting.getPlayJFrameTitle());
         KeyboardObserver.jFrame.setUndecorated(false); // Frame window
         jFrame.setPreferredSize(new Dimension(Setting.getMainMenuWidth(), Setting.getMainMenuHeight()));
         jFrame.setLocationRelativeTo(null); // the center of the screen
@@ -30,6 +30,9 @@ public class KeyboardObserver implements Runnable {
                 ((Setting.getRoomHeight() + 3) * Setting.getSizeOfGame()) + 40);
     }
 
+    /**
+     * This is listener of the keyboard. Every key event add to the ArrayBlockingQueue
+     */
     @Override
     public void run() {
         jFrame.addKeyListener(new KeyListener() {
@@ -55,6 +58,9 @@ public class KeyboardObserver implements Runnable {
         return !keyEvents.isEmpty();
     }
 
+    /**
+     * @return the first added key event
+     */
     public KeyEvent getEventFromTop() {
         return keyEvents.poll();
     }

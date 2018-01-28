@@ -187,6 +187,7 @@ public class Room implements Runnable {
         System.out.println("Game Over!");
         /* Turn on mainMenu visible */
         KeyboardObserver.jFrame.setVisible(false);
+        Setting.setWaitThreadMainMenu(false);
         jFrame.setVisible(true);
     }
 

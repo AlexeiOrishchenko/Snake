@@ -28,7 +28,7 @@ public class PlayGUI extends JFrame implements Runnable {
         /* Create Room and Snake */
         Room.room = new Room(new Snake(), jFrame);
 
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        ExecutorService executorService = Executors.newWorkStealingPool();
         executorService.execute(Room.room);
         executorService.shutdown();
     }
