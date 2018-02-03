@@ -3,6 +3,7 @@ package com.game.snake.objects.snake;
 import com.game.snake.objects.mouse.Mouse;
 import com.game.snake.objects.room.Room;
 import com.game.snake.setting.Setting;
+
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 

@@ -7,6 +7,7 @@ import com.game.snake.objects.snake.Snake;
 import com.game.snake.objects.snake.SnakeDirection;
 import com.game.snake.objects.snake.SnakeSection;
 import com.game.snake.setting.Setting;
+
 import org.jetbrains.annotations.Contract;
 
 import javax.swing.*;
