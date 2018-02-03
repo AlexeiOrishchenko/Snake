@@ -7,7 +7,6 @@ import org.jetbrains.annotations.Contract;
  * @version 1.2
  *
  * This class is the mouse
- * We can not extends this class
  */
 public final class Mouse {
 

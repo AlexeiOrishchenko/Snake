@@ -105,9 +105,7 @@ public class Room implements Runnable {
     public void run() {
         /* Create the object "the observer for the keyboard" and start it */
         KeyboardObserver keyboardObserver = new KeyboardObserver();
-        ExecutorService executorKeyboardObserver = Executors.newSingleThreadExecutor();
-        executorKeyboardObserver.execute(keyboardObserver);
-        executorKeyboardObserver.shutdown();
+        Executors.newSingleThreadExecutor().execute(keyboardObserver);
 
         /* While snake is alive */
         while (snake.isAlive()) {

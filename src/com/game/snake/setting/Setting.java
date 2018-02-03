@@ -6,7 +6,7 @@ import java.awt.*;
 
 /**
  * @author Koliadin Nikita
- * @version 1.5
+ * @version 1.6
  *
  * This class contains main parameters of the game
  */
@@ -34,12 +34,25 @@ public class Setting {
     private static String infoSkype = "Skype: koliadin321";
     private static String infoThanks = "!!!Thank you for playing this game!!!";
 
+    private static String color1 = "RED";
+    private static String color2 = "GREEN";
+    private static String color3 = "BLUE";
+    private static String color4 = "YELLOW";
+    private static String color5 = "GRAY";
+    private static String color6 = "BLACK";
+
+    private static String sizeListValue1 = "15";
+    private static String sizeListValue2 = "20";
+    private static String sizeListValue3 = "30";
+    private static String sizeListValue4 = "40";
+    private static String sizeListValue5 = "50";
+
     private static int sizeOfGame = 15;
 
     private static int mainMenuWidth = 350;
     private static int mainMenuHeight = 350;
 
-    private static int settingWidth = 450;
+    private static int settingWidth = 550;
     private static int settingHeight = 300;
 
     private static int infoWidth = 350;
@@ -57,7 +70,7 @@ public class Setting {
     private static Color colorMouse = Color.GRAY;
     private static Color colorSnake = Color.GREEN;
 
-    private static boolean changeColorMainMenu = true;
+    private static boolean changeColor = true;
 
     /* Go to pause 2 thread in method changeColorOfLabel if waitThread is true */
     private static boolean waitThreadMainMenu = false;
@@ -223,6 +236,105 @@ public class Setting {
     }
 
     @Contract(pure = true)
+    public static String getColor1() {
+        return color1;
+    }
+
+    public static void setColor1(String color1) {
+        Setting.color1 = color1;
+    }
+
+    @Contract(pure = true)
+    public static String getColor2() {
+        return color2;
+    }
+
+    public static void setColor2(String color2) {
+        Setting.color2 = color2;
+    }
+
+    @Contract(pure = true)
+    public static String getColor3() {
+        return color3;
+    }
+
+    public static void setColor3(String color3) {
+        Setting.color3 = color3;
+    }
+
+    @Contract(pure = true)
+    public static String getColor4() {
+        return color4;
+    }
+
+    public static void setColor4(String color4) {
+        Setting.color4 = color4;
+    }
+
+    @Contract(pure = true)
+    public static String getColor5() {
+        return color5;
+    }
+
+    public static void setColor5(String color5) {
+        Setting.color5 = color5;
+    }
+
+    @Contract(pure = true)
+    public static String getColor6() {
+        return color6;
+    }
+
+    public static void setColor6(String color6) {
+        Setting.color6 = color6;
+    }
+
+    @Contract(pure = true)
+    public static String getSizeListValue1() {
+        return sizeListValue1;
+    }
+
+    public static void setSizeListValue1(String sizeListValue1) {
+        Setting.sizeListValue1 = sizeListValue1;
+    }
+
+    @Contract(pure = true)
+    public static String getSizeListValue2() {
+        return sizeListValue2;
+    }
+
+    public static void setSizeListValue2(String sizeListValue2) {
+        Setting.sizeListValue2 = sizeListValue2;
+    }
+
+    @Contract(pure = true)
+    public static String getSizeListValue3() {
+        return sizeListValue3;
+    }
+
+    public static void setSizeListValue3(String sizeListValue3) {
+        Setting.sizeListValue3 = sizeListValue3;
+    }
+
+    @Contract(pure = true)
+    public static String getSizeListValue4() {
+        return sizeListValue4;
+    }
+
+    public static void setSizeListValue4(String sizeListValue4) {
+        Setting.sizeListValue4 = sizeListValue4;
+    }
+
+    @Contract(pure = true)
+    public static String getSizeListValue5() {
+        return sizeListValue5;
+    }
+
+    public static void setSizeListValue5(String sizeListValue5) {
+        Setting.sizeListValue5 = sizeListValue5;
+    }
+
+    @Contract(pure = true)
     public static int getSizeOfGame() {
         return sizeOfGame;
     }
@@ -358,12 +470,12 @@ public class Setting {
     }
 
     @Contract(pure = true)
-    public static boolean isChangeColorMainMenu() {
-        return changeColorMainMenu;
+    public static boolean isChangeColor() {
+        return changeColor;
     }
 
-    public static void setChangeColorMainMenu(boolean changeColorMainMenu) {
-        Setting.changeColorMainMenu = changeColorMainMenu;
+    public static void setChangeColor(boolean changeColor) {
+        Setting.changeColor = changeColor;
     }
 
     @Contract(pure = true)
@@ -384,3 +496,4 @@ public class Setting {
         Setting.fullScreenMainMenu = fullScreenMainMenu;
     }
 }
+

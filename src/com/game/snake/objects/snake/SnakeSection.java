@@ -9,7 +9,6 @@ import java.util.Objects;
  * @version 1.2
  *
  * This class is the part of the snake.
- * We can not extends this class.
  */
 public final class SnakeSection {
 

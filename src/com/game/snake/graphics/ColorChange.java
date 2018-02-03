@@ -7,22 +7,24 @@ import java.awt.*;
 
 /**
  * @author Koliadin Nikita
- * @version 1.5
+ * @version 1.6
  *
  * This class have method that change color of the label every times of ms.
  */
 public class ColorChange {
 
     /**
-     * <b> This method set the color of the label, and change it every sleepTime ms</b>
-     * @param jLabel <b>the label that we are set the color</b>
+     * This method set the color of the label, and change it every sleepTime ms
+     * @param jLabel the label that we are set the color
      */
     public static void changeColorOfLabel(final JLabel jLabel) throws InterruptedException {
         int r = (int) (Math.random() * 256);
         int g = (int) (Math.random() * 256);
         int b = (int) (Math.random() * 256);
-        while (Setting.isChangeColorMainMenu()) {
-            if (Setting.isWaitThreadMainMenu()) {
+        while (true) {
+            if (!Setting.isChangeColor()) {
+                Thread.sleep(1000);
+            } else if (Setting.isWaitThreadMainMenu()) {
                 Thread.sleep(1000);
             } else {
                 if (r < 255) {
@@ -60,7 +62,7 @@ public class ColorChange {
     }
 
     /**
-     * <b>Sleep ms</b>
+     * Sleep ms
      */
     private static void sleep() throws InterruptedException {
         Thread.sleep(Setting.getSleepColorChangeTimeMS());

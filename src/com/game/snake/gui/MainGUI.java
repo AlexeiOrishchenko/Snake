@@ -1,6 +1,8 @@
 package com.game.snake.gui;
 
 import com.game.snake.graphics.ColorChange;
+import com.game.snake.objects.room.Room;
+import com.game.snake.objects.snake.Snake;
 import com.game.snake.setting.Setting;
 
 import javax.swing.*;
@@ -9,11 +11,9 @@ import java.util.concurrent.Executors;
 
 /**
  * @author Koliadin Nikita
- * @version 1.5
+ * @version 1.6
  *
- * This class is the main GUI that has button "Play", "Setting" and "Exit", and also info
- * about author of this game.
- * This class implements Runnable.
+ * This class is the main GUI that has button "Play","Setting", "Info" and "Exit",
  */
 public class MainGUI implements Runnable {
 
@@ -26,12 +26,15 @@ public class MainGUI implements Runnable {
     private final JButton jButtonExit = new JButton(Setting.getMainMenuJButtonExit());
     private final JLabel jLabelAuthor = new JLabel(Setting.getAUTHOR());
 
+    /* Our single object of the SettingGUI class */
+    private SettingGUI settingGUI;
+
     public MainGUI() {
     }
 
     /**
-     * This is the main method of the main menu. Default has 3 thread - one main menu listener
-     * and 2 for change color labels.
+     * This is the main method of the main menu.
+     * Default has 3 thread - one main menu listener and 2 for change color labels.
      */
     @Override
     public void run() {
@@ -40,9 +43,10 @@ public class MainGUI implements Runnable {
         pane.setLayout(new GridBagLayout());
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
+        /* Centralize all the buttons */
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
 
         /* Label */
-        gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new Insets(-100, 0, 25, 0);
         pane.add(jLabelWelcome, gridBagConstraints);
@@ -63,7 +67,10 @@ public class MainGUI implements Runnable {
             /* Close mainMenu visible and start PlayGUI in new thread */
             MainGUI.this.jFrame.setVisible(false);
             Setting.setWaitThreadMainMenu(true);
-            Executors.newSingleThreadExecutor().execute(new PlayGUI(jFrame));
+            /* Create Room and Snake */
+            Room.room = new Room(new Snake(), jFrame);
+            Executors.newSingleThreadExecutor().execute(Room.room);
+
         });
         pane.add(jButtonPlay, gridBagConstraints);
 
@@ -72,7 +79,12 @@ public class MainGUI implements Runnable {
         gridBagConstraints.gridy = 2;
         jButtonSetting.addActionListener(e -> {
             /* Start SettingGUI in new thread */
-            Executors.newSingleThreadExecutor().execute(new SettingGUI());
+            if (settingGUI == null) {
+                settingGUI = SettingGUI.getInstance();
+                Executors.newSingleThreadExecutor().execute(settingGUI);
+            } else {
+                settingGUI.setVisible(true);
+            }
         });
         pane.add(jButtonSetting, gridBagConstraints);
 
@@ -110,8 +122,13 @@ public class MainGUI implements Runnable {
             }
         });
 
+        setJFrame();
+    }
 
-        /* Set size and locations of the window, and start it */
+    /**
+     * Set size and locations of the window, and start it
+     */
+    private void setJFrame() {
         if (Setting.isFullScreenMainMenu()) {
             jFrame.setExtendedState(Frame.MAXIMIZED_BOTH); // Max size of the window
         } else {

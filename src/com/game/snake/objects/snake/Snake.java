@@ -87,8 +87,8 @@ public final class Snake {
      * The method moves the snake into the next cell.
      * Cell coordinates are given relative to the current head with the help of variables (dx, dy).
      *
-     * @param dx <b>direction x</b>
-     * @param dy <b>direction y</b>
+     * @param dx direction x
+     * @param dy direction y
      */
     private void move(int dx, int dy) {
         /* Create a new head - a new "piece of snake" */

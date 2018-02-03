@@ -9,7 +9,7 @@ import java.util.concurrent.Executors;
  * @author Koliadin Nikita
  * @version 1.4
  *
- * Start MainGUI in SingleThreadExecutor
+ * This class has examples how we can start our game
  */
 public class Main {
     public static void main(String[] args) throws InterruptedException {
