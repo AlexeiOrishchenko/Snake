@@ -11,25 +11,35 @@ import java.util.concurrent.Executors;
 
 /**
  * @author Koliadin Nikita
- * @version 1.6
+ * @version 1.8
  *
- * This class is the main GUI that has button "Play","Setting", "Info" and "Exit",
+ * This class is the main GUI.
  */
-public class MainGUI implements Runnable {
+public class MainMenuGUI implements Runnable {
+
+    /* Our JFrame to work with */
+    private final JFrame jFrame = new JFrame(Setting.getMainMenuGUIJFrameTitle());
 
     /* Initialize JFrame button and labels for main menu */
-    private final JFrame jFrame = new JFrame(Setting.getMainMenuJFrameTitle());
-    private final JLabel jLabelWelcome = new JLabel(Setting.getMainMenuJLabelWelcome());
-    private final JButton jButtonPlay = new JButton(Setting.getMainMenuJButtonPlay());
-    private final JButton jButtonSetting = new JButton(Setting.getMainMenuJButtonSetting());
-    private final JButton jButtonInfo = new JButton(Setting.getMainMenuJButtonInfo());
-    private final JButton jButtonExit = new JButton(Setting.getMainMenuJButtonExit());
+    private final JLabel jLabelWelcome = new JLabel(Setting.getMainMenuGUIJLabelWelcome());
+    private final JButton jButtonPlay = new JButton(Setting.getMainMenuGUIJButtonPlay());
+    private final JButton jButtonSetting = new JButton(Setting.getMainMenuGUIJButtonSetting());
+    private final JButton jButtonInfo = new JButton(Setting.getMainMenuGUIJButtonInfo());
+    private final JButton jButtonExit = new JButton(Setting.getMainMenuGUIJButtonExit());
     private final JLabel jLabelAuthor = new JLabel(Setting.getAUTHOR());
 
-    /* Our single object of the SettingGUI class */
+    /* Our container and Bag for set label at the GUI */
+    private final Container pane = jFrame.getContentPane();
+    private final GridBagConstraints gridBagConstraints = new GridBagConstraints();
+
+    /* Lazy initialized object in the next. Only one setting for only one game */
     private SettingGUI settingGUI;
 
-    public MainGUI() {
+    public MainMenuGUI() {
+        pane.setLayout(new GridBagLayout());
+
+        /* Centralize all the buttons */
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
     }
 
     /**
@@ -38,26 +48,12 @@ public class MainGUI implements Runnable {
      */
     @Override
     public void run() {
-        /* Get the panel and use GridBagLayout to create main menu */
-        Container pane = jFrame.getContentPane();
-        pane.setLayout(new GridBagLayout());
-        GridBagConstraints gridBagConstraints = new GridBagConstraints();
-
-        /* Centralize all the buttons */
-        gridBagConstraints.fill = GridBagConstraints.BOTH;
-
         /* Label */
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new Insets(-100, 0, 25, 0);
         pane.add(jLabelWelcome, gridBagConstraints);
         /* Start thread that every 10ms change the color of the label */
-        Executors.newSingleThreadExecutor().execute(() -> {
-            try {
-                ColorChange.changeColorOfLabel(jLabelWelcome);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
+        Executors.newSingleThreadExecutor().execute(() -> ColorChange.changeColorOfLabel(jLabelWelcome));
 
 
         /* Button "PLAY" */
@@ -65,8 +61,8 @@ public class MainGUI implements Runnable {
         gridBagConstraints.insets = new Insets(10, 0, 0, 0);
         jButtonPlay.addActionListener(e -> {
             /* Close mainMenu visible and start PlayGUI in new thread */
-            MainGUI.this.jFrame.setVisible(false);
-            Setting.setWaitThreadMainMenu(true);
+//            MainGUI.this.jFrame.setVisible(false);
+            Setting.setMainMenuWaitThread(true);
             /* Create Room and Snake */
             Room.room = new Room(new Snake(), jFrame);
             Executors.newSingleThreadExecutor().execute(Room.room);
@@ -80,7 +76,7 @@ public class MainGUI implements Runnable {
         jButtonSetting.addActionListener(e -> {
             /* Start SettingGUI in new thread */
             if (settingGUI == null) {
-                settingGUI = SettingGUI.getInstance();
+                settingGUI = new SettingGUI();
                 Executors.newSingleThreadExecutor().execute(settingGUI);
             } else {
                 settingGUI.setVisible(true);
@@ -102,7 +98,7 @@ public class MainGUI implements Runnable {
         gridBagConstraints.gridy = 4;
         jButtonExit.addActionListener(e -> {
             /* Close mainMenu visible */
-            MainGUI.this.jFrame.setVisible(false);
+            MainMenuGUI.this.jFrame.setVisible(false);
             /* Start ExitGUI in new thread */
             Executors.newSingleThreadExecutor().execute((new ExitGUI()));
         });
@@ -114,13 +110,7 @@ public class MainGUI implements Runnable {
         gridBagConstraints.insets = new Insets(0, 60, -100, 0);
         pane.add(jLabelAuthor, gridBagConstraints);
         /* Start thread that every 10ms change the color of the label */
-        Executors.newSingleThreadExecutor().execute(() -> {
-            try {
-                ColorChange.changeColorOfLabel(jLabelAuthor);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
+        Executors.newSingleThreadExecutor().execute(() -> ColorChange.changeColorOfLabel(jLabelAuthor));
 
         setJFrame();
     }
@@ -129,7 +119,7 @@ public class MainGUI implements Runnable {
      * Set size and locations of the window, and start it
      */
     private void setJFrame() {
-        if (Setting.isFullScreenMainMenu()) {
+        if (Setting.isMainMenuFullScreen()) {
             jFrame.setExtendedState(Frame.MAXIMIZED_BOTH); // Max size of the window
         } else {
             jFrame.setPreferredSize(new Dimension(Setting.getMainMenuWidth(), Setting.getMainMenuHeight()));

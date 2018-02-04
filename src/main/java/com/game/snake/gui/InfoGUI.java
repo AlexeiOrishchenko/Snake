@@ -13,17 +13,17 @@ import java.util.concurrent.Executors;
 
 /**
  * @author Koliadin Nikita
- * @version 1.6
+ * @version 1.8
  *
  * Short date about author.
  */
-public class InfoGUI extends JFrame implements Runnable {
+public final class InfoGUI extends JFrame implements Runnable {
 
     /* Create static cached thread pool */
     private static ExecutorService executorService = Executors.newCachedThreadPool();
 
-    /* List of the JLabel */
-    private List<JLabel> labelList = new ArrayList<JLabel>(Arrays.asList(
+    /* Get list of the JLabels to InfoGUI from Setting class */
+    private List<JLabel> infoGUIJLabelList = new ArrayList<JLabel>(Arrays.asList( // FIXME: 04.02.2018
             new JLabel(Setting.getAUTHOR()),
             new JLabel(Setting.getInfoDataCreate()),
             new JLabel(Setting.getInfoMail()),
@@ -31,7 +31,8 @@ public class InfoGUI extends JFrame implements Runnable {
             new JLabel(Setting.getInfoInstagram()),
             new JLabel(Setting.getInfoGitHub()),
             new JLabel(Setting.getInfoSkype()),
-            new JLabel(Setting.getInfoThanks())));
+            new JLabel(Setting.getInfoThanks())
+    ));
 
     /* Our container and Bag for set label at the GUI */
     private Container pane = getContentPane();
@@ -42,7 +43,8 @@ public class InfoGUI extends JFrame implements Runnable {
      * new BagLayout.
      */
     public InfoGUI() throws HeadlessException {
-        super(Setting.getInfoJFrameTitle());
+        /* Get InfoGUI title from the Setting class */
+        super(Setting.getInfoGUIJFrameTitle());
 
         pane.setLayout(new GridBagLayout());
 
@@ -65,18 +67,11 @@ public class InfoGUI extends JFrame implements Runnable {
      * thread
      */
     private void setJLabel() {
-        int i = 0;
-        for (JLabel jLabel : labelList) {
-            gridBagConstraints.gridy = i++;
+        for (JLabel jLabel : infoGUIJLabelList) {
+            gridBagConstraints.gridy++;
             gridBagConstraints.insets = new Insets(10,0,0,0);
             pane.add(jLabel, gridBagConstraints);
-            InfoGUI.executorService.execute(() -> {
-                try {
-                    ColorChange.changeColorOfLabel(jLabel);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            });
+            InfoGUI.executorService.execute(() -> ColorChange.changeColorOfLabel(jLabel));
         }
     }
 
@@ -84,7 +79,7 @@ public class InfoGUI extends JFrame implements Runnable {
      * Set size and locations of the window, and start it
      */
     private void setJFrame() {
-        setPreferredSize(new Dimension(Setting.getInfoWidth(), Setting.getInfoHeight()));
+        setPreferredSize(new Dimension(Setting.getInfoGUIWidth(), Setting.getInfoGUIHeight()));
         setLocationRelativeTo(null); // The center of the screen
         pack();
         setVisible(true);

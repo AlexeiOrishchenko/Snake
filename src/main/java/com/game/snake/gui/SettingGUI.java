@@ -6,8 +6,6 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,17 +13,14 @@ import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.6
+ * @version 1.8
  *
  * This GUI class has settings for this game.
  */
 public final class SettingGUI extends JFrame implements Runnable {
 
-    /* This is synchronized singleton object of this class */
-    private static volatile SettingGUI ourSettingGUI;
-
     /* This is list of the setting label */
-    private final List<JLabel> jLabelSettingList = new ArrayList<JLabel>(Arrays.asList(
+    private final List<JLabel> settingGUIJLabelList = new ArrayList<JLabel>(Arrays.asList(
             new JLabel("Color of the snake: "),
             new JLabel("Color of the mouse: "),
             new JLabel("Color of the face: "),
@@ -37,15 +32,15 @@ public final class SettingGUI extends JFrame implements Runnable {
     ));
 
     /* This is list of the inner class setting*/
-    private final List<SetSettingLabel> setSettingLabelList = new ArrayList<SetSettingLabel>(Arrays.asList(
-            new ColorSnake(),
-            new ColorMouse(),
-            new ColorFace(),
-            new FullScreenMainMenu(),
-            new ChangeColor(),
-            new SizeOfGame(),
-            new RoomWidth(),
-            new RoomHeight()
+    private final List<LabelSettingGUI> LabelSettingGUIList = new ArrayList<LabelSettingGUI>(Arrays.asList(
+            new LabelColorSnake(),
+            new LabelColorMouse(),
+            new LabelColorFace(),
+            new LabelFullScreenMainMenu(),
+            new LabelChangeColor(),
+            new LabelSizeOfGame(),
+            new LabelRoomWidth(),
+            new LabelRoomHeight()
     ));
 
     /* Button for apply setting change */
@@ -55,36 +50,17 @@ public final class SettingGUI extends JFrame implements Runnable {
     private final Container pane = this.getContentPane();
     private final GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
-    /* Count "Y" position at the GUI */
-    private int gridyValue = 0;
-
     /**
      * Private constructor that set GUI title and create
      * new BagLayout.
      */
-    private SettingGUI() {
-        super(Setting.getSettingJFrameTitle());
+    public SettingGUI() {
+        super(Setting.getSettingGUIJFrameTitle());
 
         pane.setLayout(new GridBagLayout());
 
         /* Centralize all the labels */
         gridBagConstraints.fill = GridBagConstraints.BOTH;
-    }
-
-    /**
-     * Double-Checked Singleton.
-     *
-     * @return singleton object of this class
-     */
-    public static SettingGUI getInstance() {
-        if (ourSettingGUI == null) {
-            synchronized (SettingGUI.class) {
-                if (ourSettingGUI == null) {
-                    ourSettingGUI = new SettingGUI();
-                }
-            }
-        }
-        return ourSettingGUI;
     }
 
     /**
@@ -95,25 +71,22 @@ public final class SettingGUI extends JFrame implements Runnable {
     @Override
     public void run() {
         /* Set every label to the GUI */
-        for (SetSettingLabel label : setSettingLabelList) {
+        for (LabelSettingGUI label : LabelSettingGUIList) {
             label.set();
         }
 
         /* Enter */
-        gridBagConstraints.gridy = gridyValue++;
+        gridBagConstraints.gridy++;
         pane.add(jButtonEnter, gridBagConstraints);
-        jButtonEnter.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        jButtonEnter.addActionListener(e -> {
 
-                /* Do update */
-                for (SetSettingLabel setting : setSettingLabelList) {
-                    setting.update();
-                }
-
-                /* Close setting GUI */
-                setVisible(false);
+            /* Do update */
+            for (LabelSettingGUI setting : LabelSettingGUIList) {
+                setting.update();
             }
+
+            /* Close setting GUI */
+            setVisible(false);
         });
 
         setJFrame();
@@ -124,8 +97,8 @@ public final class SettingGUI extends JFrame implements Runnable {
      * gridy.
      */
     private void setJLabel() {
-        gridBagConstraints.gridy = gridyValue;
-        pane.add(jLabelSettingList.get(gridyValue++), gridBagConstraints);
+        gridBagConstraints.gridy++;
+        pane.add(settingGUIJLabelList.get(gridBagConstraints.gridy), gridBagConstraints);
     }
 
     /**
@@ -134,7 +107,7 @@ public final class SettingGUI extends JFrame implements Runnable {
      * @param buttonGroup add JRadioButton to this group
      */
     private void fillJRadioButton (@NotNull final ButtonGroup buttonGroup,
-                                   @NotNull ArrayList<JRadioButton> jRadioButtons) {
+                                   @NotNull final ArrayList<JRadioButton> jRadioButtons) {
 
         /* Create group of the jRadioButton */
         jRadioButtons.forEach(buttonGroup::add);
@@ -200,7 +173,9 @@ public final class SettingGUI extends JFrame implements Runnable {
      * @param jRadioButtons list of the JRadioButton
      * @param value setting value of something to compare
      */
-    private void setVisibleJRadioButton(@NotNull ArrayList<JRadioButton> jRadioButtons, String value) {
+    private void setVisibleJRadioButton(@NotNull final ArrayList<JRadioButton> jRadioButtons,
+                                        @NotNull final String value) {
+
         for (JRadioButton jRadioButton : jRadioButtons) {
             if (jRadioButton.getText().equals(value)) {
                 jRadioButton.setSelected(true);
@@ -213,7 +188,7 @@ public final class SettingGUI extends JFrame implements Runnable {
      * Set size and locations of the window, and start it
      */
     private void setJFrame() {
-        setPreferredSize(new Dimension(Setting.getSettingWidth(), Setting.getSettingHeight()));
+        setPreferredSize(new Dimension(Setting.getSettingGUIWidth(), Setting.getSettingGUIHeight()));
         setLocationRelativeTo(null); // the center of the screen
         pack();
         setVisible(true);
@@ -222,10 +197,10 @@ public final class SettingGUI extends JFrame implements Runnable {
     /**
      * This interface has 2 method: set and update.
      * 
-     * @see SetSettingLabel#set()
-     * @see SetSettingLabel#update()
+     * @see LabelSettingGUI#set()
+     * @see LabelSettingGUI#update()
      */
-    private interface SetSettingLabel {
+    private interface LabelSettingGUI {
 
         /**
          * set label to the Setting GUI class
@@ -238,7 +213,7 @@ public final class SettingGUI extends JFrame implements Runnable {
         void update();
     }
 
-    private class ColorSnake implements SetSettingLabel {
+    private class LabelColorSnake implements LabelSettingGUI {
 
         ArrayList<JRadioButton> jRadioButtonsColorSnakeList = createColorList();
 
@@ -268,7 +243,7 @@ public final class SettingGUI extends JFrame implements Runnable {
         }
     }
 
-    private class ColorMouse implements SetSettingLabel {
+    private class LabelColorMouse implements LabelSettingGUI {
 
         ArrayList<JRadioButton> jRadioButtonsColorMouseList = createColorList();
 
@@ -298,7 +273,7 @@ public final class SettingGUI extends JFrame implements Runnable {
         }
     }
 
-    private class ColorFace implements SetSettingLabel {
+    private class LabelColorFace implements LabelSettingGUI {
 
         ArrayList<JRadioButton> jRadioButtonsColorFaceList = createColorList();
 
@@ -328,7 +303,7 @@ public final class SettingGUI extends JFrame implements Runnable {
         }
     }
 
-    private class FullScreenMainMenu implements SetSettingLabel {
+    private class LabelFullScreenMainMenu implements LabelSettingGUI {
 
         ArrayList<JRadioButton> jRadioButtonsFullScreenMainMenuList = createTrueFalseList();
 
@@ -337,12 +312,12 @@ public final class SettingGUI extends JFrame implements Runnable {
             setJLabel();
             ButtonGroup groupFullScreenMainMenu = new ButtonGroup();
             fillJRadioButton(groupFullScreenMainMenu, jRadioButtonsFullScreenMainMenuList);
-            setVisibleJRadioButton(jRadioButtonsFullScreenMainMenuList, Setting.isFullScreenMainMenu() + "");
+            setVisibleJRadioButton(jRadioButtonsFullScreenMainMenuList, Setting.isMainMenuFullScreen() + "");
         }
 
         @Override
         public void update() {
-            Setting.setFullScreenMainMenu(jRadioButtonsFullScreenMainMenuList.stream()
+            Setting.setMainMenuFullScreen(jRadioButtonsFullScreenMainMenuList.stream()
                     .filter(AbstractButton::isSelected)
                     .findFirst()
                     .map(JRadioButton::getText)
@@ -351,7 +326,7 @@ public final class SettingGUI extends JFrame implements Runnable {
         }
     }
 
-    private class ChangeColor implements SetSettingLabel {
+    private class LabelChangeColor implements LabelSettingGUI {
 
         ArrayList<JRadioButton> jRadioButtonsChangeColorList = createTrueFalseList();
 
@@ -374,7 +349,7 @@ public final class SettingGUI extends JFrame implements Runnable {
         }
     }
 
-    private class SizeOfGame implements SetSettingLabel {
+    private class LabelSizeOfGame implements LabelSettingGUI {
 
         ArrayList<JRadioButton> jRadioButtonsSizeOfGameList =new ArrayList<JRadioButton>(Arrays.asList(
                 new JRadioButton("10"),
@@ -401,7 +376,7 @@ public final class SettingGUI extends JFrame implements Runnable {
         }
     }
 
-    private class RoomWidth implements SetSettingLabel {
+    private class LabelRoomWidth implements LabelSettingGUI {
 
         ArrayList<JRadioButton> jRadioButtonsRoomWidthList = createSizeList();
 
@@ -424,7 +399,7 @@ public final class SettingGUI extends JFrame implements Runnable {
         }
     }
 
-    private class RoomHeight implements SetSettingLabel {
+    private class LabelRoomHeight implements LabelSettingGUI {
 
         ArrayList<JRadioButton> jRadioButtonsRoomHeightList = createSizeList();
 

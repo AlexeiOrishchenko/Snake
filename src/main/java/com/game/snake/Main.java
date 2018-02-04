@@ -1,9 +1,6 @@
 package com.game.snake;
 
-import com.game.snake.gui.MainGUI;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import com.game.snake.gui.MainMenuGUI;
 
 /**
  * @author Koliadin Nikita
@@ -19,16 +16,18 @@ public class Main {
         thread.start();
         */
 
-        /*
-        ExecutorService executorMainGUI = Executors.newSingleThreadExecutor();
-        executorMainGUI.execute(new MainGUI());
-        executorMainGUI.shutdown();
-        */
+//        /*
+//        ExecutorService executorMainGUI = Executors.newSingleThreadExecutor();
+//        executorMainGUI.execute(new MainGUI());
+//        executorMainGUI.execute(new MainGUI());
+//        executorMainGUI.shutdown();
+//        */
 
         /*
         Executors.newSingleThreadExecutor().execute(new MainGUI());
         */
 
-        new MainGUI().run();
+//        Setting.setExitGUIJLabelList(new ArrayList<JLabel>(Arrays.asList(new JLabel("1"), new JLabel("2"))));
+        new MainMenuGUI().run();
     }
 }

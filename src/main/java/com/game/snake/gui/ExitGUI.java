@@ -5,28 +5,31 @@ import com.game.snake.setting.Setting;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 import java.util.concurrent.Executors;
 
 /**
  * @author Koliadin Nikita
- * @version 1.6
+ * @version 1.8
  *
  * This class is the last window that user will see.
  */
-public class ExitGUI extends JFrame implements Runnable {
+public final class ExitGUI extends JFrame implements Runnable {
 
-    private final JLabel jLabelThanks = new JLabel(Setting.getInfoThanks());
+    /* Get list of the JLabels to ExitGUI from Setting class */
+    private final List<JLabel> exitGUIJLabelList = Setting.getExitGUIJLabelList();
 
     /* Our container and Bag for set label at the GUI */
-    private Container pane = getContentPane();
-    private GridBagConstraints gridBagConstraints = new GridBagConstraints();
+    private final Container pane = getContentPane();
+    private final GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
     /**
      * Constructor that set GUI title and create
      * new BagLayout.
      */
     public ExitGUI() {
-        super(Setting.getExitJFrameTitle());
+        /* Get ExitGUI title from the Setting class */
+        super(Setting.getExitGUIJFrameTitle());
 
         pane.setLayout(new GridBagLayout());
 
@@ -35,7 +38,8 @@ public class ExitGUI extends JFrame implements Runnable {
     }
 
     /**
-     * Create fast change label, and in 10 sec exit the game
+     * Main method of this class, create JLabel and set
+     * GUI window JFrame
      */
     @Override
     public void run() {
@@ -49,27 +53,24 @@ public class ExitGUI extends JFrame implements Runnable {
 
     /**
      * This method add JLabel to the pane and start ColorChange in new
-     * thread
+     * thread if  Setting.changeColor is true
      */
     private void setJLabel() {
-        pane.add(jLabelThanks, gridBagConstraints);
-
-        /* Set fast change color and start change color */
-        Setting.setSleepColorChangeTimeMS(1);
-        Executors.newSingleThreadExecutor().execute(() -> {
-            try {
-                ColorChange.changeColorOfLabel(jLabelThanks);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        for (JLabel jLabel : exitGUIJLabelList) {
+            gridBagConstraints.gridy++;
+            gridBagConstraints.insets = new Insets(10,0,0,0);
+            pane.add(jLabel, gridBagConstraints);
+            if (Setting.isChangeColor()) {
+                Executors.newCachedThreadPool().execute(() -> ColorChange.changeColorOfLabel(jLabel));
             }
-        });
+        }
     }
 
     /**
      * Set size and locations of the window, and start it
      */
     private void setJFame() {
-        setPreferredSize(new Dimension(Setting.getExitWidth(), Setting.getExitHeight()));
+        setPreferredSize(new Dimension(Setting.getExitGUIWidth(), Setting.getExitGUIHeight()));
         setLocationRelativeTo(null); // the center of the screen
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
@@ -77,11 +78,11 @@ public class ExitGUI extends JFrame implements Runnable {
     }
 
     /**
-     * Sleep 10 seconds to see the last gui
+     * Sleep to see the last gui
      */
     private void sleep() {
         try {
-            Thread.sleep(10000);
+            Thread.sleep(Setting.getExitGUISleepTimeMS());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

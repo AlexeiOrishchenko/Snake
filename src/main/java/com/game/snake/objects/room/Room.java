@@ -12,7 +12,6 @@ import org.jetbrains.annotations.Contract;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
@@ -186,7 +185,7 @@ public class Room implements Runnable {
         System.out.println("Game Over!");
         /* Turn on mainMenu visible */
         KeyboardObserver.jFrame.setVisible(false);
-        Setting.setWaitThreadMainMenu(false);
+        Setting.setMainMenuWaitThread(false);
         jFrame.setVisible(true);
     }
 
