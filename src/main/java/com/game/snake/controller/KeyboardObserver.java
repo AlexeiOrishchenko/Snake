@@ -11,20 +11,26 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * @author Koliadin Nikita
- * @version 1.6
+ * @version 1.9
  *
  * This class is listener
  */
-public class KeyboardObserver implements Runnable {
-    private Queue<KeyEvent> keyEvents = new ArrayBlockingQueue<KeyEvent>(1000);
+public class KeyboardObserver extends JFrame implements Runnable {
 
-    public static JFrame jFrame;
+    /* Our queue of key pressed button */
+    private final Queue<KeyEvent> keyEvents = new ArrayBlockingQueue<KeyEvent>(1000);
 
-    static {
-        KeyboardObserver.jFrame = new JFrame(Setting.getPlayJFrameTitle());
-        KeyboardObserver.jFrame.setUndecorated(false); // Frame window
-        jFrame.setPreferredSize(new Dimension(Setting.getMainMenuWidth(), Setting.getMainMenuHeight()));
-        jFrame.setLocationRelativeTo(null); // the center of the screen
+    /* Our Setting singleton object */
+    private Setting setting = Setting.getInstance();
+
+    /**
+     * This is constructor that set play title and size of the game window
+     */
+    public KeyboardObserver() {
+        setTitle(setting.getPlayJFrameTitle());
+        setUndecorated(false); // Frame window
+//        setPreferredSize(new Dimension(setting.getMainMenuWidth(), setting.getMainMenuHeight())); // FIXME: 08.02.2018
+        setLocationRelativeTo(null); // the center of the screen
     }
 
     /**
@@ -32,11 +38,12 @@ public class KeyboardObserver implements Runnable {
      */
     @Override
     public void run() {
-        KeyboardObserver.jFrame.setSize(
-                ((Setting.getRoomWidth() + 3) * Setting.getSizeOfGame()) + 17,
-                ((Setting.getRoomHeight() + 3) * Setting.getSizeOfGame()) + 40);
+        setSize(
+                ((setting.getRoomWidth() + 3) * setting.getSizeOfGame()) + 17,
+                ((setting.getRoomHeight() + 3) * setting.getSizeOfGame()) + 40
+        );
 
-        jFrame.addKeyListener(new KeyListener() {
+        addKeyListener(new KeyListener() {
 
             @Override
             public void keyTyped(KeyEvent e) {

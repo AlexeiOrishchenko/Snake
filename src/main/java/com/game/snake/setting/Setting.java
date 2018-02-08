@@ -16,531 +16,501 @@ import java.util.List;
  */
 public class Setting {
 
+    /* Our singleton of this class */
+    private static volatile Setting ourInstance;
+
     private static final String AUTHOR = "Author: Nikita Koliadin";
 
-    private static String mainMenuGUIJFrameTitle = "Snake - MAIN MENU";
-    private static String playJFrameTitle = "Snake - PLAY"; // FIXME: 04.02.2018
-    private static String settingGUIJFrameTitle = "Snake - SETTING";
-    private static String infoGUIJFrameTitle = "Snake - INFO";
-    private static String exitGUIJFrameTitle = "Snake - EXIT";
+    private String mainMenuGUIJFrameTitle = "Snake - MAIN MENU";
+    private String playJFrameTitle = "Snake - PLAY"; // FIXME: 04.02.2018
+    private String settingGUIJFrameTitle = "Snake - SETTING";
+    private String infoGUIJFrameTitle = "Snake - INFO";
+    private String exitGUIJFrameTitle = "Snake - EXIT";
 
-    private static String mainMenuGUIJLabelWelcome = "Welcome to the game \"SNAKE\"";
-    private static String mainMenuGUIJButtonPlay = "PLAY";
-    private static String mainMenuGUIJButtonSetting = "SETTING";
-    private static String mainMenuGUIJButtonInfo = "INFO";
-    private static String mainMenuGUIJButtonExit = "EXIT";
+    private String mainMenuGUIJLabelWelcome = "Welcome to the game \"SNAKE\"";
+    private String mainMenuGUIJButtonPlay = "PLAY";
+    private String mainMenuGUIJButtonSetting = "SETTING";
+    private String mainMenuGUIJButtonInfo = "INFO";
+    private String mainMenuGUIJButtonExit = "EXIT";
 
-    private static String infoDataCreate = "01.28.2018 - Ukraine - Dnipro";
-    private static String infoMail = "Mail: qThegamEp@gmail.com";
-    private static String infoFacebook = "Facebook: https://www.facebook.com/koliadin.nikita";
-    private static String infoInstagram = "Instagram: https://www.instagram.com/koliadin_nik/";
-    private static String infoGitHub = "Github: https://github.com/qThegamEp";
-    private static String infoSkype = "Skype: koliadin321";
-    private static String infoThanks = "!!!Thank you for playing this game!!!";
+    private String infoDataCreate = "01.28.2018 - Ukraine - Dnipro";
+    private String infoMail = "Mail: qThegamEp@gmail.com";
+    private String infoFacebook = "Facebook: https://www.facebook.com/koliadin.nikita";
+    private String infoInstagram = "Instagram: https://www.instagram.com/koliadin_nik/";
+    private String infoGitHub = "Github: https://github.com/qThegamEp";
+    private String infoSkype = "Skype: koliadin321";
+    private String infoThanks = "!!!Thank you for playing this game!!!";
 
-    private static String color1 = "RED";
-    private static String color2 = "GREEN";
-    private static String color3 = "BLUE";
-    private static String color4 = "YELLOW";
-    private static String color5 = "GRAY";
-    private static String color6 = "BLACK";
+    private String color1 = "RED";
+    private String color2 = "GREEN";
+    private String color3 = "BLUE";
+    private String color4 = "YELLOW";
+    private String color5 = "GRAY";
+    private String color6 = "BLACK";
 
-    private static String sizeListValue1 = "15";
-    private static String sizeListValue2 = "20";
-    private static String sizeListValue3 = "30";
-    private static String sizeListValue4 = "40";
-    private static String sizeListValue5 = "50";
+    private String sizeListValue1 = "15";
+    private String sizeListValue2 = "20";
+    private String sizeListValue3 = "30";
+    private String sizeListValue4 = "40";
+    private String sizeListValue5 = "50";
 
-    private static List<JLabel> exitGUIJLabelList = new ArrayList<JLabel>(Arrays.asList(
-            new JLabel(Setting.getInfoThanks())));
+    private List<JLabel> exitGUIJLabelList = new ArrayList<JLabel>(Arrays.asList(
+            new JLabel(getInfoThanks())));
 
-    private static List<JLabel> infoGUIJLabelList = new ArrayList<JLabel>(Arrays.asList( // FIXME: 04.02.2018
-            new JLabel(Setting.getAUTHOR()),
-            new JLabel(Setting.getInfoDataCreate()),
-            new JLabel(Setting.getInfoMail()),
-            new JLabel(Setting.getInfoFacebook()),
-            new JLabel(Setting.getInfoInstagram()),
-            new JLabel(Setting.getInfoGitHub()),
-            new JLabel(Setting.getInfoSkype()),
-            new JLabel(Setting.getInfoThanks())
+    private List<JLabel> infoGUIJLabelList = new ArrayList<JLabel>(Arrays.asList(
+            new JLabel(getAUTHOR()),
+            new JLabel(getInfoDataCreate()),
+            new JLabel(getInfoMail()),
+            new JLabel(getInfoFacebook()),
+            new JLabel(getInfoInstagram()),
+            new JLabel(getInfoGitHub()),
+            new JLabel(getInfoSkype()),
+            new JLabel(getInfoThanks())
     ));
 
-    private static int mainMenuWidth = 350;
-    private static int mainMenuHeight = 350;
+    private int mainMenuWidth = 350;
+    private int mainMenuHeight = 350;
 
-    private static int settingGUIWidth = 550;
-    private static int settingGUIHeight = 300;
+    private int settingGUIWidth = 550;
+    private int settingGUIHeight = 300;
 
-    private static int infoGUIWidth = 350;
-    private static int infoGUIHeight = 350;
+    private int infoGUIWidth = 350;
+    private int infoGUIHeight = 350;
 
-    private static int exitGUIWidth = 320;
-    private static int exitGUIHeight = 320;
+    private int exitGUIWidth = 320;
+    private int exitGUIHeight = 320;
 
-    private static int sizeOfGame = 15;
+    private int sizeOfGame = 15;
 
-    private static int roomWidth = 20;
-    private static int roomHeight = 20;
+    private int roomWidth = 20;
+    private int roomHeight = 20;
 
-    private static int colorChangeSleepTimeMS = 1;
+    private int colorChangeSleepTimeMS = 1;
 
-    private static int exitGUISleepTimeMS = 3000;
+    private int exitGUISleepTimeMS = 3000;
 
-    private static Color colorFace = Color.RED;
-    private static Color colorMouse = Color.GRAY;
-    private static Color colorSnake = Color.GREEN;
+    private Color colorFace = Color.RED;
+    private Color colorMouse = Color.GRAY;
+    private Color colorSnake = Color.GREEN;
 
-    private static boolean changeColor = true;
+    private boolean changeColor = true;
 
     /* Go to pause 2 thread in method changeColorOfLabel if waitThread is true */
-    private static boolean mainMenuWaitThread = false;
+    private boolean mainMenuWaitThread = false;
 
-    private static boolean mainMenuFullScreen = true;
+    private boolean mainMenuFullScreen = true;
+
+    private Setting() {
+    }
+
+    /**
+     * @return singleton object of this class
+     */
+    public static Setting getInstance() {
+        if (ourInstance == null) {
+            synchronized (Setting.class) {
+                if (ourInstance == null) {
+                    ourInstance = new Setting();
+                }
+            }
+        }
+        return ourInstance;
+    }
 
     @Contract(pure = true)
     public static String getAUTHOR() {
         return AUTHOR;
     }
 
-    @Contract(pure = true)
-    public static String getMainMenuGUIJFrameTitle() {
+    public String getMainMenuGUIJFrameTitle() {
         return mainMenuGUIJFrameTitle;
     }
 
-    public static void setMainMenuGUIJFrameTitle(String mainMenuGUIJFrameTitle) {
-        Setting.mainMenuGUIJFrameTitle = mainMenuGUIJFrameTitle;
+    public void setMainMenuGUIJFrameTitle(String mainMenuGUIJFrameTitle) {
+        this.mainMenuGUIJFrameTitle = mainMenuGUIJFrameTitle;
     }
 
-    @Contract(pure = true)
-    public static String getPlayJFrameTitle() {
+    public String getPlayJFrameTitle() {
         return playJFrameTitle;
     }
 
-    public static void setPlayJFrameTitle(String playJFrameTitle) {
-        Setting.playJFrameTitle = playJFrameTitle;
+    public void setPlayJFrameTitle(String playJFrameTitle) {
+        this.playJFrameTitle = playJFrameTitle;
     }
 
-    @Contract(pure = true)
-    public static String getInfoGUIJFrameTitle() {
-        return infoGUIJFrameTitle;
-    }
-
-    public static void setInfoGUIJFrameTitle(String infoGUIJFrameTitle) {
-        Setting.infoGUIJFrameTitle = infoGUIJFrameTitle;
-    }
-
-    @Contract(pure = true)
-    public static String getSettingGUIJFrameTitle() {
+    public String getSettingGUIJFrameTitle() {
         return settingGUIJFrameTitle;
     }
 
-    public static void setSettingGUIJFrameTitle(String settingGUIJFrameTitle) {
-        Setting.settingGUIJFrameTitle = settingGUIJFrameTitle;
+    public void setSettingGUIJFrameTitle(String settingGUIJFrameTitle) {
+        this.settingGUIJFrameTitle = settingGUIJFrameTitle;
     }
 
-    @Contract(pure = true)
-    public static String getExitGUIJFrameTitle() {
+    public String getInfoGUIJFrameTitle() {
+        return infoGUIJFrameTitle;
+    }
+
+    public void setInfoGUIJFrameTitle(String infoGUIJFrameTitle) {
+        this.infoGUIJFrameTitle = infoGUIJFrameTitle;
+    }
+
+    public String getExitGUIJFrameTitle() {
         return exitGUIJFrameTitle;
     }
 
-    public static void setExitGUIJFrameTitle(String exitGUIJFrameTitle) {
-        Setting.exitGUIJFrameTitle = exitGUIJFrameTitle;
+    public void setExitGUIJFrameTitle(String exitGUIJFrameTitle) {
+        this.exitGUIJFrameTitle = exitGUIJFrameTitle;
     }
 
-    @Contract(pure = true)
-    public static String getMainMenuGUIJLabelWelcome() {
+    public String getMainMenuGUIJLabelWelcome() {
         return mainMenuGUIJLabelWelcome;
     }
 
-    public static void setMainMenuGUIJLabelWelcome(String mainMenuGUIJLabelWelcome) {
-        Setting.mainMenuGUIJLabelWelcome = mainMenuGUIJLabelWelcome;
+    public void setMainMenuGUIJLabelWelcome(String mainMenuGUIJLabelWelcome) {
+        this.mainMenuGUIJLabelWelcome = mainMenuGUIJLabelWelcome;
     }
 
-    @Contract(pure = true)
-    public static String getMainMenuGUIJButtonPlay() {
+    public String getMainMenuGUIJButtonPlay() {
         return mainMenuGUIJButtonPlay;
     }
 
-    public static void setMainMenuGUIJButtonPlay(String mainMenuGUIJButtonPlay) {
-        Setting.mainMenuGUIJButtonPlay = mainMenuGUIJButtonPlay;
+    public void setMainMenuGUIJButtonPlay(String mainMenuGUIJButtonPlay) {
+        this.mainMenuGUIJButtonPlay = mainMenuGUIJButtonPlay;
     }
 
-    @Contract(pure = true)
-    public static String getMainMenuGUIJButtonSetting() {
+    public String getMainMenuGUIJButtonSetting() {
         return mainMenuGUIJButtonSetting;
     }
 
-    public static void setMainMenuGUIJButtonSetting(String mainMenuGUIJButtonSetting) {
-        Setting.mainMenuGUIJButtonSetting = mainMenuGUIJButtonSetting;
+    public void setMainMenuGUIJButtonSetting(String mainMenuGUIJButtonSetting) {
+        this.mainMenuGUIJButtonSetting = mainMenuGUIJButtonSetting;
     }
 
-    @Contract(pure = true)
-    public static String getMainMenuGUIJButtonInfo() {
+    public String getMainMenuGUIJButtonInfo() {
         return mainMenuGUIJButtonInfo;
     }
 
-    public static void setMainMenuGUIJButtonInfo(String mainMenuGUIJButtonInfo) {
-        Setting.mainMenuGUIJButtonInfo = mainMenuGUIJButtonInfo;
+    public void setMainMenuGUIJButtonInfo(String mainMenuGUIJButtonInfo) {
+        this.mainMenuGUIJButtonInfo = mainMenuGUIJButtonInfo;
     }
 
-    @Contract(pure = true)
-    public static String getMainMenuGUIJButtonExit() {
+    public String getMainMenuGUIJButtonExit() {
         return mainMenuGUIJButtonExit;
     }
 
-    public static void setMainMenuGUIJButtonExit(String mainMenuGUIJButtonExit) {
-        Setting.mainMenuGUIJButtonExit = mainMenuGUIJButtonExit;
+    public void setMainMenuGUIJButtonExit(String mainMenuGUIJButtonExit) {
+        this.mainMenuGUIJButtonExit = mainMenuGUIJButtonExit;
     }
 
-    @Contract(pure = true)
-    public static String getInfoDataCreate() {
+    public String getInfoDataCreate() {
         return infoDataCreate;
     }
 
-    public static void setInfoDataCreate(String infoDataCreate) {
-        Setting.infoDataCreate = infoDataCreate;
+    public void setInfoDataCreate(String infoDataCreate) {
+        this.infoDataCreate = infoDataCreate;
     }
 
-    @Contract(pure = true)
-    public static String getInfoMail() {
+    public String getInfoMail() {
         return infoMail;
     }
 
-    public static void setInfoMail(String infoMail) {
-        Setting.infoMail = infoMail;
+    public void setInfoMail(String infoMail) {
+        this.infoMail = infoMail;
     }
 
-    @Contract(pure = true)
-    public static String getInfoFacebook() {
+    public String getInfoFacebook() {
         return infoFacebook;
     }
 
-    public static void setInfoFacebook(String infoFacebook) {
-        Setting.infoFacebook = infoFacebook;
+    public void setInfoFacebook(String infoFacebook) {
+        this.infoFacebook = infoFacebook;
     }
 
-    @Contract(pure = true)
-    public static String getInfoInstagram() {
+    public String getInfoInstagram() {
         return infoInstagram;
     }
 
-    public static void setInfoInstagram(String infoInstagram) {
-        Setting.infoInstagram = infoInstagram;
+    public void setInfoInstagram(String infoInstagram) {
+        this.infoInstagram = infoInstagram;
     }
 
-    @Contract(pure = true)
-    public static String getInfoGitHub() {
+    public String getInfoGitHub() {
         return infoGitHub;
     }
 
-    public static void setInfoGitHub(String infoGitHub) {
-        Setting.infoGitHub = infoGitHub;
+    public void setInfoGitHub(String infoGitHub) {
+        this.infoGitHub = infoGitHub;
     }
 
-    @Contract(pure = true)
-    public static String getInfoSkype() {
+    public String getInfoSkype() {
         return infoSkype;
     }
 
-    public static void setInfoSkype(String infoSkype) {
-        Setting.infoSkype = infoSkype;
+    public void setInfoSkype(String infoSkype) {
+        this.infoSkype = infoSkype;
     }
 
-    @Contract(pure = true)
-    public static String getInfoThanks() {
+    public String getInfoThanks() {
         return infoThanks;
     }
 
-    public static void setInfoThanks(String infoThanks) {
-        Setting.infoThanks = infoThanks;
+    public void setInfoThanks(String infoThanks) {
+        this.infoThanks = infoThanks;
     }
 
-    @Contract(pure = true)
-    public static String getColor1() {
+    public String getColor1() {
         return color1;
     }
 
-    public static void setColor1(String color1) {
-        Setting.color1 = color1;
+    public void setColor1(String color1) {
+        this.color1 = color1;
     }
 
-    @Contract(pure = true)
-    public static String getColor2() {
+    public String getColor2() {
         return color2;
     }
 
-    public static void setColor2(String color2) {
-        Setting.color2 = color2;
+    public void setColor2(String color2) {
+        this.color2 = color2;
     }
 
-    @Contract(pure = true)
-    public static String getColor3() {
+    public String getColor3() {
         return color3;
     }
 
-    public static void setColor3(String color3) {
-        Setting.color3 = color3;
+    public void setColor3(String color3) {
+        this.color3 = color3;
     }
 
-    @Contract(pure = true)
-    public static String getColor4() {
+    public String getColor4() {
         return color4;
     }
 
-    public static void setColor4(String color4) {
-        Setting.color4 = color4;
+    public void setColor4(String color4) {
+        this.color4 = color4;
     }
 
-    @Contract(pure = true)
-    public static String getColor5() {
+    public String getColor5() {
         return color5;
     }
 
-    public static void setColor5(String color5) {
-        Setting.color5 = color5;
+    public void setColor5(String color5) {
+        this.color5 = color5;
     }
 
-    @Contract(pure = true)
-    public static String getColor6() {
+    public String getColor6() {
         return color6;
     }
 
-    public static void setColor6(String color6) {
-        Setting.color6 = color6;
+    public void setColor6(String color6) {
+        this.color6 = color6;
     }
 
-    @Contract(pure = true)
-    public static String getSizeListValue1() {
+    public String getSizeListValue1() {
         return sizeListValue1;
     }
 
-    public static void setSizeListValue1(String sizeListValue1) {
-        Setting.sizeListValue1 = sizeListValue1;
+    public void setSizeListValue1(String sizeListValue1) {
+        this.sizeListValue1 = sizeListValue1;
     }
 
-    @Contract(pure = true)
-    public static String getSizeListValue2() {
+    public String getSizeListValue2() {
         return sizeListValue2;
     }
 
-    public static void setSizeListValue2(String sizeListValue2) {
-        Setting.sizeListValue2 = sizeListValue2;
+    public void setSizeListValue2(String sizeListValue2) {
+        this.sizeListValue2 = sizeListValue2;
     }
 
-    @Contract(pure = true)
-    public static String getSizeListValue3() {
+    public String getSizeListValue3() {
         return sizeListValue3;
     }
 
-    public static void setSizeListValue3(String sizeListValue3) {
-        Setting.sizeListValue3 = sizeListValue3;
+    public void setSizeListValue3(String sizeListValue3) {
+        this.sizeListValue3 = sizeListValue3;
     }
 
-    @Contract(pure = true)
-    public static String getSizeListValue4() {
+    public String getSizeListValue4() {
         return sizeListValue4;
     }
 
-    public static void setSizeListValue4(String sizeListValue4) {
-        Setting.sizeListValue4 = sizeListValue4;
+    public void setSizeListValue4(String sizeListValue4) {
+        this.sizeListValue4 = sizeListValue4;
     }
 
-    @Contract(pure = true)
-    public static String getSizeListValue5() {
+    public String getSizeListValue5() {
         return sizeListValue5;
     }
 
-    public static void setSizeListValue5(String sizeListValue5) {
-        Setting.sizeListValue5 = sizeListValue5;
+    public void setSizeListValue5(String sizeListValue5) {
+        this.sizeListValue5 = sizeListValue5;
     }
 
-    @Contract(pure = true)
-    public static int getSizeOfGame() {
-        return sizeOfGame;
-    }
-
-    public static void setSizeOfGame(int sizeOfGame) {
-        Setting.sizeOfGame = sizeOfGame;
-    }
-
-    @Contract(pure = true)
-    public static int getMainMenuWidth() {
-        return mainMenuWidth;
-    }
-
-    public static void setMainMenuWidth(int mainMenuWidth) {
-        Setting.mainMenuWidth = mainMenuWidth;
-    }
-
-    @Contract(pure = true)
-    public static int getMainMenuHeight() {
-        return mainMenuHeight;
-    }
-
-    public static void setMainMenuHeight(int mainMenuHeight) {
-        Setting.mainMenuHeight = mainMenuHeight;
-    }
-
-    @Contract(pure = true)
-    public static int getSettingGUIWidth() {
-        return settingGUIWidth;
-    }
-
-    public static void setSettingGUIWidth(int settingGUIWidth) {
-        Setting.settingGUIWidth = settingGUIWidth;
-    }
-
-    @Contract(pure = true)
-    public static int getSettingGUIHeight() {
-        return settingGUIHeight;
-    }
-
-    public static void setSettingGUIHeight(int settingGUIHeight) {
-        Setting.settingGUIHeight = settingGUIHeight;
-    }
-
-    @Contract(pure = true)
-    public static int getInfoGUIWidth() {
-        return infoGUIWidth;
-    }
-
-    public static void setInfoGUIWidth(int infoGUIWidth) {
-        Setting.infoGUIWidth = infoGUIWidth;
-    }
-
-    @Contract(pure = true)
-    public static int getInfoGUIHeight() {
-        return infoGUIHeight;
-    }
-
-    public static void setInfoGUIHeight(int infoGUIHeight) {
-        Setting.infoGUIHeight = infoGUIHeight;
-    }
-
-    @Contract(pure = true)
-    public static int getExitGUIWidth() {
-        return exitGUIWidth;
-    }
-
-    public static void setExitGUIWidth(int exitGUIWidth) {
-        Setting.exitGUIWidth = exitGUIWidth;
-    }
-
-    @Contract(pure = true)
-    public static int getExitGUIHeight() {
-        return exitGUIHeight;
-    }
-
-    public static void setExitGUIHeight(int exitGUIHeight) {
-        Setting.exitGUIHeight = exitGUIHeight;
-    }
-
-    @Contract(pure = true)
-    public static int getRoomWidth() {
-        return roomWidth;
-    }
-
-    public static void setRoomWidth(int roomWidth) {
-        Setting.roomWidth = roomWidth;
-    }
-
-    @Contract(pure = true)
-    public static int getRoomHeight() {
-        return roomHeight;
-    }
-
-    public static void setRoomHeight(int roomHeight) {
-        Setting.roomHeight = roomHeight;
-    }
-
-    @Contract(pure = true)
-    public static int getColorChangeSleepTimeMS() {
-        return colorChangeSleepTimeMS;
-    }
-
-    public static void setColorChangeSleepTimeMS(int colorChangeSleepTimeMS) {
-        Setting.colorChangeSleepTimeMS = colorChangeSleepTimeMS;
-    }
-
-    @Contract(pure = true)
-    public static Color getColorFace() {
-        return colorFace;
-    }
-
-    public static void setColorFace(Color colorFace) {
-        Setting.colorFace = colorFace;
-    }
-
-    @Contract(pure = true)
-    public static Color getColorMouse() {
-        return colorMouse;
-    }
-
-    public static void setColorMouse(Color colorMouse) {
-        Setting.colorMouse = colorMouse;
-    }
-
-    @Contract(pure = true)
-    public static Color getColorSnake() {
-        return colorSnake;
-    }
-
-    public static void setColorSnake(Color colorSnake) {
-        Setting.colorSnake = colorSnake;
-    }
-
-    @Contract(pure = true)
-    public static boolean isChangeColor() {
-        return changeColor;
-    }
-
-    public static void setChangeColor(boolean changeColor) {
-        Setting.changeColor = changeColor;
-    }
-
-    @Contract(pure = true)
-    public static boolean isMainMenuWaitThread() {
-        return mainMenuWaitThread;
-    }
-
-    public static void setMainMenuWaitThread(boolean mainMenuWaitThread) {
-        Setting.mainMenuWaitThread = mainMenuWaitThread;
-    }
-
-    @Contract(pure = true)
-    public static boolean isMainMenuFullScreen() {
-        return mainMenuFullScreen;
-    }
-
-    public static void setMainMenuFullScreen(boolean mainMenuFullScreen) {
-        Setting.mainMenuFullScreen = mainMenuFullScreen;
-    }
-
-    @Contract(pure = true)
-    public static List<JLabel> getExitGUIJLabelList() {
+    public List<JLabel> getExitGUIJLabelList() {
         return exitGUIJLabelList;
     }
 
-    public static void setExitGUIJLabelList(List<JLabel> exitGUIJLabelList) {
-        Setting.exitGUIJLabelList = exitGUIJLabelList;
+    public void setExitGUIJLabelList(List<JLabel> exitGUIJLabelList) {
+        this.exitGUIJLabelList = exitGUIJLabelList;
     }
 
-    @Contract(pure = true)
-    public static int getExitGUISleepTimeMS() {
-        return exitGUISleepTimeMS;
-    }
-
-    public static void setExitGUISleepTimeMS(int exitGUISleepTimeMS) {
-        Setting.exitGUISleepTimeMS = exitGUISleepTimeMS;
-    }
-
-    @Contract(pure = true)
-    public static List<JLabel> getInfoGUIJLabelList() {
+    public List<JLabel> getInfoGUIJLabelList() {
         return infoGUIJLabelList;
     }
 
-    public static void setInfoGUIJLabelList(List<JLabel> infoGUIJLabelList) {
-        Setting.infoGUIJLabelList = infoGUIJLabelList;
+    public void setInfoGUIJLabelList(List<JLabel> infoGUIJLabelList) {
+        this.infoGUIJLabelList = infoGUIJLabelList;
+    }
+
+    public int getMainMenuWidth() {
+        return mainMenuWidth;
+    }
+
+    public void setMainMenuWidth(int mainMenuWidth) {
+        this.mainMenuWidth = mainMenuWidth;
+    }
+
+    public int getMainMenuHeight() {
+        return mainMenuHeight;
+    }
+
+    public void setMainMenuHeight(int mainMenuHeight) {
+        this.mainMenuHeight = mainMenuHeight;
+    }
+
+    public int getSettingGUIWidth() {
+        return settingGUIWidth;
+    }
+
+    public void setSettingGUIWidth(int settingGUIWidth) {
+        this.settingGUIWidth = settingGUIWidth;
+    }
+
+    public int getSettingGUIHeight() {
+        return settingGUIHeight;
+    }
+
+    public void setSettingGUIHeight(int settingGUIHeight) {
+        this.settingGUIHeight = settingGUIHeight;
+    }
+
+    public int getInfoGUIWidth() {
+        return infoGUIWidth;
+    }
+
+    public void setInfoGUIWidth(int infoGUIWidth) {
+        this.infoGUIWidth = infoGUIWidth;
+    }
+
+    public int getInfoGUIHeight() {
+        return infoGUIHeight;
+    }
+
+    public void setInfoGUIHeight(int infoGUIHeight) {
+        this.infoGUIHeight = infoGUIHeight;
+    }
+
+    public int getExitGUIWidth() {
+        return exitGUIWidth;
+    }
+
+    public void setExitGUIWidth(int exitGUIWidth) {
+        this.exitGUIWidth = exitGUIWidth;
+    }
+
+    public int getExitGUIHeight() {
+        return exitGUIHeight;
+    }
+
+    public void setExitGUIHeight(int exitGUIHeight) {
+        this.exitGUIHeight = exitGUIHeight;
+    }
+
+    public int getSizeOfGame() {
+        return sizeOfGame;
+    }
+
+    public void setSizeOfGame(int sizeOfGame) {
+        this.sizeOfGame = sizeOfGame;
+    }
+
+    public int getRoomWidth() {
+        return roomWidth;
+    }
+
+    public void setRoomWidth(int roomWidth) {
+        this.roomWidth = roomWidth;
+    }
+
+    public int getRoomHeight() {
+        return roomHeight;
+    }
+
+    public void setRoomHeight(int roomHeight) {
+        this.roomHeight = roomHeight;
+    }
+
+    public int getColorChangeSleepTimeMS() {
+        return colorChangeSleepTimeMS;
+    }
+
+    public void setColorChangeSleepTimeMS(int colorChangeSleepTimeMS) {
+        this.colorChangeSleepTimeMS = colorChangeSleepTimeMS;
+    }
+
+    public int getExitGUISleepTimeMS() {
+        return exitGUISleepTimeMS;
+    }
+
+    public void setExitGUISleepTimeMS(int exitGUISleepTimeMS) {
+        this.exitGUISleepTimeMS = exitGUISleepTimeMS;
+    }
+
+    public Color getColorFace() {
+        return colorFace;
+    }
+
+    public void setColorFace(Color colorFace) {
+        this.colorFace = colorFace;
+    }
+
+    public Color getColorMouse() {
+        return colorMouse;
+    }
+
+    public void setColorMouse(Color colorMouse) {
+        this.colorMouse = colorMouse;
+    }
+
+    public Color getColorSnake() {
+        return colorSnake;
+    }
+
+    public void setColorSnake(Color colorSnake) {
+        this.colorSnake = colorSnake;
+    }
+
+    public boolean isChangeColor() {
+        return changeColor;
+    }
+
+    public void setChangeColor(boolean changeColor) {
+        this.changeColor = changeColor;
+    }
+
+    public boolean isMainMenuWaitThread() {
+        return mainMenuWaitThread;
+    }
+
+    public void setMainMenuWaitThread(boolean mainMenuWaitThread) {
+        this.mainMenuWaitThread = mainMenuWaitThread;
+    }
+
+    public boolean isMainMenuFullScreen() {
+        return mainMenuFullScreen;
+    }
+
+    public void setMainMenuFullScreen(boolean mainMenuFullScreen) {
+        this.mainMenuFullScreen = mainMenuFullScreen;
     }
 }
-

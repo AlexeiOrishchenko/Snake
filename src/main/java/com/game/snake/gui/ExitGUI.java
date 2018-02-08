@@ -10,26 +10,28 @@ import java.util.concurrent.Executors;
 
 /**
  * @author Koliadin Nikita
- * @version 1.8
+ * @version 1.9
  *
  * This class is the last window that user will see.
  */
 public final class ExitGUI extends JFrame implements Runnable {
 
+    /* Our Setting singleton object */
+    private final Setting setting = Setting.getInstance();
+
     /* Get list of the JLabels to ExitGUI from Setting class */
-    private final List<JLabel> exitGUIJLabelList = Setting.getExitGUIJLabelList();
+    private final List<JLabel> exitGUIJLabelList = setting.getExitGUIJLabelList();
 
     /* Our container and Bag for set label at the GUI */
     private final Container pane = getContentPane();
     private final GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
     /**
-     * Constructor that set GUI title and create
-     * new BagLayout.
+     * Constructor that set GUI title and create new BagLayout.
      */
     public ExitGUI() {
-        /* Get ExitGUI title from the Setting class */
-        super(Setting.getExitGUIJFrameTitle());
+        /* Get ExitGUI title from the setting */
+        setTitle(setting.getExitGUIJFrameTitle());
 
         pane.setLayout(new GridBagLayout());
 
@@ -60,8 +62,8 @@ public final class ExitGUI extends JFrame implements Runnable {
             gridBagConstraints.gridy++;
             gridBagConstraints.insets = new Insets(10,0,0,0);
             pane.add(jLabel, gridBagConstraints);
-            if (Setting.isChangeColor()) {
-                Executors.newCachedThreadPool().execute(() -> ColorChange.changeColorOfLabel(jLabel));
+            if (setting.isChangeColor()) {
+                Executors.newCachedThreadPool().execute(new ColorChange(jLabel, setting));
             }
         }
     }
@@ -70,7 +72,7 @@ public final class ExitGUI extends JFrame implements Runnable {
      * Set size and locations of the window, and start it
      */
     private void setJFame() {
-        setPreferredSize(new Dimension(Setting.getExitGUIWidth(), Setting.getExitGUIHeight()));
+        setPreferredSize(new Dimension(setting.getExitGUIWidth(), setting.getExitGUIHeight()));
         setLocationRelativeTo(null); // the center of the screen
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
@@ -82,7 +84,7 @@ public final class ExitGUI extends JFrame implements Runnable {
      */
     private void sleep() {
         try {
-            Thread.sleep(Setting.getExitGUISleepTimeMS());
+            Thread.sleep(setting.getExitGUISleepTimeMS());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -16,14 +16,17 @@ import java.util.concurrent.Executors;
 
 /**
  * @author Koliadin Nikita
- * @version 1.4
+ * @version 1.9
  *
  * This class is the "Room" for the snake
  */
 public class Room implements Runnable {
 
     /* static object of the room - room can be only one */
-    public static Room room;
+    public static Room room; // FIXME: 08.02.2018
+
+    /* Our Setting singleton object */
+    private final Setting setting = Setting.getInstance();
 
     /* real objects of the game */
     private Snake snake;
@@ -36,10 +39,13 @@ public class Room implements Runnable {
     private  int width;
     private  int height;
 
-    public Room(Snake snake, JFrame jFrame) {
-        this.width = Setting.getRoomWidth();
-        this.height = Setting.getRoomHeight();
-        this.snake = snake;
+    /**
+     * This constructor setMainMenu jFrame. Also create new Snake and new Mouse.
+     */
+    public Room(JFrame jFrame) {
+        this.width = this.setting.getRoomWidth();
+        this.height = this.setting.getRoomHeight();
+        this.snake = new Snake();
         createMouse();
         this.jFrame = jFrame;
     }
@@ -79,7 +85,8 @@ public class Room implements Runnable {
     }
 
     /**
-     * Create new mouse
+     * Create new mouse using random method and dont allow create
+     * mouse on the snake
      */
     public void createMouse() {
         mouse = new Mouse((int) (Math.random() * width + 1), (int) (Math.random() * height + 1));
@@ -177,25 +184,26 @@ public class Room implements Runnable {
             }
 
             snake.move();   /* Move the snake */
-            print();        /* Display the current state of the game */
+            print(keyboardObserver);        /* Display the current state of the game */
             sleep();        /* Pause between moves */
         }
 
         /* Display the message "Game Over" */
         System.out.println("Game Over!");
         /* Turn on mainMenu visible */
-        KeyboardObserver.jFrame.setVisible(false);
-        Setting.setMainMenuWaitThread(false);
+        keyboardObserver.setVisible(false);
+        setting.setMainMenuWaitThread(false);
         jFrame.setVisible(true);
     }
 
     /**
      * Print everything to the window
+     * @param keyboardObserver is listener for our game
      */
-    private void print() {
-        if (KeyboardObserver.jFrame != null) {
-            KeyboardObserver.jFrame.setContentPane(new Layer());
-            KeyboardObserver.jFrame.setVisible(true);
+    private void print(KeyboardObserver keyboardObserver) {
+        if (keyboardObserver != null) {
+            keyboardObserver.setContentPane(new Layer());
+            keyboardObserver.setVisible(true);
         }
     }
 

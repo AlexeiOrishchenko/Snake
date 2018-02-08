@@ -7,28 +7,49 @@ import java.awt.*;
 
 /**
  * @author Koliadin Nikita
- * @version 1.8
+ * @version 1.9
  *
  * This class have method that change color of the label every times of ms.
  */
-public class ColorChange {
+public class ColorChange implements Runnable {
+
+    /* Our jLabel to change color */
+    private final JLabel jLabel;
+    /* Our Setting singleton object */
+    private final Setting setting;
+
+    /**
+     * @param jLabel is the label that we are set the color
+     * @param setting is the Setting class object to get setting
+     */
+    public ColorChange(JLabel jLabel, Setting setting) {
+        this.jLabel = jLabel;
+        this.setting = setting;
+    }
+
+    /**
+     * Start changing of the color
+     */
+    @Override
+    public void run() {
+        changeColorOfLabel();
+    }
 
     /**
      * This method set the color of the label, and change it every sleepTime ms
-     * @param jLabel the label that we are set the color
      */
-    public static void changeColorOfLabel(final JLabel jLabel) {
+    public void changeColorOfLabel() {
         int r = (int) (Math.random() * 256);
         int g = (int) (Math.random() * 256);
         int b = (int) (Math.random() * 256);
         while (true) {
-            if (!Setting.isChangeColor()) {
+            if (!setting.isChangeColor()) {
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            } else if (Setting.isMainMenuWaitThread()) {
+            } else if (setting.isMainMenuWaitThread()) {
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
@@ -72,9 +93,9 @@ public class ColorChange {
     /**
      * Get ms sleep from Setting class
      */
-    private static void sleep()  {
+    private void sleep()  {
         try {
-            Thread.sleep(Setting.getColorChangeSleepTimeMS());
+            Thread.sleep(setting.getColorChangeSleepTimeMS());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

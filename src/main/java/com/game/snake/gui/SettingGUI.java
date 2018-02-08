@@ -1,6 +1,7 @@
 package com.game.snake.gui;
 
 import com.game.snake.setting.Setting;
+
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -13,11 +14,14 @@ import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.8
+ * @version 1.9
  *
  * This GUI class has settings for this game.
  */
 public final class SettingGUI extends JFrame implements Runnable {
+
+    /* Our Setting singleton object */
+    private final Setting setting = Setting.getInstance();
 
     /* This is list of the setting label */
     private final List<JLabel> settingGUIJLabelList = new ArrayList<JLabel>(Arrays.asList(
@@ -51,11 +55,11 @@ public final class SettingGUI extends JFrame implements Runnable {
     private final GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
     /**
-     * Private constructor that set GUI title and create
-     * new BagLayout.
+     * Constructor that set GUI title and create new BagLayout.
      */
     public SettingGUI() {
-        super(Setting.getSettingGUIJFrameTitle());
+        /* Get SettingGUI title from the setting */
+        setTitle(setting.getSettingGUIJFrameTitle());
 
         pane.setLayout(new GridBagLayout());
 
@@ -130,11 +134,11 @@ public final class SettingGUI extends JFrame implements Runnable {
     @Contract(pure = true)
     private ArrayList<JRadioButton> createSizeList() {
         return new ArrayList<JRadioButton>(Arrays.asList(
-                new JRadioButton(Setting.getSizeListValue1()),
-                new JRadioButton(Setting.getSizeListValue2()),
-                new JRadioButton(Setting.getSizeListValue3()),
-                new JRadioButton(Setting.getSizeListValue4()),
-                new JRadioButton(Setting.getSizeListValue5())
+                new JRadioButton(setting.getSizeListValue1()),
+                new JRadioButton(setting.getSizeListValue2()),
+                new JRadioButton(setting.getSizeListValue3()),
+                new JRadioButton(setting.getSizeListValue4()),
+                new JRadioButton(setting.getSizeListValue5())
         ));
     }
 
@@ -157,12 +161,12 @@ public final class SettingGUI extends JFrame implements Runnable {
     @NotNull
     private ArrayList<JRadioButton> createColorList() {
         return new ArrayList<JRadioButton>(Arrays.asList(
-                new JRadioButton(Setting.getColor1()),
-                new JRadioButton(Setting.getColor2()),
-                new JRadioButton(Setting.getColor3()),
-                new JRadioButton(Setting.getColor4()),
-                new JRadioButton(Setting.getColor5()),
-                new JRadioButton(Setting.getColor6())
+                new JRadioButton(setting.getColor1()),
+                new JRadioButton(setting.getColor2()),
+                new JRadioButton(setting.getColor3()),
+                new JRadioButton(setting.getColor4()),
+                new JRadioButton(setting.getColor5()),
+                new JRadioButton(setting.getColor6())
         ));
     }
 
@@ -188,7 +192,7 @@ public final class SettingGUI extends JFrame implements Runnable {
      * Set size and locations of the window, and start it
      */
     private void setJFrame() {
-        setPreferredSize(new Dimension(Setting.getSettingGUIWidth(), Setting.getSettingGUIHeight()));
+        setPreferredSize(new Dimension(setting.getSettingGUIWidth(), setting.getSettingGUIHeight()));
         setLocationRelativeTo(null); // the center of the screen
         pack();
         setVisible(true);
@@ -233,7 +237,7 @@ public final class SettingGUI extends JFrame implements Runnable {
                     final Field f;
                     try {
                         f = Color.class.getField(jRadioButton.getText()); // Get the color if we can
-                        Setting.setColorSnake((Color) f.get(null)); // Set the color
+                        setting.setColorSnake((Color) f.get(null)); // Set the color
                     } catch (NoSuchFieldException | IllegalAccessException err) {
                         err.printStackTrace();
                     }
@@ -263,7 +267,7 @@ public final class SettingGUI extends JFrame implements Runnable {
                     final Field f;
                     try {
                         f = Color.class.getField(jRadioButton.getText()); // Get the color if we can
-                        Setting.setColorMouse((Color) f.get(null)); // Set the color
+                        setting.setColorMouse((Color) f.get(null)); // Set the color
                     } catch (NoSuchFieldException | IllegalAccessException err) {
                         err.printStackTrace();
                     }
@@ -293,7 +297,7 @@ public final class SettingGUI extends JFrame implements Runnable {
                     final Field f;
                     try {
                         f = Color.class.getField(jRadioButton.getText()); // Get the color if we can
-                        Setting.setColorFace((Color) f.get(null)); // Set the color
+                        setting.setColorFace((Color) f.get(null)); // Set the color
                     } catch (NoSuchFieldException | IllegalAccessException err) {
                         err.printStackTrace();
                     }
@@ -312,12 +316,12 @@ public final class SettingGUI extends JFrame implements Runnable {
             setJLabel();
             ButtonGroup groupFullScreenMainMenu = new ButtonGroup();
             fillJRadioButton(groupFullScreenMainMenu, jRadioButtonsFullScreenMainMenuList);
-            setVisibleJRadioButton(jRadioButtonsFullScreenMainMenuList, Setting.isMainMenuFullScreen() + "");
+            setVisibleJRadioButton(jRadioButtonsFullScreenMainMenuList, setting.isMainMenuFullScreen() + "");
         }
 
         @Override
         public void update() {
-            Setting.setMainMenuFullScreen(jRadioButtonsFullScreenMainMenuList.stream()
+            setting.setMainMenuFullScreen(jRadioButtonsFullScreenMainMenuList.stream()
                     .filter(AbstractButton::isSelected)
                     .findFirst()
                     .map(JRadioButton::getText)
@@ -335,12 +339,12 @@ public final class SettingGUI extends JFrame implements Runnable {
             setJLabel();
             ButtonGroup groupChangeColor = new ButtonGroup();
             fillJRadioButton(groupChangeColor, jRadioButtonsChangeColorList);
-            setVisibleJRadioButton(jRadioButtonsChangeColorList, Setting.isChangeColor() + "");
+            setVisibleJRadioButton(jRadioButtonsChangeColorList, setting.isChangeColor() + "");
         }
 
         @Override
         public void update() {
-            Setting.setChangeColor(jRadioButtonsChangeColorList.stream()
+            setting.setChangeColor(jRadioButtonsChangeColorList.stream()
                     .filter(AbstractButton::isSelected)
                     .findFirst()
                     .map(JRadioButton::getText)
@@ -362,12 +366,12 @@ public final class SettingGUI extends JFrame implements Runnable {
             setJLabel();
             ButtonGroup groupSizeOfGame = new ButtonGroup();
             fillJRadioButton(groupSizeOfGame, jRadioButtonsSizeOfGameList);
-            setVisibleJRadioButton(jRadioButtonsSizeOfGameList,  Setting.getSizeOfGame() + "");
+            setVisibleJRadioButton(jRadioButtonsSizeOfGameList,  setting.getSizeOfGame() + "");
         }
 
         @Override
         public void update() {
-            Setting.setSizeOfGame(jRadioButtonsSizeOfGameList.stream()
+            setting.setSizeOfGame(jRadioButtonsSizeOfGameList.stream()
                     .filter(AbstractButton::isSelected)
                     .findFirst()
                     .map(JRadioButton::getText)
@@ -385,12 +389,12 @@ public final class SettingGUI extends JFrame implements Runnable {
             setJLabel();
             ButtonGroup groupRoomWidth = new ButtonGroup();
             fillJRadioButton(groupRoomWidth, jRadioButtonsRoomWidthList);
-            setVisibleJRadioButton(jRadioButtonsRoomWidthList, Setting.getRoomWidth() + "");
+            setVisibleJRadioButton(jRadioButtonsRoomWidthList, setting.getRoomWidth() + "");
         }
 
         @Override
         public void update() {
-            Setting.setRoomWidth(jRadioButtonsRoomWidthList.stream()
+            setting.setRoomWidth(jRadioButtonsRoomWidthList.stream()
                     .filter(AbstractButton::isSelected)
                     .findFirst()
                     .map(JRadioButton::getText)
@@ -408,12 +412,12 @@ public final class SettingGUI extends JFrame implements Runnable {
             setJLabel();
             ButtonGroup groupRoomHeight = new ButtonGroup();
             fillJRadioButton(groupRoomHeight, jRadioButtonsRoomHeightList);
-            setVisibleJRadioButton(jRadioButtonsRoomHeightList, Setting.getRoomHeight() + "");
+            setVisibleJRadioButton(jRadioButtonsRoomHeightList, setting.getRoomHeight() + "");
         }
 
         @Override
         public void update() {
-            Setting.setRoomHeight(jRadioButtonsRoomHeightList.stream()
+            setting.setRoomHeight(jRadioButtonsRoomHeightList.stream()
                     .filter(AbstractButton::isSelected)
                     .findFirst()
                     .map(JRadioButton::getText)

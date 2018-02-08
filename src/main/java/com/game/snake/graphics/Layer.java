@@ -10,24 +10,27 @@ import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.5
+ * @version 1.9
  *
  * This class is Graphic class
  */
 public class Layer extends JPanel {
 
+    /* Our Setting for this game object */
+    private final Setting setting = Setting.getInstance();
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        final int size = Setting.getSizeOfGame();
+        final int size = setting.getSizeOfGame();
 
-        final int width = Setting.getRoomWidth() + 2;
-        final int height = Setting.getRoomHeight() + 2;
+        final int width = setting.getRoomWidth() + 2;
+        final int height = setting.getRoomHeight() + 2;
 
 
         /* Red color of face */
-        g.setColor(Setting.getColorFace());
+        g.setColor(setting.getColorFace());
         /* Draw a rectangle showing the edge of the field to the right */
         g.fillRect(width * size, 0, size, (height * size));
         /* Draw a rectangle showing the edge of the field to the down */
@@ -38,12 +41,12 @@ public class Layer extends JPanel {
         g.fillRect(0, 0, (width * size) , size);
 
         /* Gray color of the mouse */
-        g.setColor(Setting.getColorMouse());
+        g.setColor(setting.getColorMouse());
         /* draw rectangle showing mouse */
         g.fillRect(Room.room.getMouse().getX() * size, Room.room.getMouse().getY() * size, size, size);
 
         /* Snake color of the Snake */
-        g.setColor(Setting.getColorSnake());
+        g.setColor(setting.getColorSnake());
         /* Get sections of the snake */
         List<SnakeSection> getSection = Room.room.getSnake().getSections();
         for (SnakeSection aGetSection : getSection) {

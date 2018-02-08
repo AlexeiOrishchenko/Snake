@@ -12,19 +12,28 @@ import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.4
+ * @version 1.9
  *
  * This class is the snake
  */
 public final class Snake {
 
+    /* Our Setting singleton object */
+    private Setting setting = Setting.getInstance();
+
     /* Direction of movement of a snake */
     private SnakeDirection direction;
+
     /* Status - whether the snake is alive or not */
     private boolean isAlive;
+
     /* List of snake pieces */
     private List<SnakeSection> sections;
 
+    /**
+     * This constructor create snake sections - the head of the snake,
+     * set coordinate of the head and set direction to the down
+     */
     public Snake() {
         sections = new ArrayList<SnakeSection>();
         sections.add(new SnakeSection(1, 1));
@@ -93,8 +102,7 @@ public final class Snake {
      */
     private void move(int dx, int dy) {
         /* Create a new head - a new "piece of snake" */
-        SnakeSection head = sections.get(0);
-        head = new SnakeSection(head.getX() + dx, head.getY() + dy);
+        SnakeSection head = new SnakeSection(getX() + dx, getY() + dy);
 
         /* Check - whether the head has got out of the room */
         checkBorders(head);
@@ -121,6 +129,7 @@ public final class Snake {
 
     /**
      * The method checks whether the head does not coincide with any part of the body of the snake
+     * @param head - is the head of the snake
      */
     private void checkBody(SnakeSection head) {
         if (sections.contains(head)) {
@@ -130,9 +139,10 @@ public final class Snake {
 
     /**
      * The method checks whether the new head is within the room
+     * @param head - is the head of the snake
      */
     private void checkBorders(@NotNull SnakeSection head) {
-        isAlive = (head.getX() >= 1 && head.getX() < Setting.getRoomWidth() + 2)
-                && (head.getY() >= 1 && head.getY() < Setting.getRoomHeight() + 2);
+        isAlive = (head.getX() >= 1 && head.getX() < setting.getRoomWidth() + 2)
+                && (head.getY() >= 1 && head.getY() < setting.getRoomHeight() + 2);
     }
 }

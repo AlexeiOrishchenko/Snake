@@ -4,7 +4,7 @@ import com.game.snake.gui.MainMenuGUI;
 
 /**
  * @author Koliadin Nikita
- * @version 1.4
+ * @version 1.9
  *
  * This class has examples how we can start our game
  */
