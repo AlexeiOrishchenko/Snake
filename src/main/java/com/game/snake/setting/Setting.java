@@ -92,6 +92,7 @@ public class Setting {
     private Color colorFace = Color.RED;
     private Color colorMouse = Color.GRAY;
     private Color colorSnake = Color.GREEN;
+    private Color colorHead = Color.BLACK;
 
     private boolean changeColor = true;
 
@@ -512,5 +513,13 @@ public class Setting {
 
     public void setMainMenuFullScreen(boolean mainMenuFullScreen) {
         this.mainMenuFullScreen = mainMenuFullScreen;
+    }
+
+    public Color getColorHead() {
+        return colorHead;
+    }
+
+    public void setColorHead(Color colorHead) {
+        this.colorHead = colorHead;
     }
 }
