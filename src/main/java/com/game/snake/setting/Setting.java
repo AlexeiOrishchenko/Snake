@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.8
+ * @version 1.9
  *
  * This class contains main parameters of the game
  */

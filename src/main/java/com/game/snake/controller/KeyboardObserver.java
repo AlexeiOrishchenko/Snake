@@ -3,7 +3,6 @@ package com.game.snake.controller;
 import com.game.snake.setting.Setting;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Queue;
@@ -11,7 +10,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * @author Koliadin Nikita
- * @version 1.9
+ * @version 1.10
  *
  * This class is listener
  */
@@ -20,17 +19,29 @@ public class KeyboardObserver extends JFrame implements Runnable {
     /* Our queue of key pressed button */
     private final Queue<KeyEvent> keyEvents = new ArrayBlockingQueue<KeyEvent>(1000);
 
-    /* Our Setting singleton object */
-    private Setting setting = Setting.getInstance();
-
     /**
      * This is constructor that set play title and size of the game window
      */
     public KeyboardObserver() {
+        /* Our Setting singleton object */
+        Setting setting = Setting.getInstance();
+
+        /* Set title of game gui */
         setTitle(setting.getPlayJFrameTitle());
-        setUndecorated(false); // Frame window
-//        setPreferredSize(new Dimension(setting.getMainMenuWidth(), setting.getMainMenuHeight())); // FIXME: 08.02.2018
-        setLocationRelativeTo(null); // the center of the screen
+
+        /* Frame window */
+        setUndecorated(false);
+
+        /* The center of the screen */
+        if (!((setting.getRoomHeight() > 20) || (setting.getRoomWidth() > 20))) {
+            setLocationRelativeTo(null);
+        }
+
+        /* Set size of the window by width and height of the room */
+        setSize(
+                ((setting.getRoomWidth() + 3) * setting.getSizeOfGame()) + 17,
+                ((setting.getRoomHeight() + 3) * setting.getSizeOfGame()) + 40
+        );
     }
 
     /**
@@ -38,11 +49,6 @@ public class KeyboardObserver extends JFrame implements Runnable {
      */
     @Override
     public void run() {
-        setSize(
-                ((setting.getRoomWidth() + 3) * setting.getSizeOfGame()) + 17,
-                ((setting.getRoomHeight() + 3) * setting.getSizeOfGame()) + 40
-        );
-
         addKeyListener(new KeyListener() {
 
             @Override
@@ -57,11 +63,15 @@ public class KeyboardObserver extends JFrame implements Runnable {
 
             @Override
             public void keyPressed(KeyEvent e) {
+                /* Add event to the queue */
                 keyEvents.add(e);
             }
         });
     }
 
+    /**
+     * @return if has any key event - true
+     */
     public boolean hasKeyEvents() {
         return !keyEvents.isEmpty();
     }

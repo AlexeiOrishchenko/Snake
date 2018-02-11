@@ -1,26 +1,19 @@
 package com.game.snake.gui;
 
-import com.game.snake.graphics.ColorChange;
 import com.game.snake.setting.Setting;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * @author Koliadin Nikita
- * @version 1.9
+ * @version 1.10
  *
  * Short date about author.
  */
 public final class InfoGUI extends JFrame implements Runnable {
-
-    /* Create static cached thread pool */
-    private static ExecutorService executorService = Executors.newCachedThreadPool(); // FIXME: 08.02.2018
 
     /* Our Setting singleton object */
     private final Setting setting = Setting.getInstance();
@@ -30,16 +23,7 @@ public final class InfoGUI extends JFrame implements Runnable {
     private GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
     /* Get list of the JLabels to InfoGUI from Setting class */
-    private List<JLabel> infoGUIJLabelList = new ArrayList<JLabel>(Arrays.asList( // FIXME: 08.02.2018
-            new JLabel(Setting.getAUTHOR()),
-            new JLabel(setting.getInfoDataCreate()),
-            new JLabel(setting.getInfoMail()),
-            new JLabel(setting.getInfoFacebook()),
-            new JLabel(setting.getInfoInstagram()),
-            new JLabel(setting.getInfoGitHub()),
-            new JLabel(setting.getInfoSkype()),
-            new JLabel(setting.getInfoThanks())
-    ));
+    private List<JLabel> infoGUIJLabelList = new ArrayList<JLabel>(setting.getInfoGUIJLabelList());
 
     /**
      * Constructor that set GUI title and create new BagLayout.
@@ -65,15 +49,13 @@ public final class InfoGUI extends JFrame implements Runnable {
     }
 
     /**
-     * This method add JLabel to the pane and start ColorChange in new
-     * thread
+     * This method add JLabel to the pane
      */
     private void setJLabel() {
         for (JLabel jLabel : infoGUIJLabelList) {
             gridBagConstraints.gridy++;
             gridBagConstraints.insets = new Insets(10,0,0,0);
             pane.add(jLabel, gridBagConstraints);
-            executorService.execute(new ColorChange(jLabel, setting));
         }
     }
 
