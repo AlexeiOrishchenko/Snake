@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.9
+ * @version 1.10
  *
  * This GUI class has settings for this game.
  */
@@ -25,6 +25,7 @@ public final class SettingGUI extends JFrame implements Runnable {
 
     /* This is list of the setting label */
     private final List<JLabel> settingGUIJLabelList = new ArrayList<JLabel>(Arrays.asList(
+            new JLabel("Color of the head: "),
             new JLabel("Color of the snake: "),
             new JLabel("Color of the mouse: "),
             new JLabel("Color of the face: "),
@@ -37,6 +38,7 @@ public final class SettingGUI extends JFrame implements Runnable {
 
     /* This is list of the inner class setting*/
     private final List<LabelSettingGUI> LabelSettingGUIList = new ArrayList<LabelSettingGUI>(Arrays.asList(
+            new LabelColorHead(),
             new LabelColorSnake(),
             new LabelColorMouse(),
             new LabelColorFace(),
@@ -215,6 +217,36 @@ public final class SettingGUI extends JFrame implements Runnable {
          * update information in Setting class
          */
         void update();
+    }
+
+    private class LabelColorHead implements LabelSettingGUI {
+
+        ArrayList<JRadioButton> jRadioButtonsColorHeadList = createColorList();
+
+        @Override
+        public void set() {
+            setJLabel();
+            ButtonGroup groupColorHead = new ButtonGroup();
+            fillJRadioButton(groupColorHead, jRadioButtonsColorHeadList);
+            jRadioButtonsColorHeadList.get(5).setSelected(true); /* do default selected Snake color : BLACK */
+        }
+
+        @Override
+        public void update() {
+            for (JRadioButton jRadioButton : jRadioButtonsColorHeadList) {
+                if (jRadioButton.isSelected()) {
+                    /* Try to get a color by name using reflection */
+                    final Field f;
+                    try {
+                        f = Color.class.getField(jRadioButton.getText()); // Get the color if we can
+                        setting.setColorHead((Color) f.get(null)); // Set the color
+                    } catch (NoSuchFieldException | IllegalAccessException err) {
+                        err.printStackTrace();
+                    }
+                    break;
+                }
+            }
+        }
     }
 
     private class LabelColorSnake implements LabelSettingGUI {
