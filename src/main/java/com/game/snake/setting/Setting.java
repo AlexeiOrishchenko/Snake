@@ -57,7 +57,7 @@ public class Setting {
     private List<JLabel> exitGUIJLabelList = new ArrayList<JLabel>(Arrays.asList(
             new JLabel(getInfoThanks())));
 
-    private List<JLabel> infoGUIJLabelList = new ArrayList<JLabel>(Arrays.asList(
+    private List<JLabel> infoGUIJLabelList = new ArrayList<JLabel>(Arrays.asList( // FIXME: 13.02.2018 
             new JLabel(getAUTHOR()),
             new JLabel(getInfoDataCreate()),
             new JLabel(getInfoMail()),

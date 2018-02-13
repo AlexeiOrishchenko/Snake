@@ -4,6 +4,8 @@ import com.game.snake.setting.Setting;
 import com.game.snake.objects.room.Room;
 import com.game.snake.objects.snake.SnakeSection;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
@@ -13,58 +15,50 @@ import java.util.stream.IntStream;
  * @author Koliadin Nikita
  * @version 1.10
  *
- * This class is Graphic class
  */
 public class Layer extends JPanel {
 
-    /* Our Setting for this game object */
     private final Setting setting = Setting.getInstance();
+    private final List<SnakeSection> getSection = Room.room.getSnake().getSections();
 
-    /**
-     * @param g our graphics
-     */
+    private final int size = setting.getSizeOfGame();
+    private final int width = setting.getRoomWidth() + 2;
+    private final int height = setting.getRoomHeight() + 2;
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        /* Get sections of the snake */
-        List<SnakeSection> getSection = Room.room.getSnake().getSections();
+        printFace(g);
+        printMouse(g);
+        printHead(g);
+        printSnake(g);
+    }
 
-        /* Size of the game rectangle */
-        final int size = setting.getSizeOfGame();
-
-        /* Room width and height */
-        final int width = setting.getRoomWidth() + 2;
-        final int height = setting.getRoomHeight() + 2;
-
-        /* Color color of face */
+    private void printFace(@NotNull Graphics g) {
         g.setColor(setting.getColorFace());
-        /* Draw a rectangle showing the edge of the field to the right */
-        g.fillRect(width * size, 0, size, (height * size));
-        /* Draw a rectangle showing the edge of the field to the down */
-        g.fillRect(0, height * size, (width * size) + size, size);
-        /* Draw a rectangle showing the edge of the field to the left */
-        g.fillRect(0, 0, size, (height * size));
-        /* Draw a rectangle showing the edge of the field to the up */
-        g.fillRect(0, 0, (width * size) , size);
+        g.fillRect(width * size, 0, size, (height * size)); /* Right */
+        g.fillRect(0, height * size, (width * size) + size, size); /* Down */
+        g.fillRect(0, 0, size, (height * size)); /* Left */
+        g.fillRect(0, 0, (width * size) , size); /* Up */
+    }
 
-        /* Color of the mouse */
+    private void printMouse(@NotNull Graphics g) {
         g.setColor(setting.getColorMouse());
-        /* draw rectangle showing mouse */
         g.fillRect(Room.room.getMouse().getX() * size, Room.room.getMouse().getY() * size, size, size);
+    }
 
-        /* Color of the Head */
+    private void printHead(@NotNull Graphics g) {
         g.setColor(setting.getColorHead());
-        /* Drawing the head sections */
         g.fillRect(
                 getSection.get(0).getX() * size,
                 getSection.get(0).getY() * size,
                 size,
                 size);
+    }
 
-        /* Color of the Snake */
+    private void printSnake(@NotNull Graphics g) {
         g.setColor(setting.getColorSnake());
-        /* Drawing the snake sections */
         IntStream.range(1, getSection.size())
                 .forEachOrdered(i -> g.fillRect(
                         getSection.get(i).getX() * size,
