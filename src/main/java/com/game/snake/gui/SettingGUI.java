@@ -19,13 +19,11 @@ import java.util.List;
 public final class SettingGUI extends JFrame implements Runnable {
 
     private final Setting setting = Setting.getInstance();
+
     private final Container pane = this.getContentPane();
     private final GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
-    private final JButton jButtonEnter = new JButton("Enter"); // FIXME: 13.02.2018
-
-
-    public SettingGUI() {
+    SettingGUI() {
         setTitle(setting.getSettingGUIJFrameTitle());
         pane.setLayout(new GridBagLayout());
         gridBagConstraints.fill = GridBagConstraints.BOTH;
@@ -33,40 +31,42 @@ public final class SettingGUI extends JFrame implements Runnable {
 
     @Override
     public void run() {
-        final List<LabelSettingGUI> LabelSettingGUIList = loadLabelSettingGUIList();
+        final List<SettingParameters> settingParametersList = loadSettingParametersList();
 
-        for (LabelSettingGUI label : LabelSettingGUIList) {
+        for (SettingParameters label : settingParametersList) {
             label.set();
         }
 
-        /* Enter */
-        gridBagConstraints.gridy++;
-        pane.add(jButtonEnter, gridBagConstraints);
-        jButtonEnter.addActionListener(e -> {
-
-            for (LabelSettingGUI setting : LabelSettingGUIList) {
-                setting.update();
-            }
-
-            setVisible(false);
-        });
+        setButtonEnter(settingParametersList);
 
         setJFrame();
     }
 
     @NotNull
-    private List<LabelSettingGUI> loadLabelSettingGUIList() {
-        return new ArrayList<LabelSettingGUI>(Arrays.asList(
-                new LabelColorHead(),
-                new LabelColorSnake(),
-                new LabelColorMouse(),
-                new LabelColorFace(),
-                new LabelFullScreenMainMenu(),
-                new LabelChangeColor(),
-                new LabelSizeOfGame(),
-                new LabelRoomWidth(),
-                new LabelRoomHeight()
+    private List<SettingParameters> loadSettingParametersList() {
+        return new ArrayList<>(Arrays.asList(
+                new ColorHead(),
+                new ColorSnake(),
+                new ColorMouse(),
+                new ColorFace(),
+                new MainMenuFullScreen(),
+                new ChangeColor(),
+                new SizeOfGame(),
+                new RoomWidth(),
+                new RoomHeight()
         ));
+    }
+
+    private void setButtonEnter(final List<SettingParameters> settingParametersList) {
+        final JButton jButtonEnter = new JButton("Enter");
+
+        gridBagConstraints.gridy++;
+        pane.add(jButtonEnter, gridBagConstraints);
+
+        jButtonEnter.addActionListener(e -> {
+            settingParametersList.forEach(SettingParameters::update);
+            setVisible(false);
+        });
     }
 
     private void setJFrame() {
@@ -76,32 +76,33 @@ public final class SettingGUI extends JFrame implements Runnable {
         setVisible(true);
     }
 
-    private interface LabelSettingGUI {
+    private interface SettingParameters {
         void set();
         void update();
     }
 
-    private class LabelColorHead implements LabelSettingGUI {
+    private class ColorHead implements SettingParameters {
 
-        final JLabel jLabelColorHead = new JLabel("Color of the head: ");
-        final List<JRadioButton> jRadioButtonsColorHeadList = createColorList();
+        final List<JRadioButton> colorHeadRadioButtonList = createColorList();
 
         @Override
         public void set() {
-            setJLabel(jLabelColorHead); // TODO: not current work
-            ButtonGroup groupColorHead = new ButtonGroup();
-            fillJRadioButton(groupColorHead, jRadioButtonsColorHeadList);
-            jRadioButtonsColorHeadList.get(5).setSelected(true); /* Default selected Snake color : BLACK */
+            final JLabel colorHeadLabel = new JLabel("Color of the head: ");
+
+            setJLabel(colorHeadLabel);
+            ButtonGroup colorHeadGroup = new ButtonGroup();
+            fillJRadioButton(colorHeadGroup, colorHeadRadioButtonList);
+            colorHeadRadioButtonList.get(5).setSelected(true); /* Default Snake color : BLACK TODO: do auto select */
         }
 
         @Override
         public void update() {
-            for (JRadioButton jRadioButton : jRadioButtonsColorHeadList) {
-                if (jRadioButton.isSelected()) {
-                    final Field f;
+            for (JRadioButton colorHeadRadioButton : colorHeadRadioButtonList) {
+                if (colorHeadRadioButton.isSelected()) {
+                    final Field field;
                     try {
-                        f = Color.class.getField(jRadioButton.getText());
-                        setting.setColorHead((Color) f.get(null));
+                        field = Color.class.getField(colorHeadRadioButton.getText());
+                        setting.setColorHead((Color) field.get(null));
                     } catch (NoSuchFieldException | IllegalAccessException err) {
                         err.printStackTrace();
                     }
@@ -111,27 +112,28 @@ public final class SettingGUI extends JFrame implements Runnable {
         }
     }
 
-    private class LabelColorSnake implements LabelSettingGUI {
+    private class ColorSnake implements SettingParameters {
 
-        final JLabel jLabelColorSnake = new JLabel("Color of the snake: ");
-        final List<JRadioButton> jRadioButtonsColorSnakeList = createColorList();
+        final List<JRadioButton> colorSnakeRadioButtonList = createColorList();
 
         @Override
         public void set() {
-            setJLabel(jLabelColorSnake);
-            ButtonGroup groupColorSnake = new ButtonGroup();
-            fillJRadioButton(groupColorSnake, jRadioButtonsColorSnakeList);
-            jRadioButtonsColorSnakeList.get(1).setSelected(true); /* Default selected Snake color : GREEN */
+            final JLabel colorSnakeLabel = new JLabel("Color of the snake: ");
+
+            setJLabel(colorSnakeLabel);
+            ButtonGroup colorSnakeGroup = new ButtonGroup();
+            fillJRadioButton(colorSnakeGroup, colorSnakeRadioButtonList);
+            colorSnakeRadioButtonList.get(1).setSelected(true); /* Default Snake color : GREEN TODO: do auto select */
         }
 
         @Override
         public void update() {
-            for (JRadioButton jRadioButton : jRadioButtonsColorSnakeList) {
-                if (jRadioButton.isSelected()) {
-                    final Field f;
+            for (JRadioButton colorSnakeRadioButton : colorSnakeRadioButtonList) {
+                if (colorSnakeRadioButton.isSelected()) {
+                    final Field field;
                     try {
-                        f = Color.class.getField(jRadioButton.getText());
-                        setting.setColorSnake((Color) f.get(null));
+                        field = Color.class.getField(colorSnakeRadioButton.getText());
+                        setting.setColorSnake((Color) field.get(null));
                     } catch (NoSuchFieldException | IllegalAccessException err) {
                         err.printStackTrace();
                     }
@@ -141,27 +143,28 @@ public final class SettingGUI extends JFrame implements Runnable {
         }
     }
 
-    private class LabelColorMouse implements LabelSettingGUI {
+    private class ColorMouse implements SettingParameters {
 
-        final JLabel jLabelColorMouse = new JLabel("Color of the mouse: ");
-        final List<JRadioButton> jRadioButtonsColorMouseList = createColorList();
+        final List<JRadioButton> colorMouseRadioButtonList = createColorList();
 
         @Override
         public void set() {
-            setJLabel(jLabelColorMouse);
-            ButtonGroup groupColorMouse = new ButtonGroup();
-            fillJRadioButton(groupColorMouse, jRadioButtonsColorMouseList);
-            jRadioButtonsColorMouseList.get(4).setSelected(true); /* Default selected Mouse color : GRAY */
+            final JLabel colorMouseLabel = new JLabel("Color of the mouse: ");
+
+            setJLabel(colorMouseLabel);
+            ButtonGroup colorMouseGroup = new ButtonGroup();
+            fillJRadioButton(colorMouseGroup, colorMouseRadioButtonList);
+            colorMouseRadioButtonList.get(4).setSelected(true); /* Default Mouse color : GRAY TODO: do auto select */
         }
 
         @Override
         public void update() {
-            for (JRadioButton jRadioButton : jRadioButtonsColorMouseList) {
-                if (jRadioButton.isSelected()) {
-                    final Field f;
+            for (JRadioButton colorMouseRadioButton : colorMouseRadioButtonList) {
+                if (colorMouseRadioButton.isSelected()) {
+                    final Field field;
                     try {
-                        f = Color.class.getField(jRadioButton.getText()); 
-                        setting.setColorMouse((Color) f.get(null)); 
+                        field = Color.class.getField(colorMouseRadioButton.getText());
+                        setting.setColorMouse((Color) field.get(null));
                     } catch (NoSuchFieldException | IllegalAccessException err) {
                         err.printStackTrace();
                     }
@@ -171,27 +174,28 @@ public final class SettingGUI extends JFrame implements Runnable {
         }
     }
 
-    private class LabelColorFace implements LabelSettingGUI {
+    private class ColorFace implements SettingParameters {
 
-        final JLabel jLabelColorFace = new JLabel("Color of the face: ");
-        final List<JRadioButton> jRadioButtonsColorFaceList = createColorList();
+        final List<JRadioButton> colorFaceRadioButtonList = createColorList();
 
         @Override
         public void set() {
-            setJLabel(jLabelColorFace);
-            ButtonGroup groupColorFace = new ButtonGroup();
-            fillJRadioButton(groupColorFace, jRadioButtonsColorFaceList);
-            jRadioButtonsColorFaceList.get(0).setSelected(true); /* Default selected Face color : RED */
+            final JLabel colorFaceLabel = new JLabel("Color of the face: ");
+
+            setJLabel(colorFaceLabel);
+            ButtonGroup colorFaceGroup = new ButtonGroup();
+            fillJRadioButton(colorFaceGroup, colorFaceRadioButtonList);
+            colorFaceRadioButtonList.get(0).setSelected(true); /* Default Face color : RED TODO: do auto select */
         }
 
         @Override
         public void update() {
-            for (JRadioButton jRadioButton : jRadioButtonsColorFaceList) {
-                if (jRadioButton.isSelected()) {
-                    final Field f;
+            for (JRadioButton colorFaceRadioButton : colorFaceRadioButtonList) {
+                if (colorFaceRadioButton.isSelected()) {
+                    final Field field;
                     try {
-                        f = Color.class.getField(jRadioButton.getText()); 
-                        setting.setColorFace((Color) f.get(null)); 
+                        field = Color.class.getField(colorFaceRadioButton.getText());
+                        setting.setColorFace((Color) field.get(null));
                     } catch (NoSuchFieldException | IllegalAccessException err) {
                         err.printStackTrace();
                     }
@@ -201,22 +205,23 @@ public final class SettingGUI extends JFrame implements Runnable {
         }
     }
 
-    private class LabelFullScreenMainMenu implements LabelSettingGUI {
+    private class MainMenuFullScreen implements SettingParameters {
 
-        final JLabel jLabelFullScreenMainMenu = new JLabel("Full screen main menu: ");
-        final List<JRadioButton> jRadioButtonsFullScreenMainMenuList = createTrueFalseList();
+        final List<JRadioButton> mainMenuFullScreenRadioButtonList = createTrueFalseList();
 
         @Override
         public void set() {
-            setJLabel(jLabelFullScreenMainMenu);
-            ButtonGroup groupFullScreenMainMenu = new ButtonGroup();
-            fillJRadioButton(groupFullScreenMainMenu, jRadioButtonsFullScreenMainMenuList);
-            setVisibleJRadioButton(jRadioButtonsFullScreenMainMenuList, setting.isMainMenuFullScreen() + "");
+            final JLabel mainMenuFullScreenLabel = new JLabel("Full screen main menu: ");
+
+            setJLabel(mainMenuFullScreenLabel);
+            ButtonGroup mainMenuFullScreenGroup = new ButtonGroup();
+            fillJRadioButton(mainMenuFullScreenGroup, mainMenuFullScreenRadioButtonList);
+            setVisibleJRadioButton(mainMenuFullScreenRadioButtonList, setting.isMainMenuFullScreen() + "");
         }
 
         @Override
         public void update() {
-            setting.setMainMenuFullScreen(jRadioButtonsFullScreenMainMenuList.stream()
+            setting.setMainMenuFullScreen(mainMenuFullScreenRadioButtonList.stream()
                     .filter(AbstractButton::isSelected)
                     .findFirst()
                     .map(JRadioButton::getText)
@@ -225,22 +230,23 @@ public final class SettingGUI extends JFrame implements Runnable {
         }
     }
 
-    private class LabelChangeColor implements LabelSettingGUI {
+    private class ChangeColor implements SettingParameters {
 
-        final JLabel jLabelChangeColor = new JLabel("Change color: ");
-        final List<JRadioButton> jRadioButtonsChangeColorList = createTrueFalseList();
+        final List<JRadioButton> changeColorRadioButtonList = createTrueFalseList();
 
         @Override
         public void set() {
-            setJLabel(jLabelChangeColor);
-            ButtonGroup groupChangeColor = new ButtonGroup();
-            fillJRadioButton(groupChangeColor, jRadioButtonsChangeColorList);
-            setVisibleJRadioButton(jRadioButtonsChangeColorList, setting.isChangeColor() + "");
+            final JLabel changeColorLabel = new JLabel("Change color: ");
+
+            setJLabel(changeColorLabel);
+            ButtonGroup changeColorGroup = new ButtonGroup();
+            fillJRadioButton(changeColorGroup, changeColorRadioButtonList);
+            setVisibleJRadioButton(changeColorRadioButtonList, setting.isChangeColor() + "");
         }
 
         @Override
         public void update() {
-            setting.setChangeColor(jRadioButtonsChangeColorList.stream()
+            setting.setChangeColor(changeColorRadioButtonList.stream()
                     .filter(AbstractButton::isSelected)
                     .findFirst()
                     .map(JRadioButton::getText)
@@ -249,10 +255,9 @@ public final class SettingGUI extends JFrame implements Runnable {
         }
     }
 
-    private class LabelSizeOfGame implements LabelSettingGUI {
+    private class SizeOfGame implements SettingParameters {
 
-        final JLabel jLabelSizeOfGame = new JLabel("Size of the game: ");
-        final List<JRadioButton> jRadioButtonsSizeOfGameList = new ArrayList<>(Arrays.asList(
+        final List<JRadioButton> sizeOfGameRadioButtonList = new ArrayList<>(Arrays.asList(
                 new JRadioButton("10"),
                 new JRadioButton("15"),
                 new JRadioButton("20")
@@ -260,15 +265,17 @@ public final class SettingGUI extends JFrame implements Runnable {
 
         @Override
         public void set() {
-            setJLabel(jLabelSizeOfGame);
-            ButtonGroup groupSizeOfGame = new ButtonGroup();
-            fillJRadioButton(groupSizeOfGame, jRadioButtonsSizeOfGameList);
-            setVisibleJRadioButton(jRadioButtonsSizeOfGameList,  setting.getSizeOfGame() + "");
+            final JLabel sizeOfGameLabel = new JLabel("Size of the game: ");
+
+            setJLabel(sizeOfGameLabel);
+            ButtonGroup sizeOfGameGroup = new ButtonGroup();
+            fillJRadioButton(sizeOfGameGroup, sizeOfGameRadioButtonList);
+            setVisibleJRadioButton(sizeOfGameRadioButtonList,  setting.getSizeOfGame() + "");
         }
 
         @Override
         public void update() {
-            setting.setSizeOfGame(jRadioButtonsSizeOfGameList.stream()
+            setting.setSizeOfGame(sizeOfGameRadioButtonList.stream()
                     .filter(AbstractButton::isSelected)
                     .findFirst()
                     .map(JRadioButton::getText)
@@ -277,22 +284,23 @@ public final class SettingGUI extends JFrame implements Runnable {
         }
     }
 
-    private class LabelRoomWidth implements LabelSettingGUI {
+    private class RoomWidth implements SettingParameters {
 
-        final JLabel jLabelRoomWidth = new JLabel("Room width: ");
-        final List<JRadioButton> jRadioButtonsRoomWidthList = createSizeList();
+        final List<JRadioButton> roomWidthRadioButtonList = createSizeList();
 
         @Override
         public void set() {
-            setJLabel(jLabelRoomWidth);
-            ButtonGroup groupRoomWidth = new ButtonGroup();
-            fillJRadioButton(groupRoomWidth, jRadioButtonsRoomWidthList);
-            setVisibleJRadioButton(jRadioButtonsRoomWidthList, setting.getRoomWidth() + "");
+            final JLabel roomWidthLabel = new JLabel("Room width: ");
+
+            setJLabel(roomWidthLabel);
+            ButtonGroup roomWidthGroup = new ButtonGroup();
+            fillJRadioButton(roomWidthGroup, roomWidthRadioButtonList);
+            setVisibleJRadioButton(roomWidthRadioButtonList, setting.getRoomWidth() + "");
         }
 
         @Override
         public void update() {
-            setting.setRoomWidth(jRadioButtonsRoomWidthList.stream()
+            setting.setRoomWidth(roomWidthRadioButtonList.stream()
                     .filter(AbstractButton::isSelected)
                     .findFirst()
                     .map(JRadioButton::getText)
@@ -301,22 +309,23 @@ public final class SettingGUI extends JFrame implements Runnable {
         }
     }
 
-    private class LabelRoomHeight implements LabelSettingGUI {
+    private class RoomHeight implements SettingParameters {
 
-        final JLabel jLabelRoomHeight = new JLabel("Room height: ");
-        final List<JRadioButton> jRadioButtonsRoomHeightList = createSizeList();
+        final List<JRadioButton> roomHeightRadioButtonList = createSizeList();
 
         @Override
         public void set() {
-            setJLabel(jLabelRoomHeight);
-            ButtonGroup groupRoomHeight = new ButtonGroup();
-            fillJRadioButton(groupRoomHeight, jRadioButtonsRoomHeightList);
-            setVisibleJRadioButton(jRadioButtonsRoomHeightList, setting.getRoomHeight() + "");
+            final JLabel roomHeightLabel = new JLabel("Room height: ");
+
+            setJLabel(roomHeightLabel);
+            ButtonGroup roomHeightGroup = new ButtonGroup();
+            fillJRadioButton(roomHeightGroup, roomHeightRadioButtonList);
+            setVisibleJRadioButton(roomHeightRadioButtonList, setting.getRoomHeight() + "");
         }
 
         @Override
         public void update() {
-            setting.setRoomHeight(jRadioButtonsRoomHeightList.stream()
+            setting.setRoomHeight(roomHeightRadioButtonList.stream()
                     .filter(AbstractButton::isSelected)
                     .findFirst()
                     .map(JRadioButton::getText)
