@@ -6,13 +6,11 @@ import java.util.Objects;
 
 /**
  * @author Koliadin Nikita
- * @version 1.2
- *
- * This class is the part of the snake.
+ * @version 1.10
+
  */
 public final class SnakeSection {
 
-    /* The coordinate of the snakes section */
     private final int x;
     private final int y;
 
