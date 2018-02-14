@@ -33,9 +33,7 @@ public final class SettingGUI extends JFrame implements Runnable {
     public void run() {
         final List<SettingParameters> settingParametersList = loadSettingParametersList();
 
-        for (SettingParameters label : settingParametersList) {
-            label.set();
-        }
+        settingParametersList.forEach(SettingParameters::set);
 
         setButtonEnter(settingParametersList);
 
@@ -387,11 +385,9 @@ public final class SettingGUI extends JFrame implements Runnable {
     private void setVisibleJRadioButton(@NotNull final List<JRadioButton> jRadioButtons,
                                         @NotNull final String value) {
 
-        for (JRadioButton jRadioButton : jRadioButtons) {
-            if (jRadioButton.getText().equals(value)) {
-                jRadioButton.setSelected(true);
-                break;
-            }
-        }
+        jRadioButtons.stream()
+                .filter(jRadioButton -> jRadioButton.getText().equals(value))
+                .findFirst()
+                .ifPresent(jRadioButton -> jRadioButton.setSelected(true));
     }
 }
