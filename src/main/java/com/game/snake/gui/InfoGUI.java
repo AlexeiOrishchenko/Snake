@@ -14,6 +14,7 @@ import java.util.List;
 public final class InfoGUI extends JFrame implements Runnable {
 
     private final Setting setting = Setting.getInstance();
+
     private final Container pane = getContentPane();
     private final GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
@@ -30,13 +31,13 @@ public final class InfoGUI extends JFrame implements Runnable {
     }
 
     private void setJLabel() {
-        List<JLabel> infoGUIJLabelList = new ArrayList<JLabel>(setting.getInfoGUIJLabelList()); // FIXME: 13.02.2018
+        List<JLabel> infoGUIJLabelList = new ArrayList<>(setting.getInfoGUIJTextFieldList()); // FIXME: 13.02.2018
 
-        for (JLabel jLabel : infoGUIJLabelList) {
+        infoGUIJLabelList.forEach(jLabel -> {
             gridBagConstraints.gridy++;
-            gridBagConstraints.insets = new Insets(10,0,0,0);
+            gridBagConstraints.insets = new Insets(10, 0, 0, 0);
             pane.add(jLabel, gridBagConstraints);
-        }
+        });
     }
 
     private void setJFrame() {

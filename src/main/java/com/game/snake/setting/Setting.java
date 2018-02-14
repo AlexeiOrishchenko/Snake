@@ -57,7 +57,7 @@ public class Setting {
     private List<JLabel> exitGUIJLabelList = new ArrayList<JLabel>(Arrays.asList(
             new JLabel(getInfoThanks())));
 
-    private List<JLabel> infoGUIJLabelList = new ArrayList<JLabel>(Arrays.asList( // FIXME: 13.02.2018 
+    private List<JLabel> infoGUIJTextFieldList = new ArrayList<JLabel>(Arrays.asList( // FIXME: 13.02.2018
             new JLabel(getAUTHOR()),
             new JLabel(getInfoDataCreate()),
             new JLabel(getInfoMail()),
@@ -355,14 +355,6 @@ public class Setting {
         this.exitGUIJLabelList = exitGUIJLabelList;
     }
 
-    public List<JLabel> getInfoGUIJLabelList() {
-        return infoGUIJLabelList;
-    }
-
-    public void setInfoGUIJLabelList(List<JLabel> infoGUIJLabelList) {
-        this.infoGUIJLabelList = infoGUIJLabelList;
-    }
-
     public int getMainMenuWidth() {
         return mainMenuWidth;
     }
@@ -521,5 +513,13 @@ public class Setting {
 
     public void setColorHead(Color colorHead) {
         this.colorHead = colorHead;
+    }
+
+    public List<JLabel> getInfoGUIJTextFieldList() {
+        return infoGUIJTextFieldList;
+    }
+
+    public void setInfoGUIJTextFieldList(List<JLabel> infoGUIJTextFieldList) {
+        this.infoGUIJTextFieldList = infoGUIJTextFieldList;
     }
 }
