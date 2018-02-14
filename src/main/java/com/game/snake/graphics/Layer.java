@@ -46,7 +46,12 @@ public class Layer extends JPanel {
 
     private void printMouse(@NotNull Graphics g) {
         g.setColor(setting.getColorMouse());
-        g.fillRect(Room.room.getMouse().getX() * size, Room.room.getMouse().getY() * size, size, size);
+        g.fillRect(
+                Room.room.getMouse().getX() * size,
+                Room.room.getMouse().getY() * size,
+                size,
+                size
+        );
     }
 
     private void printHead(@NotNull Graphics g) {
@@ -55,7 +60,8 @@ public class Layer extends JPanel {
                 getSection.get(0).getX() * size,
                 getSection.get(0).getY() * size,
                 size,
-                size);
+                size
+        );
     }
 
     private void printSnake(@NotNull Graphics g) {
@@ -65,7 +71,7 @@ public class Layer extends JPanel {
                         getSection.get(i).getX() * size,
                         getSection.get(i).getY() * size,
                         size,
-                        size)
-                );
+                        size
+                ));
     }
 }
