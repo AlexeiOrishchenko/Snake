@@ -4,13 +4,10 @@ import org.jetbrains.annotations.Contract;
 
 /**
  * @author Koliadin Nikita
- * @version 1.2
- *
- * This class is the mouse
+ * @version 1.10
  */
 public final class Mouse {
 
-    /* The coordinate of the mouse */
     private final int x;
     private final int y;
 
