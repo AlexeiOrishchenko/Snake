@@ -19,6 +19,7 @@ import java.util.stream.IntStream;
 public class Layer extends JPanel {
 
     private final Setting setting = Setting.getInstance();
+
     private final List<SnakeSection> getSection = Room.room.getSnake().getSections();
 
     private final int size = setting.getSizeOfGame();

@@ -71,7 +71,7 @@ public final class SettingGUI extends JFrame implements Runnable {
 
     private void setJFrame() {
         setPreferredSize(new Dimension(setting.getSettingGUIWidth(), setting.getSettingGUIHeight()));
-        setLocationRelativeTo(null); // the center of the screen
+        setLocationRelativeTo(null); /* The center of the screen */
         pack();
         setVisible(true);
     }
@@ -88,7 +88,7 @@ public final class SettingGUI extends JFrame implements Runnable {
 
         @Override
         public void set() {
-            setJLabel(jLabelColorHead);
+            setJLabel(jLabelColorHead); // TODO: not current work
             ButtonGroup groupColorHead = new ButtonGroup();
             fillJRadioButton(groupColorHead, jRadioButtonsColorHeadList);
             jRadioButtonsColorHeadList.get(5).setSelected(true); /* Default selected Snake color : BLACK */

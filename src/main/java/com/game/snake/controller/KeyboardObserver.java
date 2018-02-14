@@ -15,6 +15,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 public class KeyboardObserver extends JFrame implements Runnable {
 
     private final Setting setting = Setting.getInstance();
+
     private final Queue<KeyEvent> keyEvents = new ArrayBlockingQueue<KeyEvent>(1000);
 
     public KeyboardObserver() {

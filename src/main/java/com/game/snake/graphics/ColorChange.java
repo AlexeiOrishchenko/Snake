@@ -12,7 +12,12 @@ import java.awt.*;
 public class ColorChange implements Runnable {
 
     private final Setting setting = Setting.getInstance();
+
     private final JLabel jLabel;
+
+    private int red = (int) (Math.random() * 256);
+    private int green = (int) (Math.random() * 256);
+    private int blue = (int) (Math.random() * 256);
 
     public ColorChange(JLabel jLabel) {
         this.jLabel = jLabel;
@@ -24,48 +29,60 @@ public class ColorChange implements Runnable {
     }
 
     private void changeColorOfLabel() {
-        int r = (int) (Math.random() * 256);
-        int g = (int) (Math.random() * 256);
-        int b = (int) (Math.random() * 256);
         while (true) {
-            if (!setting.isChangeColor()) {
+            if (checkWaiting()) {
                 sleep(1000);
-            } else if (setting.isMainMenuWaitThread()) {
-                sleep(1000);
-            } else {
-                if (r < 255) {
-                    r++;
-                    jLabel.setForeground(new Color(r, g, b));
-                    sleep();
-                } else {
-                    for (; r > 0; r--) {
-                        jLabel.setForeground(new Color(r, g, b));
-                        sleep();
-                    }
-                }
-                if (g < 254) {
-                    g += 2;
-                    jLabel.setForeground(new Color(r, g, b));
-                    sleep();
-                } else {
-                    for (; g > 0; g--) {
-                        jLabel.setForeground(new Color(r, g, b));
-                        sleep();
-                    }
-                }
-                if (b < 253) {
-                    b += 3;
-                    jLabel.setForeground(new Color(r, g, b));
-                    sleep();
-                } else {
-                    for (; b > 0; b--) {
-                        jLabel.setForeground(new Color(r, g, b));
-                        sleep();
-                    }
-                }
+            }
+
+            changeRedColor();
+            changeGreenColor();
+            changeBlueColor();
+        }
+    }
+
+    private boolean checkWaiting() {
+        return ((!setting.isChangeColor()) || (setting.isMainMenuWaitThread()));
+    }
+
+    private void changeRedColor() {
+        if (red < 255) {
+            red++;
+            jLabel.setForeground(new Color(red, green, blue));
+            sleep();
+        } else {
+            for (; red > 0; red--) {
+                jLabel.setForeground(new Color(red, green, blue));
+                sleep();
             }
         }
     }
+
+    private void changeGreenColor() {
+        if (green < 254) {
+            green += 2;
+            jLabel.setForeground(new Color(red, green, blue));
+            sleep();
+        } else {
+            for (; green > 0; green--) {
+                jLabel.setForeground(new Color(red, green, blue));
+                sleep();
+            }
+        }
+    }
+
+    private void changeBlueColor() {
+        if (blue < 253) {
+            blue += 3;
+            jLabel.setForeground(new Color(red, green, blue));
+            sleep();
+        } else {
+            for (; blue > 0; blue--) {
+                jLabel.setForeground(new Color(red, green, blue));
+                sleep();
+            }
+        }
+    }
+
 
     private void sleep()  {
         try {
