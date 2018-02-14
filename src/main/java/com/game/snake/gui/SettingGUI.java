@@ -23,7 +23,7 @@ public final class SettingGUI extends JFrame implements Runnable {
     private final Container pane = this.getContentPane();
     private final GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
-    SettingGUI() {
+    public SettingGUI() {
         setTitle(setting.getSettingGUIJFrameTitle());
         pane.setLayout(new GridBagLayout());
         gridBagConstraints.fill = GridBagConstraints.BOTH;
