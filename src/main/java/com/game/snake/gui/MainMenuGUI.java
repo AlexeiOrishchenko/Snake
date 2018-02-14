@@ -1,6 +1,6 @@
 package com.game.snake.gui;
 
-import com.game.snake.graphics.ColorChange;
+import com.game.snake.graphics.ChangeColor;
 import com.game.snake.objects.room.Room;
 import com.game.snake.setting.Setting;
 
@@ -87,7 +87,7 @@ public class MainMenuGUI implements Runnable {
 
         @Override
         public void action() {
-            Executors.newSingleThreadExecutor().execute(new ColorChange(jLabelWelcome)); // FIXME: 13.02.2018
+            Executors.newSingleThreadExecutor().execute(new ChangeColor(jLabelWelcome)); // FIXME: 13.02.2018
         }
     }
 
@@ -186,7 +186,7 @@ public class MainMenuGUI implements Runnable {
 
         @Override
         public void action() {
-            Executors.newSingleThreadExecutor().execute(new ColorChange(jLabelAuthor)); // FIXME: 13.02.2018
+            Executors.newSingleThreadExecutor().execute(new ChangeColor(jLabelAuthor)); // FIXME: 13.02.2018
         }
     }
 }

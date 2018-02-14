@@ -1,6 +1,6 @@
 package com.game.snake.gui;
 
-import com.game.snake.graphics.ColorChange;
+import com.game.snake.graphics.ChangeColor;
 import com.game.snake.setting.Setting;
 
 import javax.swing.*;
@@ -41,7 +41,7 @@ public final class ExitGUI extends JFrame implements Runnable {
             gridBagConstraints.insets = new Insets(10,0,0,0);
             pane.add(jLabel, gridBagConstraints);
             if (setting.isChangeColor()) {
-                Executors.newCachedThreadPool().execute(new ColorChange(jLabel));
+                Executors.newCachedThreadPool().execute(new ChangeColor(jLabel));
             }
         }
     }

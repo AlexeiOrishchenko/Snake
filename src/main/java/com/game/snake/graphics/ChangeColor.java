@@ -9,7 +9,7 @@ import java.awt.*;
  * @author Koliadin Nikita
  * @version 1.10
  */
-public class ColorChange implements Runnable {
+public class ChangeColor implements Runnable {
 
     private final Setting setting = Setting.getInstance();
 
@@ -19,7 +19,7 @@ public class ColorChange implements Runnable {
     private int green = (int) (Math.random() * 256);
     private int blue = (int) (Math.random() * 256);
 
-    public ColorChange(JLabel jLabel) {
+    public ChangeColor(JLabel jLabel) {
         this.jLabel = jLabel;
     }
 
