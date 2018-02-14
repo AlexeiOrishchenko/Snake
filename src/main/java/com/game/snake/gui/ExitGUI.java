@@ -42,7 +42,7 @@ public final class ExitGUI extends JFrame implements Runnable {
             gridBagConstraints.insets = new Insets(10, 0, 0, 0);
             pane.add(exitGUILabel, gridBagConstraints);
             if (setting.isChangeColor()) {
-                Executors.newCachedThreadPool().execute(new ChangeColor(exitGUILabel)); // FIXME: 14.02.2018 
+                Executors.newCachedThreadPool().execute(new ChangeColor(exitGUILabel)); // FIXME: shutdown
             }
         });
     }
