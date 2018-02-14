@@ -12,30 +12,19 @@ import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.9
- *
- * This class is the snake
+ * @version 1.10
  */
 public final class Snake {
 
-    /* Our Setting singleton object */
-    private Setting setting = Setting.getInstance();
+    private final Setting setting = Setting.getInstance();
 
-    /* Direction of movement of a snake */
+    private List<SnakeSection> sections = new ArrayList<>();
+
     private SnakeDirection direction;
 
-    /* Status - whether the snake is alive or not */
     private boolean isAlive;
 
-    /* List of snake pieces */
-    private List<SnakeSection> sections;
-
-    /**
-     * This constructor create snake sections - the head of the snake,
-     * set coordinate of the head and set direction to the down
-     */
     public Snake() {
-        sections = new ArrayList<SnakeSection>();
         sections.add(new SnakeSection(1, 1));
         direction = SnakeDirection.DOWN;
         isAlive = true;
@@ -44,14 +33,6 @@ public final class Snake {
     @Contract(pure = true)
     public boolean isAlive() {
         return isAlive;
-    }
-
-    public int getX() {
-        return sections.get(0).getX();
-    }
-
-    public int getY() {
-        return sections.get(0).getY();
     }
 
     @Contract(pure = true)
@@ -68,81 +49,67 @@ public final class Snake {
         return sections;
     }
 
-    /**
-     * The method moves the snake one turn.
-     * The direction of movement is specified by the variable direction.
-     */
+    public int getHeadX() {
+        return sections.get(0).getX();
+    }
+
+    public int getHeadY() {
+        return sections.get(0).getY();
+    }
+
     public void move() {
         if (!isAlive) {
             return;
         }
 
-        switch (direction) {
-            case UP:
-                move(0, -1);
-                break;
-            case RIGHT:
-                move(1, 0);
-                break;
-            case DOWN:
-                move(0, 1);
-                break;
-            case LEFT:
-                move(-1, 0);
-                break;
+        if (direction == SnakeDirection.UP) {
+            move(0, -1);
+        } else if (direction == SnakeDirection.RIGHT) {
+            move(1, 0);
+        } else if (direction == SnakeDirection.DOWN) {
+            move(0, 1);
+        } else if (direction == SnakeDirection.LEFT) {
+            move(-1, 0);
         }
     }
 
-    /**
-     * The method moves the snake into the next cell.
-     * Cell coordinates are given relative to the current head with the help of variables (dx, dy).
-     *
-     * @param dx direction x
-     * @param dy direction y
-     */
-    private void move(int dx, int dy) {
-        /* Create a new head - a new "piece of snake" */
-        SnakeSection head = new SnakeSection(getX() + dx, getY() + dy);
+    private void move(final int dx, final int dy) {
 
-        /* Check - whether the head has got out of the room */
+        SnakeSection head = new SnakeSection(getHeadX() + dx, getHeadY() + dy);
+
         checkBorders(head);
         if (!isAlive) {
             return;
         }
 
-        /* Check whether the snake crosses itself */
         checkBody(head);
         if (!isAlive) {
             return;
         }
 
-        /* Check - did not eat a snake mouse */
-        Mouse mouse = Room.room.getMouse();
-        if (head.getX() == mouse.getX() && head.getY() == mouse.getY()) {       // Ate
-            sections.add(0, head);                                        // Add a new head
-            Room.room.eatMouse();                         //We do not delete the tail, but create a new mouse
-        } else {                                          // Just moves
-            sections.add(0, head);                  // Added a new head
-            sections.remove(sections.size() - 1);   // Removed the last element from the tail
-        }
+        checkEatMouse(head);
     }
 
-    /**
-     * The method checks whether the head does not coincide with any part of the body of the snake
-     * @param head - is the head of the snake
-     */
-    private void checkBody(SnakeSection head) {
+    private void checkBorders(@NotNull final SnakeSection head) {
+        isAlive = (head.getX() >= 1 && head.getX() < setting.getRoomWidth() + 2)
+                && (head.getY() >= 1 && head.getY() < setting.getRoomHeight() + 2);
+    }
+
+    private void checkBody(final SnakeSection head) {
         if (sections.contains(head)) {
             isAlive = false;
         }
     }
 
-    /**
-     * The method checks whether the new head is within the room
-     * @param head - is the head of the snake
-     */
-    private void checkBorders(@NotNull SnakeSection head) {
-        isAlive = (head.getX() >= 1 && head.getX() < setting.getRoomWidth() + 2)
-                && (head.getY() >= 1 && head.getY() < setting.getRoomHeight() + 2);
+    private void checkEatMouse(@NotNull final SnakeSection head) {
+        final Mouse mouse = Room.room.getMouse();
+
+        if (head.getX() == mouse.getX() && head.getY() == mouse.getY()) {
+            sections.add(0, head);
+            Room.room.eatMouse();
+        } else {
+            sections.add(0, head);
+            sections.remove(sections.size() - 1);
+        }
     }
 }
