@@ -2,9 +2,7 @@ package com.game.snake.objects.snake;
 
 /**
  * @author Koliadin Nikita
- * @version 1.2
- *
- * This class is the direction of the snake
+ * @version 1.10
  */
 public enum SnakeDirection {
     UP,
