@@ -15,6 +15,7 @@ import java.util.concurrent.Executors;
 public final class ExitGUI extends JFrame implements Runnable {
 
     private final Setting setting = Setting.getInstance();
+
     private final Container pane = getContentPane();
     private final GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
@@ -34,16 +35,16 @@ public final class ExitGUI extends JFrame implements Runnable {
     }
 
     private void setJLabel() {
-        final List<JLabel> exitGUIJLabelList = setting.getExitGUIJLabelList();
+        final List<JLabel> exitGUILabelList = setting.getExitGUIJLabelList();
 
-        for (JLabel jLabel : exitGUIJLabelList) {
+        exitGUILabelList.forEach(exitGUILabel -> {
             gridBagConstraints.gridy++;
-            gridBagConstraints.insets = new Insets(10,0,0,0);
-            pane.add(jLabel, gridBagConstraints);
+            gridBagConstraints.insets = new Insets(10, 0, 0, 0);
+            pane.add(exitGUILabel, gridBagConstraints);
             if (setting.isChangeColor()) {
-                Executors.newCachedThreadPool().execute(new ChangeColor(jLabel));
+                Executors.newCachedThreadPool().execute(new ChangeColor(exitGUILabel));
             }
-        }
+        });
     }
 
     private void setJFame() {
