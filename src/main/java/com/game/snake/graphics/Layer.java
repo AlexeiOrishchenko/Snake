@@ -20,8 +20,6 @@ public class Layer extends JPanel {
 
     private final Setting setting = Setting.getInstance();
 
-    private final List<SnakeSection> getSection = Room.room.getSnake().getSections();
-
     private final int size = setting.getSizeOfGame();
     private final int width = setting.getRoomWidth() + 2;
     private final int height = setting.getRoomHeight() + 2;
@@ -57,19 +55,21 @@ public class Layer extends JPanel {
     private void printHead(@NotNull Graphics g) {
         g.setColor(setting.getColorHead());
         g.fillRect(
-                getSection.get(0).getX() * size,
-                getSection.get(0).getY() * size,
+                Room.room.getSnake().getHeadX() * size,
+                Room.room.getSnake().getHeadY() * size,
                 size,
                 size
         );
     }
 
     private void printSnake(@NotNull Graphics g) {
+        final List<SnakeSection> snakeSection = Room.room.getSnake().getSections();
+
         g.setColor(setting.getColorSnake());
-        IntStream.range(1, getSection.size())
+        IntStream.range(1, snakeSection.size())
                 .forEachOrdered(i -> g.fillRect(
-                        getSection.get(i).getX() * size,
-                        getSection.get(i).getY() * size,
+                        snakeSection.get(i).getX() * size,
+                        snakeSection.get(i).getY() * size,
                         size,
                         size
                 ));
