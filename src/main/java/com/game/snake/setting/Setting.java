@@ -349,6 +349,14 @@ public class Setting {
         this.exitGUIJLabelList = exitGUIJLabelList;
     }
 
+    public List<JLabel> getInfoGUIJLabelList() {
+        return infoGUIJLabelList;
+    }
+
+    public void setInfoGUIJLabelList(List<JLabel> infoGUIJLabelList) {
+        this.infoGUIJLabelList = infoGUIJLabelList;
+    }
+
     public int getMainMenuWidth() {
         return mainMenuWidth;
     }
@@ -507,13 +515,5 @@ public class Setting {
 
     public void setMainMenuFullScreen(boolean mainMenuFullScreen) {
         this.mainMenuFullScreen = mainMenuFullScreen;
-    }
-
-    public List<JLabel> getInfoGUIJLabelList() {
-        return infoGUIJLabelList;
-    }
-
-    public void setInfoGUIJLabelList(List<JLabel> infoGUIJLabelList) {
-        this.infoGUIJLabelList = infoGUIJLabelList;
     }
 }
