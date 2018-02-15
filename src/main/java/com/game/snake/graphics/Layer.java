@@ -25,7 +25,7 @@ public class Layer extends JPanel {
     private final int height = setting.getRoomHeight() + 2;
 
     @Override
-    public void paintComponent(Graphics g) {
+    public void paintComponent(final Graphics g) {
         super.paintComponent(g);
 
         printFace(g);
@@ -34,7 +34,7 @@ public class Layer extends JPanel {
         printSnake(g);
     }
 
-    private void printFace(@NotNull Graphics g) {
+    private void printFace(@NotNull final Graphics g) {
         g.setColor(setting.getColorFace());
         g.fillRect(width * size, 0, size, (height * size)); /* Right */
         g.fillRect(0, height * size, (width * size) + size, size); /* Down */
@@ -42,7 +42,7 @@ public class Layer extends JPanel {
         g.fillRect(0, 0, (width * size) , size); /* Up */
     }
 
-    private void printMouse(@NotNull Graphics g) {
+    private void printMouse(@NotNull final Graphics g) {
         g.setColor(setting.getColorMouse());
         g.fillRect(
                 Room.room.getMouse().getX() * size,
@@ -52,7 +52,7 @@ public class Layer extends JPanel {
         );
     }
 
-    private void printHead(@NotNull Graphics g) {
+    private void printHead(@NotNull final Graphics g) {
         g.setColor(setting.getColorHead());
         g.fillRect(
                 Room.room.getSnake().getHeadX() * size,
@@ -62,7 +62,7 @@ public class Layer extends JPanel {
         );
     }
 
-    private void printSnake(@NotNull Graphics g) {
+    private void printSnake(@NotNull final Graphics g) {
         final List<SnakeSection> snakeSection = Room.room.getSnake().getSections();
 
         g.setColor(setting.getColorSnake());
