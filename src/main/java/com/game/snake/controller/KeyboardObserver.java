@@ -16,7 +16,7 @@ public class KeyboardObserver extends JFrame implements Runnable {
 
     private final Setting setting = Setting.getInstance();
 
-    private final Queue<KeyEvent> keyEvents = new ArrayBlockingQueue<KeyEvent>(1000);
+    private final Queue<KeyEvent> keyEvents = new ArrayBlockingQueue<>(1000);
 
     public KeyboardObserver() {
         setTitle(setting.getPlayJFrameTitle());
