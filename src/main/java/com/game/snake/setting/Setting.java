@@ -10,13 +10,10 @@ import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.9
- *
- * This class contains main parameters of the game
+ * @version 1.10
  */
 public class Setting {
 
-    /* Our singleton of this class */
     private static volatile Setting ourInstance;
 
     private static final String AUTHOR = "Author: Nikita Koliadin";
@@ -104,9 +101,6 @@ public class Setting {
     private Setting() {
     }
 
-    /**
-     * @return singleton object of this class
-     */
     public static Setting getInstance() {
         if (ourInstance == null) {
             synchronized (Setting.class) {
@@ -355,6 +349,14 @@ public class Setting {
         this.exitGUIJLabelList = exitGUIJLabelList;
     }
 
+    public List<JLabel> getInfoGUIJTextFieldList() {
+        return infoGUIJTextFieldList;
+    }
+
+    public void setInfoGUIJTextFieldList(List<JLabel> infoGUIJTextFieldList) {
+        this.infoGUIJTextFieldList = infoGUIJTextFieldList;
+    }
+
     public int getMainMenuWidth() {
         return mainMenuWidth;
     }
@@ -483,6 +485,14 @@ public class Setting {
         this.colorSnake = colorSnake;
     }
 
+    public Color getColorHead() {
+        return colorHead;
+    }
+
+    public void setColorHead(Color colorHead) {
+        this.colorHead = colorHead;
+    }
+
     public boolean isChangeColor() {
         return changeColor;
     }
@@ -505,21 +515,5 @@ public class Setting {
 
     public void setMainMenuFullScreen(boolean mainMenuFullScreen) {
         this.mainMenuFullScreen = mainMenuFullScreen;
-    }
-
-    public Color getColorHead() {
-        return colorHead;
-    }
-
-    public void setColorHead(Color colorHead) {
-        this.colorHead = colorHead;
-    }
-
-    public List<JLabel> getInfoGUIJTextFieldList() {
-        return infoGUIJTextFieldList;
-    }
-
-    public void setInfoGUIJTextFieldList(List<JLabel> infoGUIJTextFieldList) {
-        this.infoGUIJTextFieldList = infoGUIJTextFieldList;
     }
 }
