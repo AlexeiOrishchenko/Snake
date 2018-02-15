@@ -31,7 +31,7 @@ public final class InfoGUI extends JFrame implements Runnable {
     }
 
     private void setJLabel() {
-        List<JLabel> infoGUIJLabelList = new ArrayList<>(setting.getInfoGUIJTextFieldList()); // FIXME: select label
+        final List<JLabel> infoGUIJLabelList = new ArrayList<>(setting.getInfoGUIJLabelList()); // FIXME: select label
 
         infoGUIJLabelList.forEach(jLabel -> {
             gridBagConstraints.gridy++;
