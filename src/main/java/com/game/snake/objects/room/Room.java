@@ -35,9 +35,9 @@ public class Room implements Runnable {
     private int height = setting.getRoomHeight(); //TODO: edit setting
 
     public Room(final JFrame jFrame) {
+        this.jFrame = jFrame;
         this.snake = new Snake();
         createMouse();
-        this.jFrame = jFrame;
     }
 
     public Snake getSnake() {
@@ -78,7 +78,7 @@ public class Room implements Runnable {
 
         while (snake.isAlive()) {
             if (keyboardObserver.hasKeyEvents()) {
-                KeyEvent event = keyboardObserver.getEventFromTop();
+                final KeyEvent event = keyboardObserver.getEventFromTop();
 
                 checkPause(event);
 
@@ -100,7 +100,7 @@ public class Room implements Runnable {
         createMouse();
     }
 
-    private void checkPause(@NotNull KeyEvent event) {
+    private void checkPause(@NotNull final KeyEvent event) {
         if (event.getKeyChar() == 'p') {
             while (true) {
                 sleep(1000);
@@ -114,12 +114,12 @@ public class Room implements Runnable {
         }
     }
 
-    private boolean isExit(@NotNull KeyEvent event) {
+    private boolean isExit(@NotNull final KeyEvent event) {
         return event.getKeyChar() == 'q';
     }
 
-    private void checkDirection(@NotNull KeyEvent event) {
-        int i = event.getKeyCode();
+    private void checkDirection(@NotNull final KeyEvent event) {
+        final int i = event.getKeyCode();
 
         if (i == KeyEvent.VK_LEFT) {
             if (snake.getDirection() != SnakeDirection.RIGHT) {
