@@ -7,6 +7,6 @@ If you find any bugs in the game or errors in the code that you can fix or do be
 write either on the github directly under the code, or on my facebook: 
 *https://www.facebook.com/koliadin.nikita*_
 
-_Thank you for your attention_
+_Thank you for your attention!_
 
 _Author: Nikita Koliadin_
