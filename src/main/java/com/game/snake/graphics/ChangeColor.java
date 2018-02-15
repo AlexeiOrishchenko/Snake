@@ -19,7 +19,7 @@ public class ChangeColor implements Runnable {
     private int green = (int) (Math.random() * 256);
     private int blue = (int) (Math.random() * 256);
 
-    public ChangeColor(JLabel jLabel) {
+    public ChangeColor(final JLabel jLabel) {
         this.jLabel = jLabel;
     }
 
