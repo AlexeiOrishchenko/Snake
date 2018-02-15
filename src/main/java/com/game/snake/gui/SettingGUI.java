@@ -81,7 +81,7 @@ public final class SettingGUI extends JFrame implements Runnable {
 
     private class ColorHead implements SettingParameters {
 
-        final List<JRadioButton> colorHeadRadioButtonList = createColorList();
+        private final List<JRadioButton> colorHeadRadioButtonList = createColorList();
 
         @Override
         public void set() {
@@ -112,7 +112,7 @@ public final class SettingGUI extends JFrame implements Runnable {
 
     private class ColorSnake implements SettingParameters {
 
-        final List<JRadioButton> colorSnakeRadioButtonList = createColorList();
+        private final List<JRadioButton> colorSnakeRadioButtonList = createColorList();
 
         @Override
         public void set() {
@@ -143,7 +143,7 @@ public final class SettingGUI extends JFrame implements Runnable {
 
     private class ColorMouse implements SettingParameters {
 
-        final List<JRadioButton> colorMouseRadioButtonList = createColorList();
+        private final List<JRadioButton> colorMouseRadioButtonList = createColorList();
 
         @Override
         public void set() {
@@ -174,7 +174,7 @@ public final class SettingGUI extends JFrame implements Runnable {
 
     private class ColorFace implements SettingParameters {
 
-        final List<JRadioButton> colorFaceRadioButtonList = createColorList();
+        private final List<JRadioButton> colorFaceRadioButtonList = createColorList();
 
         @Override
         public void set() {
@@ -205,7 +205,7 @@ public final class SettingGUI extends JFrame implements Runnable {
 
     private class MainMenuFullScreen implements SettingParameters {
 
-        final List<JRadioButton> mainMenuFullScreenRadioButtonList = createTrueFalseList();
+        private final List<JRadioButton> mainMenuFullScreenRadioButtonList = createTrueFalseList();
 
         @Override
         public void set() {
@@ -230,7 +230,7 @@ public final class SettingGUI extends JFrame implements Runnable {
 
     private class ChangeColor implements SettingParameters {
 
-        final List<JRadioButton> changeColorRadioButtonList = createTrueFalseList();
+        private final List<JRadioButton> changeColorRadioButtonList = createTrueFalseList();
 
         @Override
         public void set() {
@@ -255,7 +255,7 @@ public final class SettingGUI extends JFrame implements Runnable {
 
     private class SizeOfGame implements SettingParameters {
 
-        final List<JRadioButton> sizeOfGameRadioButtonList = new ArrayList<>(Arrays.asList(
+        private final List<JRadioButton> sizeOfGameRadioButtonList = new ArrayList<>(Arrays.asList(
                 new JRadioButton("10"),
                 new JRadioButton("15"),
                 new JRadioButton("20")
@@ -284,7 +284,7 @@ public final class SettingGUI extends JFrame implements Runnable {
 
     private class RoomWidth implements SettingParameters {
 
-        final List<JRadioButton> roomWidthRadioButtonList = createSizeList();
+        private final List<JRadioButton> roomWidthRadioButtonList = createSizeList();
 
         @Override
         public void set() {
@@ -309,7 +309,7 @@ public final class SettingGUI extends JFrame implements Runnable {
 
     private class RoomHeight implements SettingParameters {
 
-        final List<JRadioButton> roomHeightRadioButtonList = createSizeList();
+        private final List<JRadioButton> roomHeightRadioButtonList = createSizeList();
 
         @Override
         public void set() {
