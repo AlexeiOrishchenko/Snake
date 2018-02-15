@@ -18,7 +18,7 @@ public final class Snake {
 
     private final Setting setting = Setting.getInstance();
 
-    private List<SnakeSection> sections = new ArrayList<>();
+    private final List<SnakeSection> sections = new ArrayList<>();
 
     private SnakeDirection direction;
 
@@ -74,8 +74,7 @@ public final class Snake {
     }
 
     private void move(final int dx, final int dy) {
-
-        SnakeSection head = new SnakeSection(getHeadX() + dx, getHeadY() + dy);
+        final SnakeSection head = new SnakeSection(getHeadX() + dx, getHeadY() + dy);
 
         checkBorders(head);
         if (!isAlive) {
@@ -95,7 +94,7 @@ public final class Snake {
                 && (head.getY() >= 1 && head.getY() < setting.getRoomHeight() + 2);
     }
 
-    private void checkBody(final SnakeSection head) {
+    private void checkBody(@NotNull final SnakeSection head) {
         if (sections.contains(head)) {
             isAlive = false;
         }
