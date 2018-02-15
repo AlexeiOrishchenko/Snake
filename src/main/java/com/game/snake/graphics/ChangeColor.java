@@ -25,12 +25,12 @@ public class ChangeColor implements Runnable {
 
     @Override
     public void run() {
-        changeColorOfLabel();
+        changeColor();
     }
 
-    private void changeColorOfLabel() {
+    private void changeColor() {
         while (true) {
-            if (checkWaiting()) {
+            if (isWaiting()) {
                 sleep(1000);
             }
 
@@ -40,7 +40,7 @@ public class ChangeColor implements Runnable {
         }
     }
 
-    private boolean checkWaiting() {
+    private boolean isWaiting() {
         return ((!setting.isChangeColor()) || (setting.isMainMenuWaitThread()));
     }
 
@@ -92,7 +92,7 @@ public class ChangeColor implements Runnable {
         }
     }
 
-    private void sleep(long ms) {
+    private void sleep(final long ms) {
         try {
             Thread.sleep(ms);
         } catch (InterruptedException e) {
