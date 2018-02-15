@@ -8,7 +8,7 @@ import com.game.snake.objects.snake.SnakeDirection;
 import com.game.snake.objects.snake.SnakeSection;
 import com.game.snake.setting.Setting;
 
-import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -16,35 +16,25 @@ import java.util.concurrent.Executors;
 
 /**
  * @author Koliadin Nikita
- * @version 1.9
- *
- * This class is the "Room" for the snake
+ * @version 1.10
  */
 public class Room implements Runnable {
 
-    /* static object of the room - room can be only one */
-    public static Room room; // FIXME: 08.02.2018
+    public static Room room; // FIXME: do non Static in future
 
-    /* Our Setting singleton object */
     private final Setting setting = Setting.getInstance();
 
-    /* real objects of the game */
+    private final JFrame jFrame;
+
+    private final KeyboardObserver keyboardObserver = new KeyboardObserver();
+
     private Snake snake;
     private Mouse mouse;
 
-    /* MainGUI JFrame */
-    private final JFrame jFrame;
+    private int width = setting.getRoomWidth(); //TODO: edit setting
+    private int height = setting.getRoomHeight(); //TODO: edit setting
 
-    /* Height and width of the room */
-    private  int width;
-    private  int height;
-
-    /**
-     * This constructor setMainMenu jFrame. Also create new Snake and new Mouse.
-     */
-    public Room(JFrame jFrame) {
-        this.width = this.setting.getRoomWidth();
-        this.height = this.setting.getRoomHeight();
+    public Room(final JFrame jFrame) {
         this.snake = new Snake();
         createMouse();
         this.jFrame = jFrame;
@@ -66,29 +56,113 @@ public class Room implements Runnable {
         this.mouse = mouse;
     }
 
-    @Contract(pure = true)
     public int getWidth() {
         return width;
-    }
-
-    @Contract(pure = true)
-    public int getHeight() {
-        return height;
     }
 
     public void setWidth(int width) {
         this.width = width;
     }
 
+    public int getHeight() {
+        return height;
+    }
+
     public void setHeight(int height) {
         this.height = height;
     }
 
-    /**
-     * Create new mouse using random method and dont allow create
-     * mouse on the snake
-     */
-    public void createMouse() {
+    @Override
+    public void run() {
+        Executors.newSingleThreadExecutor().execute(keyboardObserver); // FIXME: shutdown
+
+        while (snake.isAlive()) {
+            if (keyboardObserver.hasKeyEvents()) {
+                KeyEvent event = keyboardObserver.getEventFromTop();
+
+                checkPause(event);
+
+                if (isExit(event)) {
+                    gameOver();
+                    return;
+                }
+
+                checkDirection(event);
+            }
+            snake.move();
+            print();
+            sleep();
+        }
+        gameOver();
+    }
+
+    public void eatMouse() {
+        createMouse();
+    }
+
+    private void checkPause(@NotNull KeyEvent event) {
+        if (event.getKeyChar() == 'p') {
+            while (true) {
+                sleep(1000);
+                if (keyboardObserver.hasKeyEvents()) {
+                    KeyEvent eventNew = keyboardObserver.getEventFromTop();
+                    if (eventNew.getKeyChar() == 'p') {
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    private boolean isExit(@NotNull KeyEvent event) {
+        return event.getKeyChar() == 'q';
+    }
+
+    private void checkDirection(@NotNull KeyEvent event) {
+        int i = event.getKeyCode();
+
+        if (i == KeyEvent.VK_LEFT) {
+            if (snake.getDirection() != SnakeDirection.RIGHT) {
+                snake.setDirection(SnakeDirection.LEFT);
+            }
+        } else if (i == KeyEvent.VK_RIGHT) {
+            if (snake.getDirection() != SnakeDirection.LEFT) {
+                snake.setDirection(SnakeDirection.RIGHT);
+            }
+        } else if (i == KeyEvent.VK_UP) {
+            if (snake.getDirection() != SnakeDirection.DOWN) {
+                snake.setDirection(SnakeDirection.UP);
+            }
+        } else if (i == KeyEvent.VK_DOWN) {
+            if (snake.getDirection() != SnakeDirection.UP) {
+                snake.setDirection(SnakeDirection.DOWN);
+            }
+        } else if (i == KeyEvent.VK_W) {
+            if (snake.getDirection() != SnakeDirection.DOWN) {
+                snake.setDirection(SnakeDirection.UP);
+            }
+        } else if (i == KeyEvent.VK_S) {
+            if (snake.getDirection() != SnakeDirection.UP) {
+                snake.setDirection(SnakeDirection.DOWN);
+            }
+        } else if (i == KeyEvent.VK_A) {
+            if (snake.getDirection() != SnakeDirection.RIGHT) {
+                snake.setDirection(SnakeDirection.LEFT);
+            }
+        } else if (i == KeyEvent.VK_D) {
+            if (snake.getDirection() != SnakeDirection.LEFT) {
+                snake.setDirection(SnakeDirection.RIGHT);
+            }
+        }
+    }
+
+    private void gameOver() {
+        keyboardObserver.setVisible(false);
+        setting.setMainMenuWaitThread(false);
+        jFrame.setVisible(true);
+    }
+
+    private void createMouse() {
         mouse = new Mouse((int) (Math.random() * width + 1), (int) (Math.random() * height + 1));
         for (SnakeSection snakeSection : snake.getSections()) {
             if (snakeSection.getX() == mouse.getX() && snakeSection.getY() == mouse.getY()) {
@@ -97,124 +171,26 @@ public class Room implements Runnable {
         }
     }
 
-    /**
-     * The method is called when the mouse is eaten
-     */
-    public void eatMouse() {
-        createMouse();
-    }
-
-    /**
-     * The main program cycle.
-     * All important actions take place here
-     */
-    @Override
-    public void run() {
-        /* Create the object "the observer for the keyboard" and start it */
-        KeyboardObserver keyboardObserver = new KeyboardObserver();
-        Executors.newSingleThreadExecutor().execute(keyboardObserver);
-
-        /* While snake is alive */
-        while (snake.isAlive()) {
-            /* "Observer" contains events about keystrokes? */
-            if (keyboardObserver.hasKeyEvents()) {
-                KeyEvent event = keyboardObserver.getEventFromTop();
-                /* if equals 'q' -> exit */
-                if (event.getKeyChar() == 'p') { /* PAUSE */
-                    while (true) {
-                        try {
-                            Thread.sleep(1000);
-                            if (keyboardObserver.hasKeyEvents()) {
-                                KeyEvent eventNew = keyboardObserver.getEventFromTop();
-                                if (eventNew.getKeyChar() == 'p') {
-                                    break;
-                                }
-                            }
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                } else if (event.getKeyChar() == 'q') {
-                    return;
-                }
-
-                /* Arrow movement */
-                switch (event.getKeyCode()) {
-                    case KeyEvent.VK_LEFT:
-                        if (snake.getDirection() != SnakeDirection.RIGHT) {
-                            snake.setDirection(SnakeDirection.LEFT);
-                        }
-                        break;
-                    case KeyEvent.VK_RIGHT:
-                        if (snake.getDirection() != SnakeDirection.LEFT) {
-                            snake.setDirection(SnakeDirection.RIGHT);
-                        }
-                        break;
-                    case KeyEvent.VK_UP:
-                        if (snake.getDirection() != SnakeDirection.DOWN) {
-                            snake.setDirection(SnakeDirection.UP);
-                        }
-                        break;
-                    case KeyEvent.VK_DOWN:
-                        if (snake.getDirection() != SnakeDirection.UP) {
-                            snake.setDirection(SnakeDirection.DOWN);
-                        }
-                        break;
-                    case KeyEvent.VK_W:
-                        if (snake.getDirection() != SnakeDirection.DOWN) {
-                            snake.setDirection(SnakeDirection.UP);
-                        }
-                        break;
-                    case KeyEvent.VK_S:
-                        if (snake.getDirection() != SnakeDirection.UP) {
-                            snake.setDirection(SnakeDirection.DOWN);
-                        }
-                        break;
-                    case KeyEvent.VK_A:
-                        if (snake.getDirection() != SnakeDirection.RIGHT) {
-                            snake.setDirection(SnakeDirection.LEFT);
-                        }
-                        break;
-                    case KeyEvent.VK_D:
-                        if (snake.getDirection() != SnakeDirection.LEFT) {
-                            snake.setDirection(SnakeDirection.RIGHT);
-                        }
-                        break;
-                }
-            }
-
-            snake.move();   /* Move the snake */
-            print(keyboardObserver);        /* Display the current state of the game */
-            sleep();        /* Pause between moves */
-        }
-
-        /* Display the message "Game Over" */
-        System.out.println("Game Over!");
-        /* Turn on mainMenu visible */
-        keyboardObserver.setVisible(false);
-        setting.setMainMenuWaitThread(false);
-        jFrame.setVisible(true);
-    }
-
-    /**
-     * Print everything to the window
-     * @param keyboardObserver is listener for our game
-     */
-    private void print(KeyboardObserver keyboardObserver) {
+    private void print() {
         if (keyboardObserver != null) {
             keyboardObserver.setContentPane(new Layer());
             keyboardObserver.setVisible(true);
         }
     }
 
-    /**
-     * The program pauses, the length of which depends on the length of the snake.
-     */
     private void sleep() {
         try {
             int level = snake.getSections().size();
             int delay = level <= 16 ? (300 - 10 * level - 1) : 150;
             Thread.sleep(delay);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void sleep(final long ms) {
+        try {
+            Thread.sleep(ms);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
