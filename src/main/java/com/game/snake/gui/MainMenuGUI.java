@@ -84,6 +84,8 @@ public class MainMenuGUI extends JFrame implements Runnable {
 
         /**
          * This method must implement the action of each button.
+         *
+         * This method should be called when the button is pressed.
          */
         void setAction();
     }
