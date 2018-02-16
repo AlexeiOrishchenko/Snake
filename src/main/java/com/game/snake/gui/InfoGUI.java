@@ -26,11 +26,11 @@ public final class InfoGUI extends JFrame implements Runnable {
 
     @Override
     public void run() {
-        setJLabel();
-        setJFrame();
+        initJLabels();
+        initJFrame();
     }
 
-    private void setJLabel() {
+    private void initJLabels() {
         final List<JLabel> infoGUIJLabelList = new ArrayList<>(setting.getInfoGUIJLabelList()); // FIXME: select label
 
         infoGUIJLabelList.forEach(jLabel -> {
@@ -40,7 +40,7 @@ public final class InfoGUI extends JFrame implements Runnable {
         });
     }
 
-    private void setJFrame() {
+    private void initJFrame() {
         setPreferredSize(new Dimension(setting.getInfoGUIWidth(), setting.getInfoGUIHeight()));
         setLocationRelativeTo(null); /* The center of the screen */
         pack();
