@@ -20,28 +20,28 @@ public final class SettingGUI extends JFrame implements Runnable {
 
     private final Setting setting = Setting.getInstance();
 
-    private final Container pane = this.getContentPane();
+    private final Container container = getContentPane();
     private final GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
-    public SettingGUI() {
+    SettingGUI() {
         setTitle(setting.getSettingGUIJFrameTitle());
-        pane.setLayout(new GridBagLayout());
+        container.setLayout(new GridBagLayout());
         gridBagConstraints.fill = GridBagConstraints.BOTH;
     }
 
     @Override
     public void run() {
-        final List<SettingParameters> settingParametersList = loadSettingParametersList();
+        final List<SettingJComponent> settingJComponentList = loadSettingJComponentList();
 
-        settingParametersList.forEach(SettingParameters::set);
+        settingJComponentList.forEach(SettingJComponent::init);
 
-        setButtonEnter(settingParametersList);
+        initJButtonEnter(settingJComponentList);
 
         setJFrame();
     }
 
     @NotNull
-    private List<SettingParameters> loadSettingParametersList() {
+    private List<SettingJComponent> loadSettingJComponentList() {
         return new ArrayList<>(Arrays.asList(
                 new ColorHead(),
                 new ColorSnake(),
@@ -55,51 +55,64 @@ public final class SettingGUI extends JFrame implements Runnable {
         ));
     }
 
-    private void setButtonEnter(final List<SettingParameters> settingParametersList) {
+    private void initJButtonEnter(final List<SettingJComponent> settingJComponentList) {
         final JButton jButtonEnter = new JButton("Enter");
 
-        gridBagConstraints.gridy++;
-        pane.add(jButtonEnter, gridBagConstraints);
+        setJComponent(jButtonEnter);
 
         jButtonEnter.addActionListener(e -> {
-            settingParametersList.forEach(SettingParameters::update);
+            settingJComponentList.forEach(SettingJComponent::update);
             setVisible(false);
         });
     }
 
     private void setJFrame() {
         setPreferredSize(new Dimension(setting.getSettingGUIWidth(), setting.getSettingGUIHeight()));
-        setLocationRelativeTo(null); /* The center of the screen */
+        setLocationRelativeTo(null); /* Set the center of the screen */
         pack();
         setVisible(true);
     }
 
-    private interface SettingParameters {
-        void set();
+    private interface SettingJComponent {
+
+        /**
+         * This method must implement the initialization of the component,
+         * giving it a name and a position.
+         *
+         * This method should be called when all components are in
+         * the initialization process.
+         */
+        void init();
+
+        /**
+         * This method should implement updating settings from each component.
+         *
+         * This method should be called when the Enter button is pressed.
+         */
         void update();
     }
 
-    private class ColorHead implements SettingParameters {
+    private class ColorHead implements SettingJComponent {
 
-        private final List<JRadioButton> colorHeadRadioButtonList = createColorList();
+        private final List<JRadioButton> colorHeadForSelectList = createColorList();
 
         @Override
-        public void set() {
+        public void init() {
             final JLabel colorHeadLabel = new JLabel("Color of the head: ");
 
-            setJLabel(colorHeadLabel);
+            setJComponent(colorHeadLabel);
             ButtonGroup colorHeadGroup = new ButtonGroup();
-            fillJRadioButton(colorHeadGroup, colorHeadRadioButtonList);
-            colorHeadRadioButtonList.get(5).setSelected(true); /* Default Snake color : BLACK TODO: do auto select */
+            fillJRadioButton(colorHeadGroup, colorHeadForSelectList);
+            colorHeadForSelectList.get(5).setSelected(true); /* Default Snake color : BLACK TODO: do auto select */
         }
 
         @Override
         public void update() {
-            for (JRadioButton colorHeadRadioButton : colorHeadRadioButtonList) {
-                if (colorHeadRadioButton.isSelected()) {
+            for (JRadioButton colorHead : colorHeadForSelectList) {
+                if (colorHead.isSelected()) {
                     final Field field;
                     try {
-                        field = Color.class.getField(colorHeadRadioButton.getText());
+                        field = Color.class.getField(colorHead.getText());
                         setting.setColorHead((Color) field.get(null));
                     } catch (NoSuchFieldException | IllegalAccessException err) {
                         err.printStackTrace();
@@ -110,27 +123,27 @@ public final class SettingGUI extends JFrame implements Runnable {
         }
     }
 
-    private class ColorSnake implements SettingParameters {
+    private class ColorSnake implements SettingJComponent {
 
-        private final List<JRadioButton> colorSnakeRadioButtonList = createColorList();
+        private final List<JRadioButton> colorSnakeForSelectList = createColorList();
 
         @Override
-        public void set() {
+        public void init() {
             final JLabel colorSnakeLabel = new JLabel("Color of the snake: ");
 
-            setJLabel(colorSnakeLabel);
+            setJComponent(colorSnakeLabel);
             ButtonGroup colorSnakeGroup = new ButtonGroup();
-            fillJRadioButton(colorSnakeGroup, colorSnakeRadioButtonList);
-            colorSnakeRadioButtonList.get(1).setSelected(true); /* Default Snake color : GREEN TODO: do auto select */
+            fillJRadioButton(colorSnakeGroup, colorSnakeForSelectList);
+            colorSnakeForSelectList.get(1).setSelected(true); /* Default Snake color : GREEN TODO: do auto select */
         }
 
         @Override
         public void update() {
-            for (JRadioButton colorSnakeRadioButton : colorSnakeRadioButtonList) {
-                if (colorSnakeRadioButton.isSelected()) {
+            for (JRadioButton colorSnake : colorSnakeForSelectList) {
+                if (colorSnake.isSelected()) {
                     final Field field;
                     try {
-                        field = Color.class.getField(colorSnakeRadioButton.getText());
+                        field = Color.class.getField(colorSnake.getText());
                         setting.setColorSnake((Color) field.get(null));
                     } catch (NoSuchFieldException | IllegalAccessException err) {
                         err.printStackTrace();
@@ -141,27 +154,27 @@ public final class SettingGUI extends JFrame implements Runnable {
         }
     }
 
-    private class ColorMouse implements SettingParameters {
+    private class ColorMouse implements SettingJComponent {
 
-        private final List<JRadioButton> colorMouseRadioButtonList = createColorList();
+        private final List<JRadioButton> colorMouseForSelectList = createColorList();
 
         @Override
-        public void set() {
+        public void init() {
             final JLabel colorMouseLabel = new JLabel("Color of the mouse: ");
 
-            setJLabel(colorMouseLabel);
+            setJComponent(colorMouseLabel);
             ButtonGroup colorMouseGroup = new ButtonGroup();
-            fillJRadioButton(colorMouseGroup, colorMouseRadioButtonList);
-            colorMouseRadioButtonList.get(4).setSelected(true); /* Default Mouse color : GRAY TODO: do auto select */
+            fillJRadioButton(colorMouseGroup, colorMouseForSelectList);
+            colorMouseForSelectList.get(4).setSelected(true); /* Default Mouse color : GRAY TODO: do auto select */
         }
 
         @Override
         public void update() {
-            for (JRadioButton colorMouseRadioButton : colorMouseRadioButtonList) {
-                if (colorMouseRadioButton.isSelected()) {
+            for (JRadioButton colorMouse : colorMouseForSelectList) {
+                if (colorMouse.isSelected()) {
                     final Field field;
                     try {
-                        field = Color.class.getField(colorMouseRadioButton.getText());
+                        field = Color.class.getField(colorMouse.getText());
                         setting.setColorMouse((Color) field.get(null));
                     } catch (NoSuchFieldException | IllegalAccessException err) {
                         err.printStackTrace();
@@ -172,27 +185,27 @@ public final class SettingGUI extends JFrame implements Runnable {
         }
     }
 
-    private class ColorFace implements SettingParameters {
+    private class ColorFace implements SettingJComponent {
 
-        private final List<JRadioButton> colorFaceRadioButtonList = createColorList();
+        private final List<JRadioButton> colorFaceForSelectList = createColorList();
 
         @Override
-        public void set() {
+        public void init() {
             final JLabel colorFaceLabel = new JLabel("Color of the face: ");
 
-            setJLabel(colorFaceLabel);
+            setJComponent(colorFaceLabel);
             ButtonGroup colorFaceGroup = new ButtonGroup();
-            fillJRadioButton(colorFaceGroup, colorFaceRadioButtonList);
-            colorFaceRadioButtonList.get(0).setSelected(true); /* Default Face color : RED TODO: do auto select */
+            fillJRadioButton(colorFaceGroup, colorFaceForSelectList);
+            colorFaceForSelectList.get(0).setSelected(true); /* Default Face color : RED TODO: do auto select */
         }
 
         @Override
         public void update() {
-            for (JRadioButton colorFaceRadioButton : colorFaceRadioButtonList) {
-                if (colorFaceRadioButton.isSelected()) {
+            for (JRadioButton colorFace : colorFaceForSelectList) {
+                if (colorFace.isSelected()) {
                     final Field field;
                     try {
-                        field = Color.class.getField(colorFaceRadioButton.getText());
+                        field = Color.class.getField(colorFace.getText());
                         setting.setColorFace((Color) field.get(null));
                     } catch (NoSuchFieldException | IllegalAccessException err) {
                         err.printStackTrace();
@@ -203,23 +216,23 @@ public final class SettingGUI extends JFrame implements Runnable {
         }
     }
 
-    private class MainMenuFullScreen implements SettingParameters {
+    private class MainMenuFullScreen implements SettingJComponent {
 
-        private final List<JRadioButton> mainMenuFullScreenRadioButtonList = createTrueFalseList();
+        private final List<JRadioButton> mainMenuFullScreenForSelectList = createTrueFalseList();
 
         @Override
-        public void set() {
+        public void init() {
             final JLabel mainMenuFullScreenLabel = new JLabel("Full screen main menu: ");
 
-            setJLabel(mainMenuFullScreenLabel);
+            setJComponent(mainMenuFullScreenLabel);
             ButtonGroup mainMenuFullScreenGroup = new ButtonGroup();
-            fillJRadioButton(mainMenuFullScreenGroup, mainMenuFullScreenRadioButtonList);
-            setVisibleJRadioButton(mainMenuFullScreenRadioButtonList, setting.isMainMenuFullScreen() + "");
+            fillJRadioButton(mainMenuFullScreenGroup, mainMenuFullScreenForSelectList);
+            setVisibleJRadioButton(mainMenuFullScreenForSelectList, setting.isMainMenuFullScreen() + "");
         }
 
         @Override
         public void update() {
-            setting.setMainMenuFullScreen(mainMenuFullScreenRadioButtonList.stream()
+            setting.setMainMenuFullScreen(mainMenuFullScreenForSelectList.stream()
                     .filter(AbstractButton::isSelected)
                     .findFirst()
                     .map(JRadioButton::getText)
@@ -228,23 +241,23 @@ public final class SettingGUI extends JFrame implements Runnable {
         }
     }
 
-    private class ChangeColor implements SettingParameters {
+    private class ChangeColor implements SettingJComponent {
 
-        private final List<JRadioButton> changeColorRadioButtonList = createTrueFalseList();
+        private final List<JRadioButton> changeColorForSelectList = createTrueFalseList();
 
         @Override
-        public void set() {
+        public void init() {
             final JLabel changeColorLabel = new JLabel("Change color: ");
 
-            setJLabel(changeColorLabel);
+            setJComponent(changeColorLabel);
             ButtonGroup changeColorGroup = new ButtonGroup();
-            fillJRadioButton(changeColorGroup, changeColorRadioButtonList);
-            setVisibleJRadioButton(changeColorRadioButtonList, setting.isChangeColor() + "");
+            fillJRadioButton(changeColorGroup, changeColorForSelectList);
+            setVisibleJRadioButton(changeColorForSelectList, setting.isChangeColor() + "");
         }
 
         @Override
         public void update() {
-            setting.setChangeColor(changeColorRadioButtonList.stream()
+            setting.setChangeColor(changeColorForSelectList.stream()
                     .filter(AbstractButton::isSelected)
                     .findFirst()
                     .map(JRadioButton::getText)
@@ -253,27 +266,27 @@ public final class SettingGUI extends JFrame implements Runnable {
         }
     }
 
-    private class SizeOfGame implements SettingParameters {
+    private class SizeOfGame implements SettingJComponent {
 
-        private final List<JRadioButton> sizeOfGameRadioButtonList = new ArrayList<>(Arrays.asList(
+        private final List<JRadioButton> sizeOfGameForSelectList = new ArrayList<>(Arrays.asList(
                 new JRadioButton("10"),
                 new JRadioButton("15"),
                 new JRadioButton("20")
         ));
 
         @Override
-        public void set() {
+        public void init() {
             final JLabel sizeOfGameLabel = new JLabel("Size of the game: ");
 
-            setJLabel(sizeOfGameLabel);
+            setJComponent(sizeOfGameLabel);
             ButtonGroup sizeOfGameGroup = new ButtonGroup();
-            fillJRadioButton(sizeOfGameGroup, sizeOfGameRadioButtonList);
-            setVisibleJRadioButton(sizeOfGameRadioButtonList,  setting.getSizeOfGame() + "");
+            fillJRadioButton(sizeOfGameGroup, sizeOfGameForSelectList);
+            setVisibleJRadioButton(sizeOfGameForSelectList,  setting.getSizeOfGame() + "");
         }
 
         @Override
         public void update() {
-            setting.setSizeOfGame(sizeOfGameRadioButtonList.stream()
+            setting.setSizeOfGame(sizeOfGameForSelectList.stream()
                     .filter(AbstractButton::isSelected)
                     .findFirst()
                     .map(JRadioButton::getText)
@@ -282,23 +295,23 @@ public final class SettingGUI extends JFrame implements Runnable {
         }
     }
 
-    private class RoomWidth implements SettingParameters {
+    private class RoomWidth implements SettingJComponent {
 
-        private final List<JRadioButton> roomWidthRadioButtonList = createSizeList();
+        private final List<JRadioButton> roomWidthForSelectList = createSizeList();
 
         @Override
-        public void set() {
+        public void init() {
             final JLabel roomWidthLabel = new JLabel("Room width: ");
 
-            setJLabel(roomWidthLabel);
+            setJComponent(roomWidthLabel);
             ButtonGroup roomWidthGroup = new ButtonGroup();
-            fillJRadioButton(roomWidthGroup, roomWidthRadioButtonList);
-            setVisibleJRadioButton(roomWidthRadioButtonList, setting.getRoomWidth() + "");
+            fillJRadioButton(roomWidthGroup, roomWidthForSelectList);
+            setVisibleJRadioButton(roomWidthForSelectList, setting.getRoomWidth() + "");
         }
 
         @Override
         public void update() {
-            setting.setRoomWidth(roomWidthRadioButtonList.stream()
+            setting.setRoomWidth(roomWidthForSelectList.stream()
                     .filter(AbstractButton::isSelected)
                     .findFirst()
                     .map(JRadioButton::getText)
@@ -307,23 +320,23 @@ public final class SettingGUI extends JFrame implements Runnable {
         }
     }
 
-    private class RoomHeight implements SettingParameters {
+    private class RoomHeight implements SettingJComponent {
 
-        private final List<JRadioButton> roomHeightRadioButtonList = createSizeList();
+        private final List<JRadioButton> roomHeightForSelectList = createSizeList();
 
         @Override
-        public void set() {
+        public void init() {
             final JLabel roomHeightLabel = new JLabel("Room height: ");
 
-            setJLabel(roomHeightLabel);
+            setJComponent(roomHeightLabel);
             ButtonGroup roomHeightGroup = new ButtonGroup();
-            fillJRadioButton(roomHeightGroup, roomHeightRadioButtonList);
-            setVisibleJRadioButton(roomHeightRadioButtonList, setting.getRoomHeight() + "");
+            fillJRadioButton(roomHeightGroup, roomHeightForSelectList);
+            setVisibleJRadioButton(roomHeightForSelectList, setting.getRoomHeight() + "");
         }
 
         @Override
         public void update() {
-            setting.setRoomHeight(roomHeightRadioButtonList.stream()
+            setting.setRoomHeight(roomHeightForSelectList.stream()
                     .filter(AbstractButton::isSelected)
                     .findFirst()
                     .map(JRadioButton::getText)
@@ -332,9 +345,9 @@ public final class SettingGUI extends JFrame implements Runnable {
         }
     }
 
-    private void setJLabel(JLabel jLabel) {
+    private void setJComponent(@NotNull final JComponent jComponent) {
         gridBagConstraints.gridy++;
-        pane.add(jLabel, gridBagConstraints);
+        container.add(jComponent, gridBagConstraints);
     }
 
     private void fillJRadioButton (@NotNull final ButtonGroup buttonGroup,
@@ -342,11 +355,11 @@ public final class SettingGUI extends JFrame implements Runnable {
 
         jRadioButtons.forEach(buttonGroup::add);
 
-        int i = 1;
-        for (JRadioButton button : jRadioButtons) {
-            gridBagConstraints.gridx = i++;
-            pane.add(button, gridBagConstraints);
-        }
+        gridBagConstraints.gridx = 1;
+        jRadioButtons.forEach(button -> {
+            gridBagConstraints.gridx++;
+            container.add(button, gridBagConstraints);
+        });
         gridBagConstraints.gridx = 0;
     }
 
