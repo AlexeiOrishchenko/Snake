@@ -15,12 +15,12 @@ public final class InfoGUI extends JFrame implements Runnable {
 
     private final Setting setting = Setting.getInstance();
 
-    private final Container pane = getContentPane();
+    private final Container container = getContentPane();
     private final GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
-    public InfoGUI() throws HeadlessException {
+    InfoGUI() throws HeadlessException {
         setTitle(setting.getInfoGUIJFrameTitle());
-        pane.setLayout(new GridBagLayout());
+        container.setLayout(new GridBagLayout());
         gridBagConstraints.fill = GridBagConstraints.BOTH;
     }
 
@@ -36,7 +36,7 @@ public final class InfoGUI extends JFrame implements Runnable {
         infoGUIJLabelList.forEach(jLabel -> {
             gridBagConstraints.gridy++;
             gridBagConstraints.insets = new Insets(10, 0, 0, 0);
-            pane.add(jLabel, gridBagConstraints);
+            container.add(jLabel, gridBagConstraints);
         });
     }
 
