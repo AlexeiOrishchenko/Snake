@@ -20,7 +20,7 @@ public final class ExitGUI extends JFrame implements Runnable {
     private final Container pane = getContentPane();
     private final GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
-    public ExitGUI() {
+    ExitGUI() {
         setTitle(setting.getExitGUIJFrameTitle());
         pane.setLayout(new GridBagLayout());
         gridBagConstraints.fill = GridBagConstraints.BOTH;
