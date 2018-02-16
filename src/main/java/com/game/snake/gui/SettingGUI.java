@@ -37,7 +37,7 @@ public final class SettingGUI extends JFrame implements Runnable {
 
         initJButtonEnter(settingJComponentList);
 
-        setJFrame();
+        initJFrame();
     }
 
     @NotNull
@@ -58,7 +58,7 @@ public final class SettingGUI extends JFrame implements Runnable {
     private void initJButtonEnter(final List<SettingJComponent> settingJComponentList) {
         final JButton jButtonEnter = new JButton("Enter");
 
-        setJComponent(jButtonEnter);
+        setJComponentPlace(jButtonEnter);
 
         jButtonEnter.addActionListener(e -> {
             settingJComponentList.forEach(SettingJComponent::update);
@@ -66,7 +66,7 @@ public final class SettingGUI extends JFrame implements Runnable {
         });
     }
 
-    private void setJFrame() {
+    private void initJFrame() {
         setPreferredSize(new Dimension(setting.getSettingGUIWidth(), setting.getSettingGUIHeight()));
         setLocationRelativeTo(null); /* Set the center of the screen */
         pack();
@@ -100,7 +100,7 @@ public final class SettingGUI extends JFrame implements Runnable {
         public void init() {
             final JLabel colorHeadLabel = new JLabel("Color of the head: ");
 
-            setJComponent(colorHeadLabel);
+            setJComponentPlace(colorHeadLabel);
             ButtonGroup colorHeadGroup = new ButtonGroup();
             fillJRadioButton(colorHeadGroup, colorHeadForSelectList);
             colorHeadForSelectList.get(5).setSelected(true); /* Default Snake color : BLACK TODO: do auto select */
@@ -131,7 +131,7 @@ public final class SettingGUI extends JFrame implements Runnable {
         public void init() {
             final JLabel colorSnakeLabel = new JLabel("Color of the snake: ");
 
-            setJComponent(colorSnakeLabel);
+            setJComponentPlace(colorSnakeLabel);
             ButtonGroup colorSnakeGroup = new ButtonGroup();
             fillJRadioButton(colorSnakeGroup, colorSnakeForSelectList);
             colorSnakeForSelectList.get(1).setSelected(true); /* Default Snake color : GREEN TODO: do auto select */
@@ -162,7 +162,7 @@ public final class SettingGUI extends JFrame implements Runnable {
         public void init() {
             final JLabel colorMouseLabel = new JLabel("Color of the mouse: ");
 
-            setJComponent(colorMouseLabel);
+            setJComponentPlace(colorMouseLabel);
             ButtonGroup colorMouseGroup = new ButtonGroup();
             fillJRadioButton(colorMouseGroup, colorMouseForSelectList);
             colorMouseForSelectList.get(4).setSelected(true); /* Default Mouse color : GRAY TODO: do auto select */
@@ -193,7 +193,7 @@ public final class SettingGUI extends JFrame implements Runnable {
         public void init() {
             final JLabel colorFaceLabel = new JLabel("Color of the face: ");
 
-            setJComponent(colorFaceLabel);
+            setJComponentPlace(colorFaceLabel);
             ButtonGroup colorFaceGroup = new ButtonGroup();
             fillJRadioButton(colorFaceGroup, colorFaceForSelectList);
             colorFaceForSelectList.get(0).setSelected(true); /* Default Face color : RED TODO: do auto select */
@@ -224,7 +224,7 @@ public final class SettingGUI extends JFrame implements Runnable {
         public void init() {
             final JLabel mainMenuFullScreenLabel = new JLabel("Full screen main menu: ");
 
-            setJComponent(mainMenuFullScreenLabel);
+            setJComponentPlace(mainMenuFullScreenLabel);
             ButtonGroup mainMenuFullScreenGroup = new ButtonGroup();
             fillJRadioButton(mainMenuFullScreenGroup, mainMenuFullScreenForSelectList);
             setVisibleJRadioButton(mainMenuFullScreenForSelectList, setting.isMainMenuFullScreen() + "");
@@ -249,7 +249,7 @@ public final class SettingGUI extends JFrame implements Runnable {
         public void init() {
             final JLabel changeColorLabel = new JLabel("Change color: ");
 
-            setJComponent(changeColorLabel);
+            setJComponentPlace(changeColorLabel);
             ButtonGroup changeColorGroup = new ButtonGroup();
             fillJRadioButton(changeColorGroup, changeColorForSelectList);
             setVisibleJRadioButton(changeColorForSelectList, setting.isChangeColor() + "");
@@ -278,7 +278,7 @@ public final class SettingGUI extends JFrame implements Runnable {
         public void init() {
             final JLabel sizeOfGameLabel = new JLabel("Size of the game: ");
 
-            setJComponent(sizeOfGameLabel);
+            setJComponentPlace(sizeOfGameLabel);
             ButtonGroup sizeOfGameGroup = new ButtonGroup();
             fillJRadioButton(sizeOfGameGroup, sizeOfGameForSelectList);
             setVisibleJRadioButton(sizeOfGameForSelectList,  setting.getSizeOfGame() + "");
@@ -303,7 +303,7 @@ public final class SettingGUI extends JFrame implements Runnable {
         public void init() {
             final JLabel roomWidthLabel = new JLabel("Room width: ");
 
-            setJComponent(roomWidthLabel);
+            setJComponentPlace(roomWidthLabel);
             ButtonGroup roomWidthGroup = new ButtonGroup();
             fillJRadioButton(roomWidthGroup, roomWidthForSelectList);
             setVisibleJRadioButton(roomWidthForSelectList, setting.getRoomWidth() + "");
@@ -328,7 +328,7 @@ public final class SettingGUI extends JFrame implements Runnable {
         public void init() {
             final JLabel roomHeightLabel = new JLabel("Room height: ");
 
-            setJComponent(roomHeightLabel);
+            setJComponentPlace(roomHeightLabel);
             ButtonGroup roomHeightGroup = new ButtonGroup();
             fillJRadioButton(roomHeightGroup, roomHeightForSelectList);
             setVisibleJRadioButton(roomHeightForSelectList, setting.getRoomHeight() + "");
@@ -345,7 +345,7 @@ public final class SettingGUI extends JFrame implements Runnable {
         }
     }
 
-    private void setJComponent(@NotNull final JComponent jComponent) {
+    private void setJComponentPlace(@NotNull final JComponent jComponent) {
         gridBagConstraints.gridy++;
         container.add(jComponent, gridBagConstraints);
     }
