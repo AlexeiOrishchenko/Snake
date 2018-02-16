@@ -21,31 +21,31 @@ public class MainMenuGUI extends JFrame implements Runnable {
 
     private final Setting setting = Setting.getInstance();
 
-    private final Container pane = getContentPane();
+    private final Container container = getContentPane();
     private final GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
     private SettingGUI settingGUI;
 
     public MainMenuGUI() {
         setTitle(setting.getMainMenuGUIJFrameTitle());
-        pane.setLayout(new GridBagLayout());
+        container.setLayout(new GridBagLayout());
         gridBagConstraints.fill = GridBagConstraints.BOTH;
     }
 
     @Override
     public void run() {
-        final List<ComponentMainMenuGUI> componentMainMenuGUIList = loadComponentMainMenuGUIList();
+        final List<MainMenuJComponent> mainMenuJComponentList = loadMainMenuJComponentList();
 
-        componentMainMenuGUIList.forEach(componentMainMenuGUI -> {
-            componentMainMenuGUI.set();
-            componentMainMenuGUI.action();
+        mainMenuJComponentList.forEach(mainMenuJComponent -> {
+            mainMenuJComponent.init();
+            mainMenuJComponent.setAction();
         });
 
         setJFrame();
     }
 
     @NotNull
-    private List<ComponentMainMenuGUI> loadComponentMainMenuGUIList() {
+    private List<MainMenuJComponent> loadMainMenuJComponentList() {
         return new ArrayList<>(Arrays.asList(
                 new LabelWelcome(),
                 new ButtonPlay(),
@@ -68,45 +68,56 @@ public class MainMenuGUI extends JFrame implements Runnable {
             setExtendedState(Frame.MAXIMIZED_BOTH);
         } else {
             setPreferredSize(new Dimension(setting.getMainMenuWidth(), setting.getMainMenuHeight()));
-            setLocationRelativeTo(null); /* The center of the screen */
+            setLocationRelativeTo(null); /* Set the center of the screen */
         }
     }
 
-    private interface ComponentMainMenuGUI {
-        void set();
-        void action();
+    private interface MainMenuJComponent {
+
+        /**
+         * This method must implement the initialization of the component,
+         * giving it a name and location and add it to the container.
+         *
+         * This method should be called for each component.
+         */
+        void init();
+
+        /**
+         * This method must implement the action of each button.
+         */
+        void setAction();
     }
 
-    private class LabelWelcome implements ComponentMainMenuGUI {
+    private class LabelWelcome implements MainMenuJComponent {
 
         private final JLabel labelWelcome = new JLabel(setting.getMainMenuGUIJLabelWelcome());
 
         @Override
-        public void set() {
+        public void init() {
             gridBagConstraints.gridy++;
             gridBagConstraints.insets = new Insets(-100, 0, 25, 0);
-            pane.add(labelWelcome, gridBagConstraints);
+            container.add(labelWelcome, gridBagConstraints);
         }
 
         @Override
-        public void action() {
+        public void setAction() {
             Executors.newSingleThreadExecutor().execute(new ChangeColor(labelWelcome)); // FIXME: shutdown
         }
     }
 
-    private class ButtonPlay implements ComponentMainMenuGUI {
+    private class ButtonPlay implements MainMenuJComponent {
 
         private final JButton buttonPlay = new JButton(setting.getMainMenuGUIJButtonPlay());
 
         @Override
-        public void set() {
+        public void init() {
             gridBagConstraints.gridy++;
             gridBagConstraints.insets = new Insets(10, 0, 0, 0);
-            pane.add(buttonPlay, gridBagConstraints);
+            container.add(buttonPlay, gridBagConstraints);
         }
 
         @Override
-        public void action() {
+        public void setAction() {
             buttonPlay.addActionListener(e -> {
                 setVisible(false);
                 setting.setMainMenuWaitThread(true);
@@ -116,18 +127,18 @@ public class MainMenuGUI extends JFrame implements Runnable {
         }
     }
 
-    private class ButtonSetting implements ComponentMainMenuGUI {
+    private class ButtonSetting implements MainMenuJComponent {
 
         private final JButton buttonSetting = new JButton(setting.getMainMenuGUIJButtonSetting());
 
         @Override
-        public void set() {
+        public void init() {
             gridBagConstraints.gridy++;
-            pane.add(buttonSetting, gridBagConstraints);
+            container.add(buttonSetting, gridBagConstraints);
         }
 
         @Override
-        public void action() {
+        public void setAction() {
             buttonSetting.addActionListener(e -> {
                 if (settingGUI == null) {
                     settingGUI = new SettingGUI();
@@ -139,36 +150,36 @@ public class MainMenuGUI extends JFrame implements Runnable {
         }
     }
 
-    private class ButtonInfo implements ComponentMainMenuGUI {
+    private class ButtonInfo implements MainMenuJComponent {
 
         private final JButton buttonInfo = new JButton(setting.getMainMenuGUIJButtonInfo());
 
         @Override
-        public void set() {
+        public void init() {
             gridBagConstraints.gridy++;
-            pane.add(buttonInfo, gridBagConstraints);
+            container.add(buttonInfo, gridBagConstraints);
         }
 
         @Override
-        public void action() {
+        public void setAction() {
             buttonInfo.addActionListener(e -> {
                 Executors.newSingleThreadExecutor().execute(new InfoGUI()); // FIXME: shutdown
             });
         }
     }
 
-    private class ButtonExit implements ComponentMainMenuGUI {
+    private class ButtonExit implements MainMenuJComponent {
 
         private final JButton buttonExit = new JButton(setting.getMainMenuGUIJButtonExit());
 
         @Override
-        public void set() {
+        public void init() {
             gridBagConstraints.gridy++;
-            pane.add(buttonExit, gridBagConstraints);
+            container.add(buttonExit, gridBagConstraints);
         }
 
         @Override
-        public void action() {
+        public void setAction() {
             buttonExit.addActionListener(e -> {
                 MainMenuGUI.this.setVisible(false);
                 Executors.newSingleThreadExecutor().execute((new ExitGUI())); // FIXME: shutdown
@@ -176,19 +187,19 @@ public class MainMenuGUI extends JFrame implements Runnable {
         }
     }
 
-    private class LabelAuthor implements ComponentMainMenuGUI {
+    private class LabelAuthor implements MainMenuJComponent {
 
         private final JLabel labelAuthor = new JLabel(Setting.getAUTHOR());
 
         @Override
-        public void set() {
+        public void init() {
             gridBagConstraints.gridy++;
             gridBagConstraints.insets = new Insets(0, 60, -100, 0);
-            pane.add(labelAuthor, gridBagConstraints);
+            container.add(labelAuthor, gridBagConstraints);
         }
 
         @Override
-        public void action() {
+        public void setAction() {
             Executors.newSingleThreadExecutor().execute(new ChangeColor(labelAuthor)); // FIXME: shutdown
         }
     }
