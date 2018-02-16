@@ -26,11 +26,11 @@ public final class InfoGUI extends JFrame implements Runnable {
 
     @Override
     public void run() {
-        initJLabels();
+        initJLabel();
         initJFrame();
     }
 
-    private void initJLabels() {
+    private void initJLabel() {
         final List<JLabel> infoGUIJLabelList = new ArrayList<>(setting.getInfoGUIJLabelList()); // FIXME: select label
 
         infoGUIJLabelList.forEach(jLabel -> {
