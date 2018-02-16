@@ -2,6 +2,7 @@ package com.game.snake.gui;
 
 import com.game.snake.graphics.ChangeColor;
 import com.game.snake.setting.Setting;
+import org.jetbrains.annotations.Contract;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,14 +28,13 @@ public final class ExitGUI extends JFrame implements Runnable {
 
     @Override
     public void run() {
-        setJLabel();
-        setJFame();
+        initJLabel();
+        initJFrame();
         sleep();
-
-        System.exit(0);
+        exit();
     }
 
-    private void setJLabel() {
+    private void initJLabel() {
         final List<JLabel> exitGUILabelList = setting.getExitGUIJLabelList();
 
         exitGUILabelList.forEach(exitGUILabel -> {
@@ -47,7 +47,7 @@ public final class ExitGUI extends JFrame implements Runnable {
         });
     }
 
-    private void setJFame() {
+    private void initJFrame() {
         setPreferredSize(new Dimension(setting.getExitGUIWidth(), setting.getExitGUIHeight()));
         setLocationRelativeTo(null); /* The center of the screen */
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -61,5 +61,10 @@ public final class ExitGUI extends JFrame implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    @Contract(" -> fail")
+    private void exit() {
+        System.exit(0);
     }
 }
