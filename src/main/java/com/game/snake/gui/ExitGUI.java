@@ -2,6 +2,7 @@ package com.game.snake.gui;
 
 import com.game.snake.graphics.ChangeColor;
 import com.game.snake.setting.Setting;
+
 import org.jetbrains.annotations.Contract;
 
 import javax.swing.*;
