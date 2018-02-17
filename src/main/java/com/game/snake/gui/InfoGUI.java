@@ -1,27 +1,51 @@
 package com.game.snake.gui;
 
-import com.game.snake.setting.Setting;
+import org.jetbrains.annotations.Contract;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.10
+ * @version 1.11
  */
 public final class InfoGUI extends JFrame implements Runnable {
 
-    private final Setting setting = Setting.getInstance();
+    private static volatile InfoGUI infoGUI;
 
-    private final Container container = getContentPane();
-    private final GridBagConstraints gridBagConstraints = new GridBagConstraints();
+    private static boolean initialized = false;
 
-    InfoGUI() throws HeadlessException {
-        setTitle(setting.getInfoGUIJFrameTitle());
-        container.setLayout(new GridBagLayout());
-        gridBagConstraints.fill = GridBagConstraints.BOTH;
+    private JLabel LabelWithIcon;
+
+    private String ResourceName = String.valueOf("/InfoPicture.png");
+
+    private InfoGUI() throws HeadlessException {
+        setTitle("Snake - INFO");
+    }
+
+    @Contract(pure = true)
+    public static boolean isInitialized() {
+        return initialized;
+    }
+
+    @Contract(pure = true)
+    public String getResourceName() {
+        return ResourceName;
+    }
+
+    public void setResourceName(String resourceName) {
+        ResourceName = resourceName;
+    }
+
+    public static InfoGUI getInstance() {
+        if (infoGUI == null) {
+            synchronized (InfoGUI.class) {
+                if (infoGUI == null) {
+                    infoGUI = new InfoGUI();
+                }
+            }
+        }
+        return infoGUI;
     }
 
     @Override
@@ -31,18 +55,31 @@ public final class InfoGUI extends JFrame implements Runnable {
     }
 
     private void initJLabel() {
-        final List<JLabel> infoGUIJLabelList = new ArrayList<>(setting.getInfoGUIJLabelList()); // FIXME: select label
+        loadResource();
+        getContentPane().add(LabelWithIcon);
+        initialized = true;
+    }
 
-        infoGUIJLabelList.forEach(jLabel -> {
-            gridBagConstraints.gridy++;
-            gridBagConstraints.insets = new Insets(10, 0, 0, 0);
-            container.add(jLabel, gridBagConstraints);
-        });
+    private void loadResource() {
+        if (LabelWithIcon == null) {
+            LabelWithIcon = new JLabel(new ImageIcon(getClass().getResource(ResourceName)));
+            logImageLoad();
+        }
+    }
+
+    private void logImageLoad() {
+        System.out.println(
+                "File path: " + getClass().getResource(ResourceName) +
+                "\tWidth = " + LabelWithIcon.getIcon().getIconWidth() +
+                "\tHeight = " + LabelWithIcon.getIcon().getIconHeight()
+        );
     }
 
     private void initJFrame() {
-        setPreferredSize(new Dimension(setting.getInfoGUIWidth(), setting.getInfoGUIHeight()));
-        setLocationRelativeTo(null); /* The center of the screen */
+        setPreferredSize(new Dimension(
+                LabelWithIcon.getIcon().getIconWidth(),
+                LabelWithIcon.getIcon().getIconHeight()
+        ));
         pack();
         setVisible(true);
     }

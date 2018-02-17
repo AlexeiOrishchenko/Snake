@@ -19,6 +19,8 @@ import java.util.concurrent.Executors;
  */
 public class MainMenuGUI extends JFrame implements Runnable {
 
+    private static InfoGUI infoGUI = InfoGUI.getInstance();
+
     private final Setting setting = Setting.getInstance();
 
     private final Container container = getContentPane();
@@ -164,9 +166,13 @@ public class MainMenuGUI extends JFrame implements Runnable {
 
         @Override
         public void setAction() {
-            jButtonInfo.addActionListener(e -> {
-                Executors.newSingleThreadExecutor().execute(new InfoGUI()); // FIXME: shutdown
-            });
+            if (!InfoGUI.isInitialized()) {
+                jButtonInfo.addActionListener(e -> {
+                    Executors.newSingleThreadExecutor().execute(infoGUI); // FIXME: shutdown
+                });
+            } else {
+                infoGUI.setVisible(true);
+            }
         }
     }
 

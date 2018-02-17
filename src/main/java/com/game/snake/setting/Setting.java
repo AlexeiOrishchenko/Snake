@@ -21,7 +21,6 @@ public class Setting {
     private String mainMenuGUIJFrameTitle = "Snake - MAIN MENU";
     private String playJFrameTitle = "Snake - PLAY"; // FIXME: 04.02.2018
     private String settingGUIJFrameTitle = "Snake - SETTING";
-    private String infoGUIJFrameTitle = "Snake - INFO";
     private String exitGUIJFrameTitle = "Snake - EXIT";
 
     private String mainMenuGUIJLabelWelcome = "Welcome to the game \"SNAKE\"";
@@ -30,12 +29,6 @@ public class Setting {
     private String mainMenuGUIJButtonInfo = "INFO";
     private String mainMenuGUIJButtonExit = "EXIT";
 
-    private String infoDataCreate = "01.28.2018 - Ukraine - Dnipro";
-    private String infoMail = "Mail: qThegamEp@gmail.com";
-    private String infoFacebook = "Facebook: https://www.facebook.com/koliadin.nikita";
-    private String infoInstagram = "Instagram: https://www.instagram.com/koliadin_nik/";
-    private String infoGitHub = "Github: https://github.com/qThegamEp";
-    private String infoSkype = "Skype: koliadin321";
     private String infoThanks = "!!!Thank you for playing this game!!!";
 
     private String color1 = "RED";
@@ -51,19 +44,8 @@ public class Setting {
     private String sizeListValue4 = "40";
     private String sizeListValue5 = "50";
 
-    private List<JLabel> exitGUIJLabelList = new ArrayList<JLabel>(Arrays.asList(
+    private List<JLabel> exitGUIJLabelList = new ArrayList<>(Arrays.asList(
             new JLabel(getInfoThanks())));
-
-    private List<JLabel> infoGUIJLabelList = new ArrayList<>(Arrays.asList( // FIXME: 13.02.2018
-            new JLabel(getAUTHOR()),
-            new JLabel(getInfoDataCreate()),
-            new JLabel(getInfoMail()),
-            new JLabel(getInfoFacebook()),
-            new JLabel(getInfoInstagram()),
-            new JLabel(getInfoGitHub()),
-            new JLabel(getInfoSkype()),
-            new JLabel(getInfoThanks())
-    ));
 
     private int mainMenuWidth = 350;
     private int mainMenuHeight = 350;
@@ -71,8 +53,8 @@ public class Setting {
     private int settingGUIWidth = 550;
     private int settingGUIHeight = 300;
 
-    private int infoGUIWidth = 350;
-    private int infoGUIHeight = 350;
+    private int infoGUIWidth = 800;
+    private int infoGUIHeight = 600;
 
     private int exitGUIWidth = 320;
     private int exitGUIHeight = 320;
@@ -141,14 +123,6 @@ public class Setting {
         this.settingGUIJFrameTitle = settingGUIJFrameTitle;
     }
 
-    public String getInfoGUIJFrameTitle() {
-        return infoGUIJFrameTitle;
-    }
-
-    public void setInfoGUIJFrameTitle(String infoGUIJFrameTitle) {
-        this.infoGUIJFrameTitle = infoGUIJFrameTitle;
-    }
-
     public String getExitGUIJFrameTitle() {
         return exitGUIJFrameTitle;
     }
@@ -195,54 +169,6 @@ public class Setting {
 
     public void setMainMenuGUIJButtonExit(String mainMenuGUIJButtonExit) {
         this.mainMenuGUIJButtonExit = mainMenuGUIJButtonExit;
-    }
-
-    public String getInfoDataCreate() {
-        return infoDataCreate;
-    }
-
-    public void setInfoDataCreate(String infoDataCreate) {
-        this.infoDataCreate = infoDataCreate;
-    }
-
-    public String getInfoMail() {
-        return infoMail;
-    }
-
-    public void setInfoMail(String infoMail) {
-        this.infoMail = infoMail;
-    }
-
-    public String getInfoFacebook() {
-        return infoFacebook;
-    }
-
-    public void setInfoFacebook(String infoFacebook) {
-        this.infoFacebook = infoFacebook;
-    }
-
-    public String getInfoInstagram() {
-        return infoInstagram;
-    }
-
-    public void setInfoInstagram(String infoInstagram) {
-        this.infoInstagram = infoInstagram;
-    }
-
-    public String getInfoGitHub() {
-        return infoGitHub;
-    }
-
-    public void setInfoGitHub(String infoGitHub) {
-        this.infoGitHub = infoGitHub;
-    }
-
-    public String getInfoSkype() {
-        return infoSkype;
-    }
-
-    public void setInfoSkype(String infoSkype) {
-        this.infoSkype = infoSkype;
     }
 
     public String getInfoThanks() {
@@ -347,14 +273,6 @@ public class Setting {
 
     public void setExitGUIJLabelList(List<JLabel> exitGUIJLabelList) {
         this.exitGUIJLabelList = exitGUIJLabelList;
-    }
-
-    public List<JLabel> getInfoGUIJLabelList() {
-        return infoGUIJLabelList;
-    }
-
-    public void setInfoGUIJLabelList(List<JLabel> infoGUIJLabelList) {
-        this.infoGUIJLabelList = infoGUIJLabelList;
     }
 
     public int getMainMenuWidth() {
