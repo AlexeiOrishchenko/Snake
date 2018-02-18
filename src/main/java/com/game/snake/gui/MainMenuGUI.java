@@ -166,12 +166,12 @@ public class MainMenuGUI extends JFrame implements Runnable {
 
         @Override
         public void setAction() {
-            if (!InfoGUI.isInitialized()) {
+            if (!infoGUI.isInitialized()) {
                 jButtonInfo.addActionListener(e -> {
                     Executors.newSingleThreadExecutor().execute(infoGUI); // FIXME: shutdown
                 });
             } else {
-                infoGUI.setVisible(true);
+                infoGUI.onVisible();
             }
         }
     }

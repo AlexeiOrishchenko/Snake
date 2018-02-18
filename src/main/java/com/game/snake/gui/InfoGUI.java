@@ -1,40 +1,30 @@
 package com.game.snake.gui;
 
-import org.jetbrains.annotations.Contract;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
 
 /**
  * @author Koliadin Nikita
- * @version 1.11
+ * @version 1.12
  */
-public final class InfoGUI extends JFrame implements Runnable {
+public final class InfoGUI implements Runnable {
 
     private static volatile InfoGUI infoGUI;
 
-    private static boolean initialized = false;
+    @Getter private boolean initialized = false;
 
-    private JLabel LabelWithIcon;
+    private final JFrame jFrame;
 
-    private String ResourceName = String.valueOf("/InfoPicture.png");
+    private JLabel labelWithIcon;
 
-    private InfoGUI() throws HeadlessException {
-        setTitle("Snake - INFO");
-    }
+    @Getter @Setter private String resourceName = String.valueOf("/InfoPicture.png");
+    @Getter @Setter private String infoGUITitle = String.valueOf("Snake - INFO");
 
-    @Contract(pure = true)
-    public static boolean isInitialized() {
-        return initialized;
-    }
-
-    @Contract(pure = true)
-    public String getResourceName() {
-        return ResourceName;
-    }
-
-    public void setResourceName(String resourceName) {
-        ResourceName = resourceName;
+    private InfoGUI() {
+        jFrame = new JFrame();
     }
 
     public static InfoGUI getInstance() {
@@ -48,6 +38,10 @@ public final class InfoGUI extends JFrame implements Runnable {
         return infoGUI;
     }
 
+    public void onVisible() {
+        jFrame.setVisible(true);
+    }
+
     @Override
     public void run() {
         initJLabel();
@@ -56,31 +50,32 @@ public final class InfoGUI extends JFrame implements Runnable {
 
     private void initJLabel() {
         loadResource();
-        getContentPane().add(LabelWithIcon);
-        initialized = true;
+        jFrame.getContentPane().add(labelWithIcon);
     }
 
     private void loadResource() {
-        if (LabelWithIcon == null) {
-            LabelWithIcon = new JLabel(new ImageIcon(getClass().getResource(ResourceName)));
+        if (labelWithIcon == null) {
+            labelWithIcon = new JLabel(new ImageIcon(getClass().getResource(resourceName)));
             logImageLoad();
         }
     }
 
     private void logImageLoad() {
         System.out.println(
-                "File path: " + getClass().getResource(ResourceName) +
-                "\tWidth = " + LabelWithIcon.getIcon().getIconWidth() +
-                "\tHeight = " + LabelWithIcon.getIcon().getIconHeight()
+                "File path: " + getClass().getResource(resourceName) +
+                "\tWidth = " + labelWithIcon.getIcon().getIconWidth() +
+                "\tHeight = " + labelWithIcon.getIcon().getIconHeight()
         );
     }
 
     private void initJFrame() {
-        setPreferredSize(new Dimension(
-                LabelWithIcon.getIcon().getIconWidth(),
-                LabelWithIcon.getIcon().getIconHeight()
+        jFrame.setTitle(infoGUITitle);
+        jFrame.setPreferredSize(new Dimension(
+                labelWithIcon.getIcon().getIconWidth(),
+                labelWithIcon.getIcon().getIconHeight()
         ));
-        pack();
-        setVisible(true);
+        jFrame.pack();
+        jFrame.setVisible(true);
+        initialized = true;
     }
 }
