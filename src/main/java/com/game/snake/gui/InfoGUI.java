@@ -75,6 +75,7 @@ public final class InfoGUI implements Runnable {
                 labelWithIcon.getIcon().getIconHeight()
         ));
         jFrame.pack();
+        jFrame.setLocationRelativeTo(null); /* The center of the screen */
         jFrame.setVisible(true);
         initialized = true;
     }

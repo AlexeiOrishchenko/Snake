@@ -50,9 +50,9 @@ public final class ExitGUI extends JFrame implements Runnable {
 
     private void initJFrame() {
         setPreferredSize(new Dimension(setting.getExitGUIWidth(), setting.getExitGUIHeight()));
-        setLocationRelativeTo(null); /* The center of the screen */
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
+        setLocationRelativeTo(null); /* The center of the screen */
         setVisible(true);
     }
 

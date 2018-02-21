@@ -68,8 +68,8 @@ public final class SettingGUI extends JFrame implements Runnable {
 
     private void initJFrame() {
         setPreferredSize(new Dimension(setting.getSettingGUIWidth(), setting.getSettingGUIHeight()));
-        setLocationRelativeTo(null); /* Set the center of the screen */
         pack();
+        setLocationRelativeTo(null); /* Set the center of the screen */
         setVisible(true);
     }
 
