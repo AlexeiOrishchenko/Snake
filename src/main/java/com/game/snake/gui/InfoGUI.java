@@ -2,6 +2,7 @@ package com.game.snake.gui;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.val;
 
 import javax.swing.*;
 import java.awt.*;
@@ -56,27 +57,29 @@ public final class InfoGUI implements Runnable {
     private void loadResource() {
         if (labelWithIcon == null) {
             labelWithIcon = new JLabel(new ImageIcon(getClass().getResource(resourceName)));
-            logImageLoad();
         }
-    }
-
-    private void logImageLoad() {
-        System.out.println(
-                "File path: " + getClass().getResource(resourceName) +
-                "\tWidth = " + labelWithIcon.getIcon().getIconWidth() +
-                "\tHeight = " + labelWithIcon.getIcon().getIconHeight()
-        );
     }
 
     private void initJFrame() {
         jFrame.setTitle(infoGUITitle);
-        jFrame.setPreferredSize(new Dimension(
-                labelWithIcon.getIcon().getIconWidth(),
-                labelWithIcon.getIcon().getIconHeight()
-        ));
+        setJFrameSize();
         jFrame.pack();
         jFrame.setLocationRelativeTo(null); /* The center of the screen */
         jFrame.setVisible(true);
         initialized = true;
+    }
+
+    private void setJFrameSize() {
+        val iconWidth = labelWithIcon.getIcon().getIconWidth();
+        val iconHeight = labelWithIcon.getIcon().getIconHeight();
+
+        jFrame.setPreferredSize(new Dimension(
+                iconWidth,
+                iconHeight
+        ));
+        jFrame.setMinimumSize(new Dimension(
+                iconWidth,
+                iconHeight
+        ));
     }
 }
