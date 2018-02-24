@@ -115,7 +115,7 @@ public class Room implements Runnable {
     }
 
     private boolean isExit(@NotNull final KeyEvent event) {
-        return event.getKeyChar() == 'q';
+        return event.getKeyChar() == KeyEvent.VK_ESCAPE;
     }
 
     private void checkDirection(@NotNull final KeyEvent event) {
