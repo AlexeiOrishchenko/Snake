@@ -53,9 +53,6 @@ public class Setting {
     private int settingGUIWidth = 550;
     private int settingGUIHeight = 300;
 
-    private int infoGUIWidth = 800;
-    private int infoGUIHeight = 600;
-
     private int exitGUIWidth = 320;
     private int exitGUIHeight = 320;
 
@@ -305,22 +302,6 @@ public class Setting {
 
     public void setSettingGUIHeight(int settingGUIHeight) {
         this.settingGUIHeight = settingGUIHeight;
-    }
-
-    public int getInfoGUIWidth() {
-        return infoGUIWidth;
-    }
-
-    public void setInfoGUIWidth(int infoGUIWidth) {
-        this.infoGUIWidth = infoGUIWidth;
-    }
-
-    public int getInfoGUIHeight() {
-        return infoGUIHeight;
-    }
-
-    public void setInfoGUIHeight(int infoGUIHeight) {
-        this.infoGUIHeight = infoGUIHeight;
     }
 
     public int getExitGUIWidth() {
