@@ -20,6 +20,7 @@ import java.util.concurrent.Executors;
 public class MainMenuGUI extends JFrame implements Runnable {
 
     private static InfoGUI infoGUI = InfoGUI.getInstance();
+    private static ExitGUI exitGUI = ExitGUI.getInstance();
 
     private final Setting setting = Setting.getInstance();
 
@@ -188,10 +189,14 @@ public class MainMenuGUI extends JFrame implements Runnable {
 
         @Override
         public void setAction() {
-            jButtonExit.addActionListener(e -> {
-                MainMenuGUI.this.setVisible(false);
-                Executors.newSingleThreadExecutor().execute((new ExitGUI())); // FIXME: shutdown
-            });
+            if (!exitGUI.isInitialized()) {
+                jButtonExit.addActionListener(e -> {
+                    MainMenuGUI.this.setVisible(false);
+                    Executors.newSingleThreadExecutor().execute((exitGUI)); // FIXME: shutdown
+                });
+            } else {
+                exitGUI.onVisible();
+            }
         }
     }
 
