@@ -1,30 +1,46 @@
 package com.game.snake.gui;
 
-import com.game.snake.graphics.ChangeColor;
-import com.game.snake.setting.Setting;
-
+import lombok.Getter;
+import lombok.Setter;
 import org.jetbrains.annotations.Contract;
 
 import javax.swing.*;
-import java.awt.*;
-import java.util.List;
-import java.util.concurrent.Executors;
 
 /**
  * @author Koliadin Nikita
- * @version 1.10
+ * @version 1.12
  */
-public final class ExitGUI extends JFrame implements Runnable {
+public final class ExitGUI implements Runnable {
 
-    private final Setting setting = Setting.getInstance();
+    private static volatile ExitGUI exitGUI;
 
-    private final Container pane = getContentPane();
-    private final GridBagConstraints gridBagConstraints = new GridBagConstraints();
+    @Getter private boolean initialized = false;
 
-    ExitGUI() {
-        setTitle(setting.getExitGUIJFrameTitle());
-        pane.setLayout(new GridBagLayout());
-        gridBagConstraints.fill = GridBagConstraints.BOTH;
+    private final JFrame jFrame;
+
+    private JLabel labelWithIcon;
+
+    @Getter @Setter private String resourceName = String.valueOf("/ExitPicture.jpg");
+    @Getter @Setter private String exitGUITitle = String.valueOf("Snake - EXIT");
+    @Getter @Setter private long sleepTimeMS = 10000L;
+
+    private ExitGUI() {
+        jFrame = new JFrame();
+    }
+
+    public static ExitGUI getInstance() {
+        if (exitGUI == null) {
+            synchronized (ExitGUI.class) {
+                if (exitGUI == null) {
+                    exitGUI = new ExitGUI();
+                }
+            }
+        }
+        return exitGUI;
+    }
+
+    public void onVisible() {
+        jFrame.setVisible(true);
     }
 
     @Override
@@ -36,29 +52,28 @@ public final class ExitGUI extends JFrame implements Runnable {
     }
 
     private void initJLabel() {
-        final List<JLabel> exitGUILabelList = setting.getExitGUIJLabelList();
+        loadResource();
+        jFrame.getContentPane().add(labelWithIcon);
+    }
 
-        exitGUILabelList.forEach(exitGUILabel -> {
-            gridBagConstraints.gridy++;
-            gridBagConstraints.insets = new Insets(10, 0, 0, 0);
-            pane.add(exitGUILabel, gridBagConstraints);
-            if (setting.isChangeColor()) {
-                Executors.newCachedThreadPool().execute(new ChangeColor(exitGUILabel)); // FIXME: shutdown
-            }
-        });
+    private void loadResource() {
+        if (labelWithIcon == null) {
+            labelWithIcon = new JLabel(new ImageIcon(getClass().getResource(resourceName)));
+        }
     }
 
     private void initJFrame() {
-        setPreferredSize(new Dimension(setting.getExitGUIWidth(), setting.getExitGUIHeight()));
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        pack();
-        setLocationRelativeTo(null); /* The center of the screen */
-        setVisible(true);
+        jFrame.setTitle(exitGUITitle);
+        jFrame.setResizable(false);
+        jFrame.setDefaultCloseOperation(jFrame.EXIT_ON_CLOSE);
+        jFrame.pack();
+        jFrame.setLocationRelativeTo(null); /* The center of the screen */
+        jFrame.setVisible(true);
     }
 
     private void sleep() {
         try {
-            Thread.sleep(setting.getExitGUISleepTimeMS());
+            Thread.sleep(sleepTimeMS);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
