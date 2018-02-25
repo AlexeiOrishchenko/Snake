@@ -21,15 +21,12 @@ public class Setting {
     private String mainMenuGUIJFrameTitle = "Snake - MAIN MENU";
     private String playJFrameTitle = "Snake - PLAY"; // FIXME: 04.02.2018
     private String settingGUIJFrameTitle = "Snake - SETTING";
-    private String exitGUIJFrameTitle = "Snake - EXIT";
 
     private String mainMenuGUIJLabelWelcome = "Welcome to the game \"SNAKE\"";
     private String mainMenuGUIJButtonPlay = "PLAY";
     private String mainMenuGUIJButtonSetting = "SETTING";
     private String mainMenuGUIJButtonInfo = "INFO";
     private String mainMenuGUIJButtonExit = "EXIT";
-
-    private String infoThanks = "!!!Thank you for playing this game!!!";
 
     private String color1 = "RED";
     private String color2 = "GREEN";
@@ -44,17 +41,11 @@ public class Setting {
     private String sizeListValue4 = "40";
     private String sizeListValue5 = "50";
 
-    private List<JLabel> exitGUIJLabelList = new ArrayList<>(Arrays.asList(
-            new JLabel(getInfoThanks())));
-
     private int mainMenuWidth = 350;
     private int mainMenuHeight = 350;
 
     private int settingGUIWidth = 550;
     private int settingGUIHeight = 300;
-
-    private int exitGUIWidth = 320;
-    private int exitGUIHeight = 320;
 
     private int sizeOfGame = 15;
 
@@ -62,8 +53,6 @@ public class Setting {
     private int roomHeight = 20;
 
     private int colorChangeSleepTimeMS = 1;
-
-    private int exitGUISleepTimeMS = 3000;
 
     private Color colorFace = Color.RED;
     private Color colorMouse = Color.GRAY;
@@ -120,14 +109,6 @@ public class Setting {
         this.settingGUIJFrameTitle = settingGUIJFrameTitle;
     }
 
-    public String getExitGUIJFrameTitle() {
-        return exitGUIJFrameTitle;
-    }
-
-    public void setExitGUIJFrameTitle(String exitGUIJFrameTitle) {
-        this.exitGUIJFrameTitle = exitGUIJFrameTitle;
-    }
-
     public String getMainMenuGUIJLabelWelcome() {
         return mainMenuGUIJLabelWelcome;
     }
@@ -166,14 +147,6 @@ public class Setting {
 
     public void setMainMenuGUIJButtonExit(String mainMenuGUIJButtonExit) {
         this.mainMenuGUIJButtonExit = mainMenuGUIJButtonExit;
-    }
-
-    public String getInfoThanks() {
-        return infoThanks;
-    }
-
-    public void setInfoThanks(String infoThanks) {
-        this.infoThanks = infoThanks;
     }
 
     public String getColor1() {
@@ -264,14 +237,6 @@ public class Setting {
         this.sizeListValue5 = sizeListValue5;
     }
 
-    public List<JLabel> getExitGUIJLabelList() {
-        return exitGUIJLabelList;
-    }
-
-    public void setExitGUIJLabelList(List<JLabel> exitGUIJLabelList) {
-        this.exitGUIJLabelList = exitGUIJLabelList;
-    }
-
     public int getMainMenuWidth() {
         return mainMenuWidth;
     }
@@ -304,22 +269,6 @@ public class Setting {
         this.settingGUIHeight = settingGUIHeight;
     }
 
-    public int getExitGUIWidth() {
-        return exitGUIWidth;
-    }
-
-    public void setExitGUIWidth(int exitGUIWidth) {
-        this.exitGUIWidth = exitGUIWidth;
-    }
-
-    public int getExitGUIHeight() {
-        return exitGUIHeight;
-    }
-
-    public void setExitGUIHeight(int exitGUIHeight) {
-        this.exitGUIHeight = exitGUIHeight;
-    }
-
     public int getSizeOfGame() {
         return sizeOfGame;
     }
@@ -350,14 +299,6 @@ public class Setting {
 
     public void setColorChangeSleepTimeMS(int colorChangeSleepTimeMS) {
         this.colorChangeSleepTimeMS = colorChangeSleepTimeMS;
-    }
-
-    public int getExitGUISleepTimeMS() {
-        return exitGUISleepTimeMS;
-    }
-
-    public void setExitGUISleepTimeMS(int exitGUISleepTimeMS) {
-        this.exitGUISleepTimeMS = exitGUISleepTimeMS;
     }
 
     public Color getColorFace() {
