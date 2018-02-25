@@ -2,15 +2,11 @@ package com.game.snake.setting;
 
 import org.jetbrains.annotations.Contract;
 
-import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.10
+ * @version 1.12
  */
 public class Setting {
 
