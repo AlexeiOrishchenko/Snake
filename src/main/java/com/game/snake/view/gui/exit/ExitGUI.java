@@ -5,6 +5,8 @@ import lombok.Setter;
 import org.jetbrains.annotations.Contract;
 
 import javax.swing.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  * @author Koliadin Nikita
@@ -68,7 +70,30 @@ public final class ExitGUI implements Runnable {
         jFrame.setDefaultCloseOperation(jFrame.EXIT_ON_CLOSE);
         jFrame.pack();
         jFrame.setLocationRelativeTo(null); /* The center of the screen */
+        setJFrameKeyEvent();
         jFrame.setVisible(true);
+    }
+
+    private void setJFrameKeyEvent() {
+        jFrame.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(final KeyEvent e) {
+                /* Do nothing */
+            }
+
+            @Override
+            public void keyPressed(final KeyEvent e) {
+                if (e.getKeyChar() == KeyEvent.VK_ESCAPE) {
+                    jFrame.setVisible(false);
+                    exit();
+                }
+            }
+
+            @Override
+            public void keyReleased(final KeyEvent e) {
+                /* Do nothing */
+            }
+        });
     }
 
     private void sleep() {
