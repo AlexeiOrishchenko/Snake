@@ -6,6 +6,8 @@ import lombok.val;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  * @author Koliadin Nikita
@@ -66,6 +68,7 @@ public final class InfoGUI implements Runnable {
         jFrame.pack();
         jFrame.setLocationRelativeTo(null); /* The center of the screen */
         jFrame.setVisible(true);
+        setJFrameKeyEvent();
         initialized = true;
     }
 
@@ -81,5 +84,26 @@ public final class InfoGUI implements Runnable {
                 iconWidth,
                 iconHeight
         ));
+    }
+
+    private void setJFrameKeyEvent() {
+        jFrame.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                /* Do nothing */
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyChar() == KeyEvent.VK_ESCAPE) {
+                    jFrame.setVisible(false);
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                /* Do nothing */
+            }
+        });
     }
 }
