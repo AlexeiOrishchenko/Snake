@@ -16,11 +16,11 @@ public final class ExitGUI implements Runnable {
 
     private static volatile ExitGUI exitGUI;
 
-    @Getter private boolean initialized = false;
-
     private final JFrame jFrame;
 
     private JLabel labelWithIcon;
+
+    @Getter private boolean initialized = false;
 
     @Getter @Setter private String resourceName = String.valueOf("/ExitPicture.jpg");
     @Getter @Setter private String exitGUITitle = String.valueOf("Snake - EXIT");
