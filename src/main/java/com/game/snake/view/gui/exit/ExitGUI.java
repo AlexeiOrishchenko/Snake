@@ -31,14 +31,14 @@ public final class ExitGUI implements Runnable {
     }
 
     public static ExitGUI getInstance() {
-        if (exitGUI == null) {
+        if (ExitGUI.exitGUI == null) {
             synchronized (ExitGUI.class) {
-                if (exitGUI == null) {
-                    exitGUI = new ExitGUI();
+                if (ExitGUI.exitGUI == null) {
+                    ExitGUI.exitGUI = new ExitGUI();
                 }
             }
         }
-        return exitGUI;
+        return ExitGUI.exitGUI;
     }
 
     public void onVisible() {
