@@ -31,14 +31,14 @@ public final class InfoGUI implements Runnable {
     }
 
     public static InfoGUI getInstance() {
-        if (infoGUI == null) {
+        if (InfoGUI.infoGUI == null) {
             synchronized (InfoGUI.class) {
-                if (infoGUI == null) {
-                    infoGUI = new InfoGUI();
+                if (InfoGUI.infoGUI == null) {
+                    InfoGUI.infoGUI = new InfoGUI();
                 }
             }
         }
-        return infoGUI;
+        return InfoGUI.infoGUI;
     }
 
     public void onVisible() {
