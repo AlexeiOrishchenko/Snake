@@ -17,11 +17,11 @@ public final class InfoGUI implements Runnable {
 
     private static volatile InfoGUI infoGUI;
 
-    @Getter private boolean initialized = false;
-
     private final JFrame jFrame;
 
     private JLabel labelWithIcon;
+
+    @Getter private boolean initialized = false;
 
     @Getter @Setter private String resourceName = String.valueOf("/InfoPicture.png");
     @Getter @Setter private String infoGUITitle = String.valueOf("Snake - INFO");
@@ -89,19 +89,19 @@ public final class InfoGUI implements Runnable {
     private void setJFrameKeyEvent() {
         jFrame.addKeyListener(new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {
+            public void keyTyped(final KeyEvent e) {
                 /* Do nothing */
             }
 
             @Override
-            public void keyPressed(KeyEvent e) {
+            public void keyPressed(final KeyEvent e) {
                 if (e.getKeyChar() == KeyEvent.VK_ESCAPE) {
                     jFrame.setVisible(false);
                 }
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {
+            public void keyReleased(final KeyEvent e) {
                 /* Do nothing */
             }
         });
