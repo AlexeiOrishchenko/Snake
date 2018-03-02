@@ -1,4 +1,4 @@
-package com.game.snake.graphics;
+package com.game.snake.view.graphics;
 
 import com.game.snake.setting.Setting;
 
@@ -7,7 +7,7 @@ import java.awt.*;
 
 /**
  * @author Koliadin Nikita
- * @version 1.10
+ * @version 1.13
  */
 public class ChangeColor implements Runnable {
 

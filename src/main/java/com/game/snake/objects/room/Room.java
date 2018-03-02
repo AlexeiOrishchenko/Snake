@@ -1,7 +1,7 @@
 package com.game.snake.objects.room;
 
 import com.game.snake.controller.KeyboardObserver;
-import com.game.snake.graphics.Layer;
+import com.game.snake.view.graphics.Layer;
 import com.game.snake.objects.mouse.Mouse;
 import com.game.snake.objects.snake.Snake;
 import com.game.snake.objects.snake.SnakeDirection;
@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
 
 /**
  * @author Koliadin Nikita
- * @version 1.10
+ * @version 1.13
  */
 public class Room implements Runnable {
 

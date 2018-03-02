@@ -1,6 +1,6 @@
 package com.game.snake.view.gui.mainmenu;
 
-import com.game.snake.graphics.ChangeColor;
+import com.game.snake.view.graphics.ChangeColor;
 import com.game.snake.objects.room.Room;
 import com.game.snake.setting.Setting;
 
@@ -18,7 +18,7 @@ import java.util.concurrent.Executors;
 
 /**
  * @author Koliadin Nikita
- * @version 1.10
+ * @version 1.13
  */
 public class MainMenuGUI extends JFrame implements Runnable {
 

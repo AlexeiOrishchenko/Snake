@@ -9,7 +9,7 @@ import java.awt.*;
 
 /**
  * @author Koliadin Nikita
- * @version 1.12
+ * @version 1.13
  */
 public final class InfoGUI implements Runnable {
 

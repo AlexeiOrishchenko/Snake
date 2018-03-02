@@ -8,7 +8,7 @@ import javax.swing.*;
 
 /**
  * @author Koliadin Nikita
- * @version 1.12
+ * @version 1.13
  */
 public final class ExitGUI implements Runnable {
 

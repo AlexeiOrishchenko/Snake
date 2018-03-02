@@ -1,4 +1,4 @@
-package com.game.snake.graphics;
+package com.game.snake.view.graphics;
 
 import com.game.snake.setting.Setting;
 import com.game.snake.objects.room.Room;
@@ -13,7 +13,7 @@ import java.util.stream.IntStream;
 
 /**
  * @author Koliadin Nikita
- * @version 1.10
+ * @version 1.13
  *
  */
 public class Layer extends JPanel {

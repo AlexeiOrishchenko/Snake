@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.10
+ * @version 1.13
  */
 public final class SettingGUI extends JFrame implements Runnable {
 
