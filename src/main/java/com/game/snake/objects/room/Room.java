@@ -1,6 +1,7 @@
 package com.game.snake.objects.room;
 
 import com.game.snake.controller.KeyboardObserver;
+import com.game.snake.view.graphics.ChangeColor;
 import com.game.snake.view.graphics.Layer;
 import com.game.snake.objects.mouse.Mouse;
 import com.game.snake.objects.snake.Snake;
@@ -8,6 +9,8 @@ import com.game.snake.objects.snake.SnakeDirection;
 import com.game.snake.objects.snake.SnakeSection;
 import com.game.snake.setting.Setting;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -28,48 +31,16 @@ public class Room implements Runnable {
 
     private final KeyboardObserver keyboardObserver = new KeyboardObserver();
 
-    private Snake snake;
-    private Mouse mouse;
+    @Getter @Setter private Snake snake;
+    @Getter @Setter private Mouse mouse;
 
-    private int width = setting.getRoomWidth(); //TODO: edit setting
-    private int height = setting.getRoomHeight(); //TODO: edit setting
+    @Getter @Setter private int width = setting.getRoomWidth(); //TODO: edit setting
+    @Getter @Setter private int height = setting.getRoomHeight(); //TODO: edit setting
 
     public Room(final JFrame jFrame) {
         this.jFrame = jFrame;
         this.snake = new Snake();
         createMouse();
-    }
-
-    public Snake getSnake() {
-        return snake;
-    }
-
-    public void setSnake(Snake snake) {
-        this.snake = snake;
-    }
-
-    public Mouse getMouse() {
-        return mouse;
-    }
-
-    public void setMouse(Mouse mouse) {
-        this.mouse = mouse;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
     }
 
     @Override
@@ -158,7 +129,7 @@ public class Room implements Runnable {
 
     private void gameOver() {
         keyboardObserver.setVisible(false);
-        setting.setMainMenuWaitThread(false);
+        ChangeColor.setMainMenuWaitThread(false);
         jFrame.setVisible(true);
     }
 

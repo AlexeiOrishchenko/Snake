@@ -1,28 +1,17 @@
 package com.game.snake.setting;
 
-import org.jetbrains.annotations.Contract;
-
 import java.awt.*;
 
 /**
  * @author Koliadin Nikita
- * @version 1.12
+ * @version 1.13
  */
 public class Setting {
 
     private static volatile Setting ourInstance;
 
-    private static final String AUTHOR = "Author: Nikita Koliadin";
-
-    private String mainMenuGUIJFrameTitle = "Snake - MAIN MENU";
     private String playJFrameTitle = "Snake - PLAY"; // FIXME: 04.02.2018
     private String settingGUIJFrameTitle = "Snake - SETTING";
-
-    private String mainMenuGUIJLabelWelcome = "Welcome to the game \"SNAKE\"";
-    private String mainMenuGUIJButtonPlay = "PLAY";
-    private String mainMenuGUIJButtonSetting = "SETTING";
-    private String mainMenuGUIJButtonInfo = "INFO";
-    private String mainMenuGUIJButtonExit = "EXIT";
 
     private String color1 = "RED";
     private String color2 = "GREEN";
@@ -37,9 +26,6 @@ public class Setting {
     private String sizeListValue4 = "40";
     private String sizeListValue5 = "50";
 
-    private int mainMenuWidth = 350;
-    private int mainMenuHeight = 350;
-
     private int settingGUIWidth = 550;
     private int settingGUIHeight = 300;
 
@@ -48,17 +34,12 @@ public class Setting {
     private int roomWidth = 20;
     private int roomHeight = 20;
 
-    private int colorChangeSleepTimeMS = 1;
-
     private Color colorFace = Color.RED;
     private Color colorMouse = Color.GRAY;
     private Color colorSnake = Color.GREEN;
     private Color colorHead = Color.BLACK;
 
     private boolean changeColor = true;
-
-    /* Go to pause 2 thread in method changeColorOfLabel if waitThread is true */
-    private boolean mainMenuWaitThread = false;
 
     private boolean mainMenuFullScreen = true;
 
@@ -76,19 +57,6 @@ public class Setting {
         return ourInstance;
     }
 
-    @Contract(pure = true)
-    public static String getAUTHOR() {
-        return AUTHOR;
-    }
-
-    public String getMainMenuGUIJFrameTitle() {
-        return mainMenuGUIJFrameTitle;
-    }
-
-    public void setMainMenuGUIJFrameTitle(String mainMenuGUIJFrameTitle) {
-        this.mainMenuGUIJFrameTitle = mainMenuGUIJFrameTitle;
-    }
-
     public String getPlayJFrameTitle() {
         return playJFrameTitle;
     }
@@ -103,46 +71,6 @@ public class Setting {
 
     public void setSettingGUIJFrameTitle(String settingGUIJFrameTitle) {
         this.settingGUIJFrameTitle = settingGUIJFrameTitle;
-    }
-
-    public String getMainMenuGUIJLabelWelcome() {
-        return mainMenuGUIJLabelWelcome;
-    }
-
-    public void setMainMenuGUIJLabelWelcome(String mainMenuGUIJLabelWelcome) {
-        this.mainMenuGUIJLabelWelcome = mainMenuGUIJLabelWelcome;
-    }
-
-    public String getMainMenuGUIJButtonPlay() {
-        return mainMenuGUIJButtonPlay;
-    }
-
-    public void setMainMenuGUIJButtonPlay(String mainMenuGUIJButtonPlay) {
-        this.mainMenuGUIJButtonPlay = mainMenuGUIJButtonPlay;
-    }
-
-    public String getMainMenuGUIJButtonSetting() {
-        return mainMenuGUIJButtonSetting;
-    }
-
-    public void setMainMenuGUIJButtonSetting(String mainMenuGUIJButtonSetting) {
-        this.mainMenuGUIJButtonSetting = mainMenuGUIJButtonSetting;
-    }
-
-    public String getMainMenuGUIJButtonInfo() {
-        return mainMenuGUIJButtonInfo;
-    }
-
-    public void setMainMenuGUIJButtonInfo(String mainMenuGUIJButtonInfo) {
-        this.mainMenuGUIJButtonInfo = mainMenuGUIJButtonInfo;
-    }
-
-    public String getMainMenuGUIJButtonExit() {
-        return mainMenuGUIJButtonExit;
-    }
-
-    public void setMainMenuGUIJButtonExit(String mainMenuGUIJButtonExit) {
-        this.mainMenuGUIJButtonExit = mainMenuGUIJButtonExit;
     }
 
     public String getColor1() {
@@ -233,22 +161,6 @@ public class Setting {
         this.sizeListValue5 = sizeListValue5;
     }
 
-    public int getMainMenuWidth() {
-        return mainMenuWidth;
-    }
-
-    public void setMainMenuWidth(int mainMenuWidth) {
-        this.mainMenuWidth = mainMenuWidth;
-    }
-
-    public int getMainMenuHeight() {
-        return mainMenuHeight;
-    }
-
-    public void setMainMenuHeight(int mainMenuHeight) {
-        this.mainMenuHeight = mainMenuHeight;
-    }
-
     public int getSettingGUIWidth() {
         return settingGUIWidth;
     }
@@ -289,14 +201,6 @@ public class Setting {
         this.roomHeight = roomHeight;
     }
 
-    public int getColorChangeSleepTimeMS() {
-        return colorChangeSleepTimeMS;
-    }
-
-    public void setColorChangeSleepTimeMS(int colorChangeSleepTimeMS) {
-        this.colorChangeSleepTimeMS = colorChangeSleepTimeMS;
-    }
-
     public Color getColorFace() {
         return colorFace;
     }
@@ -335,14 +239,6 @@ public class Setting {
 
     public void setChangeColor(boolean changeColor) {
         this.changeColor = changeColor;
-    }
-
-    public boolean isMainMenuWaitThread() {
-        return mainMenuWaitThread;
-    }
-
-    public void setMainMenuWaitThread(boolean mainMenuWaitThread) {
-        this.mainMenuWaitThread = mainMenuWaitThread;
     }
 
     public boolean isMainMenuFullScreen() {

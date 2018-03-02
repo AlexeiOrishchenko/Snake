@@ -2,6 +2,7 @@ package com.game.snake.view.gui.setting;
 
 import com.game.snake.setting.Setting;
 
+import lombok.Getter;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,15 +19,34 @@ import java.util.List;
  */
 public final class SettingGUI extends JFrame implements Runnable {
 
+    private static volatile SettingGUI settingGUI;
+
     private final Setting setting = Setting.getInstance();
 
     private final Container container = getContentPane();
     private final GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
-    public SettingGUI() {
+    @Getter private boolean initialized = false;
+
+    private SettingGUI() {
         setTitle(setting.getSettingGUIJFrameTitle());
         container.setLayout(new GridBagLayout());
         gridBagConstraints.fill = GridBagConstraints.BOTH;
+    }
+
+    public static SettingGUI getInstance() {
+        if (settingGUI == null) {
+            synchronized (SettingGUI.class) {
+                if (settingGUI == null) {
+                    settingGUI = new SettingGUI();
+                }
+            }
+        }
+        return settingGUI;
+    }
+
+    public void onVisible() {
+        setVisible(true);
     }
 
     @Override
@@ -71,6 +91,7 @@ public final class SettingGUI extends JFrame implements Runnable {
         pack();
         setLocationRelativeTo(null); /* Set the center of the screen */
         setVisible(true);
+        initialized = true;
     }
 
     private interface SettingJComponent {

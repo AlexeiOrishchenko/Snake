@@ -2,6 +2,10 @@ package com.game.snake.view.graphics;
 
 import com.game.snake.setting.Setting;
 
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,6 +15,11 @@ import java.awt.*;
  */
 public class ChangeColor implements Runnable {
 
+    @Getter @Setter private static boolean mainMenuWaitThread = false;
+
+    @Getter @Setter private static long sleepWaitMS = 1000;
+    @Getter @Setter private static long sleepChangeMS = 1;
+
     private final Setting setting = Setting.getInstance();
 
     private final JLabel jLabel;
@@ -19,7 +28,7 @@ public class ChangeColor implements Runnable {
     private int green = (int) (Math.random() * 256);
     private int blue = (int) (Math.random() * 256);
 
-    public ChangeColor(final JLabel jLabel) {
+    public ChangeColor(@NonNull final JLabel jLabel) {
         this.jLabel = jLabel;
     }
 
@@ -29,9 +38,9 @@ public class ChangeColor implements Runnable {
     }
 
     private void changeColor() {
-        while (true) {
+        while (true) { // TODO: shutdown
             if (isWaiting()) {
-                sleep(1000);
+                sleep(ChangeColor.sleepWaitMS);
             }
 
             changeRedColor();
@@ -41,18 +50,18 @@ public class ChangeColor implements Runnable {
     }
 
     private boolean isWaiting() {
-        return ((!setting.isChangeColor()) || (setting.isMainMenuWaitThread()));
+        return ((!setting.isChangeColor()) || (ChangeColor.mainMenuWaitThread));
     }
 
     private void changeRedColor() {
         if (red < 255) {
             red++;
             jLabel.setForeground(new Color(red, green, blue));
-            sleep();
+            sleep(ChangeColor.sleepChangeMS);
         } else {
             for (; red > 0; red--) {
                 jLabel.setForeground(new Color(red, green, blue));
-                sleep();
+                sleep(ChangeColor.sleepChangeMS);
             }
         }
     }
@@ -61,11 +70,11 @@ public class ChangeColor implements Runnable {
         if (green < 254) {
             green += 2;
             jLabel.setForeground(new Color(red, green, blue));
-            sleep();
+            sleep(ChangeColor.sleepChangeMS);
         } else {
             for (; green > 0; green--) {
                 jLabel.setForeground(new Color(red, green, blue));
-                sleep();
+                sleep(ChangeColor.sleepChangeMS);
             }
         }
     }
@@ -74,21 +83,12 @@ public class ChangeColor implements Runnable {
         if (blue < 253) {
             blue += 3;
             jLabel.setForeground(new Color(red, green, blue));
-            sleep();
+            sleep(ChangeColor.sleepChangeMS);
         } else {
             for (; blue > 0; blue--) {
                 jLabel.setForeground(new Color(red, green, blue));
-                sleep();
+                sleep(ChangeColor.sleepChangeMS);
             }
-        }
-    }
-
-
-    private void sleep()  {
-        try {
-            Thread.sleep(setting.getColorChangeSleepTimeMS());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
     }
 
