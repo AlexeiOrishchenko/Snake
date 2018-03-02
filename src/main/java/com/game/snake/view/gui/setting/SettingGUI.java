@@ -1,4 +1,4 @@
-package com.game.snake.gui;
+package com.game.snake.view.gui.setting;
 
 import com.game.snake.setting.Setting;
 
@@ -23,7 +23,7 @@ public final class SettingGUI extends JFrame implements Runnable {
     private final Container container = getContentPane();
     private final GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
-    SettingGUI() {
+    public SettingGUI() {
         setTitle(setting.getSettingGUIJFrameTitle());
         container.setLayout(new GridBagLayout());
         gridBagConstraints.fill = GridBagConstraints.BOTH;

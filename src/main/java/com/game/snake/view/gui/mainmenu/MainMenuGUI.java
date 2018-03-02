@@ -1,9 +1,12 @@
-package com.game.snake.gui;
+package com.game.snake.view.gui.mainmenu;
 
 import com.game.snake.graphics.ChangeColor;
 import com.game.snake.objects.room.Room;
 import com.game.snake.setting.Setting;
 
+import com.game.snake.view.gui.setting.SettingGUI;
+import com.game.snake.view.gui.exit.ExitGUI;
+import com.game.snake.view.gui.info.InfoGUI;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;

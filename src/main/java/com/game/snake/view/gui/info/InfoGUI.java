@@ -1,4 +1,4 @@
-package com.game.snake.gui;
+package com.game.snake.view.gui.info;
 
 import lombok.Getter;
 import lombok.Setter;

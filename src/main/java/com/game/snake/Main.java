@@ -1,6 +1,6 @@
 package com.game.snake;
 
-import com.game.snake.gui.MainMenuGUI;
+import com.game.snake.view.gui.mainmenu.MainMenuGUI;
 
 /**
  * @author Koliadin Nikita
