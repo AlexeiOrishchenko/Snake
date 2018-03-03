@@ -14,7 +14,7 @@ import java.awt.event.KeyListener;
  */
 public final class ExitGUI implements Runnable {
 
-    private static volatile ExitGUI exitGUI;
+    private static volatile ExitGUI instance;
 
     private final JFrame jFrame;
 
@@ -23,22 +23,23 @@ public final class ExitGUI implements Runnable {
     @Getter private boolean initialized = false;
 
     @Getter @Setter private String resourceName = String.valueOf("/ExitPicture.jpg");
-    @Getter @Setter private String exitGUITitle = String.valueOf("Snake - EXIT");
-    @Getter @Setter private long sleepTimeMS = 10000L;
+    @Getter @Setter private String titleName = String.valueOf("Snake - EXIT");
+
+    @Getter @Setter private long sleepTimeToExitMS = 10000L;
 
     private ExitGUI() {
         jFrame = new JFrame();
     }
 
     public static ExitGUI getInstance() {
-        if (ExitGUI.exitGUI == null) {
+        if (ExitGUI.instance == null) {
             synchronized (ExitGUI.class) {
-                if (ExitGUI.exitGUI == null) {
-                    ExitGUI.exitGUI = new ExitGUI();
+                if (ExitGUI.instance == null) {
+                    ExitGUI.instance = new ExitGUI();
                 }
             }
         }
-        return ExitGUI.exitGUI;
+        return ExitGUI.instance;
     }
 
     public void onVisible() {
@@ -65,7 +66,7 @@ public final class ExitGUI implements Runnable {
     }
 
     private void initJFrame() {
-        jFrame.setTitle(exitGUITitle);
+        jFrame.setTitle(titleName);
         jFrame.setResizable(false);
         jFrame.setDefaultCloseOperation(jFrame.EXIT_ON_CLOSE);
         jFrame.pack();
@@ -98,7 +99,7 @@ public final class ExitGUI implements Runnable {
 
     private void sleep() {
         try {
-            Thread.sleep(sleepTimeMS);
+            Thread.sleep(sleepTimeToExitMS);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
