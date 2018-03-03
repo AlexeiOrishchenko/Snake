@@ -17,12 +17,12 @@ import java.util.concurrent.Executors;
  */
 public class ButtonExit implements MainMenuComponent {
 
-    private final JButton jButtonExit = new JButton();
+    private final JFrame jFrame;
+
+    private final JButton buttonExit = new JButton();
 
     private final Container container;
     private final GridBagConstraints gridBagConstraints;
-
-    private final JFrame jFrame;
 
     @Getter @Setter private String text = String.valueOf("EXIT");
 
@@ -36,14 +36,14 @@ public class ButtonExit implements MainMenuComponent {
 
     @Override
     public void init() {
-        jButtonExit.setText(text);
+        buttonExit.setText(text);
         gridBagConstraints.gridy++;
-        container.add(jButtonExit, gridBagConstraints);
+        container.add(buttonExit, gridBagConstraints);
     }
 
     @Override
     public void setAction() {
-        jButtonExit.addActionListener(e -> {
+        buttonExit.addActionListener(e -> {
             val exitGUI = ExitGUI.getInstance();
             if (!exitGUI.isInitialized()) {
                 jFrame.setVisible(false);

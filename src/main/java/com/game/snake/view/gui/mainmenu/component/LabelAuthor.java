@@ -17,7 +17,7 @@ import java.util.concurrent.Executors;
  */
 public class LabelAuthor implements MainMenuComponent {
 
-    private final JLabel jLabelAuthor = new JLabel();
+    private final JLabel labelAuthor = new JLabel();
 
     private final Container container;
     private final GridBagConstraints gridBagConstraints;
@@ -32,16 +32,16 @@ public class LabelAuthor implements MainMenuComponent {
 
     @Override
     public void init() {
-        jLabelAuthor.setText(text);
+        labelAuthor.setText(text);
         gridBagConstraints.gridy++;
         gridBagConstraints.insets = new Insets(50, 60, 0, 0);
-        container.add(jLabelAuthor, gridBagConstraints);
+        container.add(labelAuthor, gridBagConstraints);
     }
 
     @Override
     public void setAction() {
         val executor = Executors.newSingleThreadExecutor();
-        executor.execute(new ChangeColor(jLabelAuthor));
+        executor.execute(new ChangeColor(labelAuthor));
         executor.shutdown();
     }
 }

@@ -17,7 +17,7 @@ import java.util.concurrent.Executors;
  */
 public class ButtonInfo implements MainMenuComponent {
 
-    private final JButton jButtonInfo = new JButton();
+    private final JButton buttonInfo = new JButton();
 
     private final Container container;
     private final GridBagConstraints gridBagConstraints;
@@ -32,14 +32,14 @@ public class ButtonInfo implements MainMenuComponent {
 
     @Override
     public void init() {
-        jButtonInfo.setText(text);
+        buttonInfo.setText(text);
         gridBagConstraints.gridy++;
-        container.add(jButtonInfo, gridBagConstraints);
+        container.add(buttonInfo, gridBagConstraints);
     }
 
     @Override
     public void setAction() {
-        jButtonInfo.addActionListener(e -> {
+        buttonInfo.addActionListener(e -> {
             val infoGUI = InfoGUI.getInstance();
             if (!infoGUI.isInitialized()) {
                 val executor = Executors.newSingleThreadExecutor();
