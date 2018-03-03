@@ -1,4 +1,4 @@
-package com.game.snake.objects.snake;
+package com.game.snake.model.objects.snake;
 
 import org.jetbrains.annotations.Contract;
 

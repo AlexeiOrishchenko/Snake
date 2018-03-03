@@ -1,4 +1,4 @@
-package com.game.snake.setting;
+package com.game.snake.model.setting;
 
 import lombok.Getter;
 import lombok.Setter;

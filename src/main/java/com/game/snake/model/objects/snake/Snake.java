@@ -1,8 +1,8 @@
-package com.game.snake.objects.snake;
+package com.game.snake.model.objects.snake;
 
-import com.game.snake.objects.mouse.Mouse;
-import com.game.snake.objects.room.Room;
-import com.game.snake.setting.Setting;
+import com.game.snake.model.objects.mouse.Mouse;
+import com.game.snake.model.objects.room.Room;
+import com.game.snake.model.setting.Setting;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;

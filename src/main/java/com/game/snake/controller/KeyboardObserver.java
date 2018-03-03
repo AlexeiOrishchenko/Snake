@@ -1,6 +1,6 @@
 package com.game.snake.controller;
 
-import com.game.snake.setting.Setting;
+import com.game.snake.model.setting.Setting;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;

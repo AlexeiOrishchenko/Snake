@@ -1,6 +1,6 @@
 package com.game.snake.view.graphics;
 
-import com.game.snake.setting.Setting;
+import com.game.snake.model.setting.Setting;
 
 import lombok.Getter;
 import lombok.NonNull;

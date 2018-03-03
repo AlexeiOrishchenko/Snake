@@ -1,8 +1,8 @@
 package com.game.snake.view.graphics;
 
-import com.game.snake.setting.Setting;
-import com.game.snake.objects.room.Room;
-import com.game.snake.objects.snake.SnakeSection;
+import com.game.snake.model.setting.Setting;
+import com.game.snake.model.objects.room.Room;
+import com.game.snake.model.objects.snake.SnakeSection;
 
 import org.jetbrains.annotations.NotNull;
 

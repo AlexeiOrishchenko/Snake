@@ -1,6 +1,6 @@
 package com.game.snake.view.gui.mainmenu.component;
 
-import com.game.snake.objects.room.Room;
+import com.game.snake.model.objects.room.Room;
 import com.game.snake.view.graphics.ChangeColor;
 
 import lombok.Getter;

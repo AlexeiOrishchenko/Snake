@@ -1,13 +1,13 @@
-package com.game.snake.objects.room;
+package com.game.snake.model.objects.room;
 
 import com.game.snake.controller.KeyboardObserver;
+import com.game.snake.model.objects.mouse.Mouse;
 import com.game.snake.view.graphics.ChangeColor;
 import com.game.snake.view.graphics.Layer;
-import com.game.snake.objects.mouse.Mouse;
-import com.game.snake.objects.snake.Snake;
-import com.game.snake.objects.snake.SnakeDirection;
-import com.game.snake.objects.snake.SnakeSection;
-import com.game.snake.setting.Setting;
+import com.game.snake.model.objects.snake.Snake;
+import com.game.snake.model.objects.snake.SnakeDirection;
+import com.game.snake.model.objects.snake.SnakeSection;
+import com.game.snake.model.setting.Setting;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,4 +1,4 @@
-package com.game.snake.objects.mouse;
+package com.game.snake.model.objects.mouse;
 
 import org.jetbrains.annotations.Contract;
 
