@@ -3,11 +3,14 @@ package com.game.snake.view.gui.setting;
 import com.game.snake.setting.Setting;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +22,7 @@ import java.util.List;
  */
 public final class SettingGUI implements Runnable {
 
-    private static volatile SettingGUI settingGUI;
+    private static volatile SettingGUI instance;
 
     private final JFrame jFrame = new JFrame();
 
@@ -28,23 +31,27 @@ public final class SettingGUI implements Runnable {
     private final Container container = jFrame.getContentPane();
     private final GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
+    @Getter @Setter private String titleName = String.valueOf("Snake - SETTING");
+
+    @Getter @Setter private int minWidth = 550;
+    @Getter @Setter private int minHeight = 300;
+
     @Getter private boolean initialized = false;
 
     private SettingGUI() {
-        jFrame.setTitle(setting.getSettingGUIJFrameTitle());
         container.setLayout(new GridBagLayout());
         gridBagConstraints.fill = GridBagConstraints.BOTH;
     }
 
     public static SettingGUI getInstance() {
-        if (SettingGUI.settingGUI == null) {
+        if (SettingGUI.instance == null) {
             synchronized (SettingGUI.class) {
-                if (SettingGUI.settingGUI == null) {
-                    SettingGUI.settingGUI = new SettingGUI();
+                if (SettingGUI.instance == null) {
+                    SettingGUI.instance = new SettingGUI();
                 }
             }
         }
-        return SettingGUI.settingGUI;
+        return SettingGUI.instance;
     }
 
     public void onVisible() {
@@ -89,11 +96,43 @@ public final class SettingGUI implements Runnable {
     }
 
     private void initJFrame() {
-        jFrame.setPreferredSize(new Dimension(setting.getSettingGUIWidth(), setting.getSettingGUIHeight()));
+        jFrame.setTitle(titleName);
+        setJFrameSize();
         jFrame.pack();
         jFrame.setLocationRelativeTo(null); /* Set the center of the screen */
+        setJFrameKeyEvent();
         jFrame.setVisible(true);
         initialized = true;
+    }
+
+    private void setJFrameSize() {
+        jFrame.setMinimumSize(new Dimension(
+                minWidth,
+                minHeight
+        ));
+    }
+
+    private void setJFrameKeyEvent() {
+        jFrame.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(final KeyEvent e) {
+                /* Do nothing */
+            }
+
+            @Override
+            public void keyPressed(final KeyEvent e) {
+                if (e.getKeyChar() == KeyEvent.VK_ESCAPE) {
+                    jFrame.setVisible(false);
+                } else if (e.getKeyChar() == KeyEvent.VK_ENTER) {
+                    // TODO: do enter setting
+                }
+            }
+
+            @Override
+            public void keyReleased(final KeyEvent e) {
+                /* Do nothing */
+            }
+        });
     }
 
     private interface SettingJComponent {
