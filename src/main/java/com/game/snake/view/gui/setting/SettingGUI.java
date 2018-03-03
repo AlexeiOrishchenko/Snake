@@ -2,8 +2,10 @@ package com.game.snake.view.gui.setting;
 
 import com.game.snake.setting.Setting;
 
+import com.game.snake.view.gui.setting.component.SettingComponent;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.val;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -60,17 +62,17 @@ public final class SettingGUI implements Runnable {
 
     @Override
     public void run() {
-        final List<SettingJComponent> settingJComponentList = loadSettingJComponentList();
+        val settingComponentList = loadSettingComponentList();
 
-        settingJComponentList.forEach(SettingJComponent::init);
+        settingComponentList.forEach(SettingComponent::init);
 
-        initJButtonEnter(settingJComponentList);
+        initJButtonEnter(settingComponentList);
 
         initJFrame();
     }
 
     @NotNull
-    private List<SettingJComponent> loadSettingJComponentList() {
+    private List<SettingComponent> loadSettingComponentList() {
         return new ArrayList<>(Arrays.asList(
                 new ColorHead(),
                 new ColorSnake(),
@@ -84,13 +86,13 @@ public final class SettingGUI implements Runnable {
         ));
     }
 
-    private void initJButtonEnter(final List<SettingJComponent> settingJComponentList) {
-        final JButton jButtonEnter = new JButton("Enter");
+    private void initJButtonEnter(final List<SettingComponent> settingComponentList) {
+        val buttonEnter = new JButton("Enter");
 
-        setJComponentPlace(jButtonEnter);
+        setJComponentPlace(buttonEnter);
 
-        jButtonEnter.addActionListener(e -> {
-            settingJComponentList.forEach(SettingJComponent::update);
+        buttonEnter.addActionListener(e -> {
+            settingComponentList.forEach(SettingComponent::update);
             jFrame.setVisible(false);
         });
     }
@@ -112,7 +114,7 @@ public final class SettingGUI implements Runnable {
         ));
     }
 
-    private void setJFrameKeyEvent() {
+    private void setJFrameKeyEvent() { // FIXME: DON'T WORK
         jFrame.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(final KeyEvent e) {
@@ -135,26 +137,26 @@ public final class SettingGUI implements Runnable {
         });
     }
 
-    private interface SettingJComponent {
+//    private interface SettingJComponent {
+//
+//        /**
+//         * This method must implement the initialization of the component,
+//         * giving it a name and a position.
+//         *
+//         * This method should be called when all components are in
+//         * the initialization process.
+//         */
+//        void init();
+//
+//        /**
+//         * This method should implement updating settings from each component.
+//         *
+//         * This method should be called when the Enter button is pressed.
+//         */
+//        void update();
+//    }
 
-        /**
-         * This method must implement the initialization of the component,
-         * giving it a name and a position.
-         *
-         * This method should be called when all components are in
-         * the initialization process.
-         */
-        void init();
-
-        /**
-         * This method should implement updating settings from each component.
-         *
-         * This method should be called when the Enter button is pressed.
-         */
-        void update();
-    }
-
-    private class ColorHead implements SettingJComponent {
+    private class ColorHead implements SettingComponent {
 
         private final List<JRadioButton> colorHeadForSelectList = createColorList();
 
@@ -185,7 +187,7 @@ public final class SettingGUI implements Runnable {
         }
     }
 
-    private class ColorSnake implements SettingJComponent {
+    private class ColorSnake implements SettingComponent {
 
         private final List<JRadioButton> colorSnakeForSelectList = createColorList();
 
@@ -216,7 +218,7 @@ public final class SettingGUI implements Runnable {
         }
     }
 
-    private class ColorMouse implements SettingJComponent {
+    private class ColorMouse implements SettingComponent {
 
         private final List<JRadioButton> colorMouseForSelectList = createColorList();
 
@@ -247,7 +249,7 @@ public final class SettingGUI implements Runnable {
         }
     }
 
-    private class ColorFace implements SettingJComponent {
+    private class ColorFace implements SettingComponent {
 
         private final List<JRadioButton> colorFaceForSelectList = createColorList();
 
@@ -278,7 +280,7 @@ public final class SettingGUI implements Runnable {
         }
     }
 
-    private class MainMenuFullScreen implements SettingJComponent {
+    private class MainMenuFullScreen implements SettingComponent {
 
         private final List<JRadioButton> mainMenuFullScreenForSelectList = createTrueFalseList();
 
@@ -303,7 +305,7 @@ public final class SettingGUI implements Runnable {
         }
     }
 
-    private class ChangeColor implements SettingJComponent {
+    private class ChangeColor implements SettingComponent {
 
         private final List<JRadioButton> changeColorForSelectList = createTrueFalseList();
 
@@ -328,7 +330,7 @@ public final class SettingGUI implements Runnable {
         }
     }
 
-    private class SizeOfGame implements SettingJComponent {
+    private class SizeOfGame implements SettingComponent {
 
         private final List<JRadioButton> sizeOfGameForSelectList = new ArrayList<>(Arrays.asList(
                 new JRadioButton("10"),
@@ -357,7 +359,7 @@ public final class SettingGUI implements Runnable {
         }
     }
 
-    private class RoomWidth implements SettingJComponent {
+    private class RoomWidth implements SettingComponent {
 
         private final List<JRadioButton> roomWidthForSelectList = createSizeList();
 
@@ -382,7 +384,7 @@ public final class SettingGUI implements Runnable {
         }
     }
 
-    private class RoomHeight implements SettingJComponent {
+    private class RoomHeight implements SettingComponent {
 
         private final List<JRadioButton> roomHeightForSelectList = createSizeList();
 
