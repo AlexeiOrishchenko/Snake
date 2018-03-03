@@ -68,6 +68,7 @@ public final class InfoGUI implements Runnable {
         jFrame.pack();
         jFrame.setLocationRelativeTo(null); /* The center of the screen */
         setJFrameKeyEvent();
+        jFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         jFrame.setVisible(true);
         initialized = true;
     }

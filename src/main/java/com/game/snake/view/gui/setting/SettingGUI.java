@@ -92,6 +92,7 @@ public final class SettingGUI implements Runnable {
         jFrame.pack();
         jFrame.setLocationRelativeTo(null); /* Set the center of the screen */
         setJFrameKeyEvent();
+        jFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         jFrame.setVisible(true);
         initialized = true;
     }
