@@ -15,30 +15,30 @@ import java.awt.event.KeyListener;
  */
 public final class InfoGUI implements Runnable {
 
-    private static volatile InfoGUI infoGUI;
+    private static volatile InfoGUI instance;
 
     private final JFrame jFrame;
 
     private JLabel labelWithIcon;
 
-    @Getter private boolean initialized = false;
-
     @Getter @Setter private String resourceName = String.valueOf("/InfoPicture.png");
-    @Getter @Setter private String infoGUITitle = String.valueOf("Snake - INFO");
+    @Getter @Setter private String titleName = String.valueOf("Snake - INFO");
+
+    @Getter private boolean initialized = false;
 
     private InfoGUI() {
         jFrame = new JFrame();
     }
 
     public static InfoGUI getInstance() {
-        if (InfoGUI.infoGUI == null) {
+        if (InfoGUI.instance == null) {
             synchronized (InfoGUI.class) {
-                if (InfoGUI.infoGUI == null) {
-                    InfoGUI.infoGUI = new InfoGUI();
+                if (InfoGUI.instance == null) {
+                    InfoGUI.instance = new InfoGUI();
                 }
             }
         }
-        return InfoGUI.infoGUI;
+        return InfoGUI.instance;
     }
 
     public void onVisible() {
@@ -63,7 +63,7 @@ public final class InfoGUI implements Runnable {
     }
 
     private void initJFrame() {
-        jFrame.setTitle(infoGUITitle);
+        jFrame.setTitle(titleName);
         setJFrameSize();
         jFrame.pack();
         jFrame.setLocationRelativeTo(null); /* The center of the screen */
