@@ -25,9 +25,6 @@ public class Setting {
     private String sizeListValue4 = "40";
     private String sizeListValue5 = "50";
 
-    private int settingGUIWidth = 550;
-    private int settingGUIHeight = 300;
-
     private int sizeOfGame = 15;
 
     private int roomWidth = 20;
@@ -150,22 +147,6 @@ public class Setting {
 
     public void setSizeListValue5(String sizeListValue5) {
         this.sizeListValue5 = sizeListValue5;
-    }
-
-    public int getSettingGUIWidth() {
-        return settingGUIWidth;
-    }
-
-    public void setSettingGUIWidth(int settingGUIWidth) {
-        this.settingGUIWidth = settingGUIWidth;
-    }
-
-    public int getSettingGUIHeight() {
-        return settingGUIHeight;
-    }
-
-    public void setSettingGUIHeight(int settingGUIHeight) {
-        this.settingGUIHeight = settingGUIHeight;
     }
 
     public int getSizeOfGame() {
