@@ -31,8 +31,8 @@ public class MainMenuGUI implements Runnable {
     @Getter @Setter private ButtonExit buttonExit = new ButtonExit(container, gridBagConstraints, jFrame);
     @Getter @Setter private LabelAuthor labelAuthor =  new LabelAuthor(container, gridBagConstraints);
 
-    @Getter @Setter private int mainMenuMinWidth = 350;
-    @Getter @Setter private int mainMenuMinHeight = 350;
+    @Getter @Setter private int minWidth = 350;
+    @Getter @Setter private int minHeight = 350;
 
     public MainMenuGUI() {
         container.setLayout(new GridBagLayout());
@@ -41,18 +41,18 @@ public class MainMenuGUI implements Runnable {
 
     @Override
     public void run() {
-        val mainMenuComponentList = loadMainMenuComponentList();
+        val componentList = loadComponentList();
 
-        mainMenuComponentList.forEach(mainMenuComponent -> {
-            mainMenuComponent.init();
-            mainMenuComponent.setAction();
+        componentList.forEach(component -> {
+            component.init();
+            component.setAction();
         });
 
         initJFrame();
     }
 
     @NotNull
-    private List<MainMenuComponent> loadMainMenuComponentList() {
+    private List<MainMenuComponent> loadComponentList() {
         return new ArrayList<>(Arrays.asList(
                 labelWelcome,
                 buttonPlay,
@@ -74,8 +74,8 @@ public class MainMenuGUI implements Runnable {
 
     private void setJFrameSize() {
         jFrame.setMinimumSize(new Dimension(
-                mainMenuMinWidth,
-                mainMenuMinHeight
+                minWidth,
+                minHeight
         ));
         jFrame.setExtendedState(Frame.MAXIMIZED_BOTH);
     }
