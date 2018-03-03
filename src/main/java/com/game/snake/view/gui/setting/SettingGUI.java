@@ -37,14 +37,14 @@ public final class SettingGUI implements Runnable {
     }
 
     public static SettingGUI getInstance() {
-        if (settingGUI == null) {
+        if (SettingGUI.settingGUI == null) {
             synchronized (SettingGUI.class) {
-                if (settingGUI == null) {
-                    settingGUI = new SettingGUI();
+                if (SettingGUI.settingGUI == null) {
+                    SettingGUI.settingGUI = new SettingGUI();
                 }
             }
         }
-        return settingGUI;
+        return SettingGUI.settingGUI;
     }
 
     public void onVisible() {
