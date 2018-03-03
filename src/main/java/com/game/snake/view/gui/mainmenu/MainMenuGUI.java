@@ -43,18 +43,18 @@ public class MainMenuGUI implements Runnable {
 
     @Override
     public void run() {
-        val componentList = loadComponentList();
+        val mainMenuComponentList = loadMainMenuComponentList();
 
-        componentList.forEach(component -> {
-            component.init();
-            component.setAction();
+        mainMenuComponentList.forEach(mainMenuComponent -> {
+            mainMenuComponent.init();
+            mainMenuComponent.setAction();
         });
 
         initJFrame();
     }
 
     @NotNull
-    private List<MainMenuComponent> loadComponentList() {
+    private List<MainMenuComponent> loadMainMenuComponentList() {
         return new ArrayList<>(Arrays.asList(
                 labelWelcome,
                 buttonPlay,

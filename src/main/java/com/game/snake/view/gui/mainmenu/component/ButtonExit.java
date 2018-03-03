@@ -19,7 +19,7 @@ public class ButtonExit implements MainMenuComponent {
 
     private final JFrame jFrame;
 
-    private final JButton buttonExit = new JButton();
+    private final JButton jButtonExit = new JButton();
 
     private final Container container;
     private final GridBagConstraints gridBagConstraints;
@@ -36,14 +36,14 @@ public class ButtonExit implements MainMenuComponent {
 
     @Override
     public void init() {
-        buttonExit.setText(text);
+        jButtonExit.setText(text);
         gridBagConstraints.gridy++;
-        container.add(buttonExit, gridBagConstraints);
+        container.add(jButtonExit, gridBagConstraints);
     }
 
     @Override
     public void setAction() {
-        buttonExit.addActionListener(e -> {
+        jButtonExit.addActionListener(e -> {
             val exitGUI = ExitGUI.getInstance();
             if (!exitGUI.isInitialized()) {
                 jFrame.setVisible(false);

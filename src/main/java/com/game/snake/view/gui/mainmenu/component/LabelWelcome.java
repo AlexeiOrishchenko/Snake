@@ -17,7 +17,7 @@ import java.util.concurrent.Executors;
  */
 public class LabelWelcome implements MainMenuComponent{
 
-    private final JLabel labelWelcome = new JLabel();
+    private final JLabel jLabelWelcome = new JLabel();
 
     private final Container container;
     private final GridBagConstraints gridBagConstraints;
@@ -32,16 +32,16 @@ public class LabelWelcome implements MainMenuComponent{
 
     @Override
     public void init() {
-        labelWelcome.setText(text);
+        jLabelWelcome.setText(text);
         gridBagConstraints.gridy++;
         gridBagConstraints.insets = new Insets(0, 0, 50, 0);
-        container.add(labelWelcome, gridBagConstraints);
+        container.add(jLabelWelcome, gridBagConstraints);
     }
 
     @Override
     public void setAction() {
         val executor = Executors.newSingleThreadExecutor();
-        executor.execute(new ChangeColor(labelWelcome));
+        executor.execute(new ChangeColor(jLabelWelcome));
         executor.shutdown();
     }
 }

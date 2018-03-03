@@ -18,7 +18,7 @@ public final class ExitGUI implements Runnable {
 
     private final JFrame jFrame;
 
-    private JLabel labelWithIcon;
+    private JLabel jLabelWithIcon;
 
     @Getter @Setter private String resourceName = String.valueOf("/ExitPicture.jpg");
     @Getter @Setter private String titleName = String.valueOf("Snake - EXIT");
@@ -56,12 +56,12 @@ public final class ExitGUI implements Runnable {
 
     private void initJLabel() {
         loadResource();
-        jFrame.getContentPane().add(labelWithIcon);
+        jFrame.getContentPane().add(jLabelWithIcon);
     }
 
     private void loadResource() {
-        if (labelWithIcon == null) {
-            labelWithIcon = new JLabel(new ImageIcon(getClass().getResource(resourceName)));
+        if (jLabelWithIcon == null) {
+            jLabelWithIcon = new JLabel(new ImageIcon(getClass().getResource(resourceName)));
         }
     }
 

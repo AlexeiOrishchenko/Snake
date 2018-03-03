@@ -13,7 +13,7 @@ public interface MainMenuComponent {
     void init();
 
     /**
-     * This method must implement the action of each button.
+     * This method must implement the action of each component.
      */
     void setAction();
 }

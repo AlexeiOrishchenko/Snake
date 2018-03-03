@@ -20,7 +20,7 @@ public class ButtonPlay implements MainMenuComponent {
 
     private final JFrame jFrame;
 
-    private final JButton buttonPlay = new JButton();
+    private final JButton jButtonPlay = new JButton();
 
     private final Container container;
     private final GridBagConstraints gridBagConstraints;
@@ -37,15 +37,15 @@ public class ButtonPlay implements MainMenuComponent {
 
     @Override
     public void init() {
-        buttonPlay.setText(text);
+        jButtonPlay.setText(text);
         gridBagConstraints.gridy++;
         gridBagConstraints.insets = new Insets(10, 0, 0, 0);
-        container.add(buttonPlay, gridBagConstraints);
+        container.add(jButtonPlay, gridBagConstraints);
     }
 
     @Override
     public void setAction() {
-        buttonPlay.addActionListener(e -> {
+        jButtonPlay.addActionListener(e -> {
             jFrame.setVisible(false);
             ChangeColor.setMainMenuWaitThread(true);
             Room.room = new Room(jFrame);

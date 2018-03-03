@@ -19,7 +19,7 @@ public final class InfoGUI implements Runnable {
 
     private final JFrame jFrame;
 
-    private JLabel labelWithIcon;
+    private JLabel jLabelWithIcon;
 
     @Getter @Setter private String resourceName = String.valueOf("/InfoPicture.png");
     @Getter @Setter private String titleName = String.valueOf("Snake - INFO");
@@ -53,12 +53,12 @@ public final class InfoGUI implements Runnable {
 
     private void initJLabel() {
         loadResource();
-        jFrame.getContentPane().add(labelWithIcon);
+        jFrame.getContentPane().add(jLabelWithIcon);
     }
 
     private void loadResource() {
-        if (labelWithIcon == null) {
-            labelWithIcon = new JLabel(new ImageIcon(getClass().getResource(resourceName)));
+        if (jLabelWithIcon == null) {
+            jLabelWithIcon = new JLabel(new ImageIcon(getClass().getResource(resourceName)));
         }
     }
 
@@ -73,8 +73,8 @@ public final class InfoGUI implements Runnable {
     }
 
     private void setJFrameSize() {
-        val iconWidth = labelWithIcon.getIcon().getIconWidth();
-        val iconHeight = labelWithIcon.getIcon().getIconHeight();
+        val iconWidth = jLabelWithIcon.getIcon().getIconWidth();
+        val iconHeight = jLabelWithIcon.getIcon().getIconHeight();
 
         jFrame.setPreferredSize(new Dimension(
                 iconWidth,
