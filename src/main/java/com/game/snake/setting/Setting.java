@@ -11,7 +11,6 @@ public class Setting {
     private static volatile Setting ourInstance;
 
     private String playJFrameTitle = "Snake - PLAY"; // FIXME: 04.02.2018
-    private String settingGUIJFrameTitle = "Snake - SETTING";
 
     private String color1 = "RED";
     private String color2 = "GREEN";
@@ -63,14 +62,6 @@ public class Setting {
 
     public void setPlayJFrameTitle(String playJFrameTitle) {
         this.playJFrameTitle = playJFrameTitle;
-    }
-
-    public String getSettingGUIJFrameTitle() {
-        return settingGUIJFrameTitle;
-    }
-
-    public void setSettingGUIJFrameTitle(String settingGUIJFrameTitle) {
-        this.settingGUIJFrameTitle = settingGUIJFrameTitle;
     }
 
     public String getColor1() {
