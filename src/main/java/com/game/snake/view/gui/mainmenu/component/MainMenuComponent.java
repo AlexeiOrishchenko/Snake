@@ -1,4 +1,4 @@
-package com.game.snake.view.gui.mainmenu.components;
+package com.game.snake.view.gui.mainmenu.component;
 
 /**
  * @author Koliadin Nikita

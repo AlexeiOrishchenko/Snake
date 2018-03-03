@@ -1,4 +1,4 @@
-package com.game.snake.view.gui.mainmenu.components;
+package com.game.snake.view.gui.mainmenu.component;
 
 import com.game.snake.view.gui.exit.ExitGUI;
 

@@ -1,6 +1,6 @@
 package com.game.snake.view.gui.mainmenu;
 
-import com.game.snake.view.gui.mainmenu.components.*;
+import com.game.snake.view.gui.mainmenu.component.*;
 
 import lombok.Getter;
 import lombok.Setter;
