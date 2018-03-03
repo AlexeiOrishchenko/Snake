@@ -85,7 +85,7 @@ public final class ExitGUI implements Runnable {
             @Override
             public void keyPressed(final KeyEvent e) {
                 if (e.getKeyChar() == KeyEvent.VK_ESCAPE) {
-                    jFrame.setVisible(false);
+                    jFrame.dispose();
                     exit();
                 }
             }

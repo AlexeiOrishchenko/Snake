@@ -128,7 +128,7 @@ public class Room implements Runnable {
     }
 
     private void gameOver() {
-        keyboardObserver.setVisible(false);
+        keyboardObserver.dispose();
         ChangeColor.setMainMenuWaitThread(false);
         jFrame.setVisible(true);
     }

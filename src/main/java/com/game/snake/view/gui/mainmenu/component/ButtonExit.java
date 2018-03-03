@@ -46,7 +46,7 @@ public class ButtonExit implements MainMenuComponent {
         jButtonExit.addActionListener(e -> {
             val exitGUI = ExitGUI.getInstance();
             if (!exitGUI.isInitialized()) {
-                jFrame.setVisible(false);
+                jFrame.dispose();
                 val executor = Executors.newSingleThreadExecutor();
                 executor.execute(exitGUI);
                 executor.shutdown();

@@ -46,7 +46,7 @@ public class ButtonPlay implements MainMenuComponent {
     @Override
     public void setAction() {
         jButtonPlay.addActionListener(e -> {
-            jFrame.setVisible(false);
+            jFrame.dispose();
             ChangeColor.setMainMenuWaitThread(true);
             Room.room = new Room(jFrame);
             val executor = Executors.newSingleThreadExecutor();

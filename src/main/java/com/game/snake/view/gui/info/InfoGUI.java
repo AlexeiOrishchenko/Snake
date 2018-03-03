@@ -96,7 +96,7 @@ public final class InfoGUI implements Runnable {
             @Override
             public void keyPressed(final KeyEvent e) {
                 if (e.getKeyChar() == KeyEvent.VK_ESCAPE) {
-                    jFrame.setVisible(false);
+                    jFrame.dispose();
                 }
             }
 
