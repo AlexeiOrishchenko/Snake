@@ -17,19 +17,21 @@ import java.util.List;
  * @author Koliadin Nikita
  * @version 1.13
  */
-public final class SettingGUI extends JFrame implements Runnable {
+public final class SettingGUI implements Runnable {
 
     private static volatile SettingGUI settingGUI;
 
+    private final JFrame jFrame = new JFrame();
+
     private final Setting setting = Setting.getInstance();
 
-    private final Container container = getContentPane();
+    private final Container container = jFrame.getContentPane();
     private final GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
     @Getter private boolean initialized = false;
 
     private SettingGUI() {
-        setTitle(setting.getSettingGUIJFrameTitle());
+        jFrame.setTitle(setting.getSettingGUIJFrameTitle());
         container.setLayout(new GridBagLayout());
         gridBagConstraints.fill = GridBagConstraints.BOTH;
     }
@@ -46,7 +48,7 @@ public final class SettingGUI extends JFrame implements Runnable {
     }
 
     public void onVisible() {
-        setVisible(true);
+        jFrame.setVisible(true);
     }
 
     @Override
@@ -82,15 +84,15 @@ public final class SettingGUI extends JFrame implements Runnable {
 
         jButtonEnter.addActionListener(e -> {
             settingJComponentList.forEach(SettingJComponent::update);
-            setVisible(false);
+            jFrame.setVisible(false);
         });
     }
 
     private void initJFrame() {
-        setPreferredSize(new Dimension(setting.getSettingGUIWidth(), setting.getSettingGUIHeight()));
-        pack();
-        setLocationRelativeTo(null); /* Set the center of the screen */
-        setVisible(true);
+        jFrame.setPreferredSize(new Dimension(setting.getSettingGUIWidth(), setting.getSettingGUIHeight()));
+        jFrame.pack();
+        jFrame.setLocationRelativeTo(null); /* Set the center of the screen */
+        jFrame.setVisible(true);
         initialized = true;
     }
 
