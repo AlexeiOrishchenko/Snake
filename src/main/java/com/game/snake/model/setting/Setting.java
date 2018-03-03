@@ -13,8 +13,6 @@ public class Setting {
 
     private static volatile Setting ourInstance;
 
-    @Getter @Setter private String playJFrameTitle = "Snake - PLAY"; // FIXME: 04.02.2018
-
     @Getter @Setter private String color1 = "RED";
     @Getter @Setter private String color2 = "GREEN";
     @Getter @Setter private String color3 = "BLUE";

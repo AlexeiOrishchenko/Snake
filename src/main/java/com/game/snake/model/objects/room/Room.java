@@ -128,7 +128,7 @@ public class Room implements Runnable {
     }
 
     private void gameOver() {
-        keyboardObserver.dispose();
+        keyboardObserver.offVisible();
         ChangeColor.setMainMenuWaitThread(false);
         jFrame.setVisible(true);
     }
@@ -144,8 +144,8 @@ public class Room implements Runnable {
 
     private void print() {
         if (keyboardObserver != null) {
-            keyboardObserver.setContentPane(new Layer());
-            keyboardObserver.setVisible(true);
+            keyboardObserver.getJFrame().setContentPane(new Layer());
+            keyboardObserver.onVisible();
         }
     }
 
