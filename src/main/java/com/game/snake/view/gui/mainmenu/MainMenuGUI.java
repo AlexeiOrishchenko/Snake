@@ -31,6 +31,8 @@ public class MainMenuGUI implements Runnable {
     @Getter @Setter private ButtonExit buttonExit = new ButtonExit(container, gridBagConstraints, jFrame);
     @Getter @Setter private LabelAuthor labelAuthor =  new LabelAuthor(container, gridBagConstraints);
 
+    @Getter @Setter private String titleName = String.valueOf("Snake - MAIN MENU");
+
     @Getter @Setter private int minWidth = 350;
     @Getter @Setter private int minHeight = 350;
 
@@ -64,7 +66,7 @@ public class MainMenuGUI implements Runnable {
     }
 
     private void initJFrame() {
-        jFrame.setTitle("Snake - MAIN MENU");
+        jFrame.setTitle(titleName);
         setJFrameSize();
         jFrame.setDefaultCloseOperation(jFrame.EXIT_ON_CLOSE);
         jFrame.pack();
