@@ -23,7 +23,7 @@ import java.util.concurrent.Executors;
  */
 public class Room implements Runnable {
 
-    public static Room room; // FIXME: do non Static in future
+    @Getter @Setter private static Room room; 
 
     private final Setting setting = Setting.getInstance();
 

@@ -91,10 +91,10 @@ public final class Snake {
     }
 
     private void checkEatMouse(@NonNull final SnakeSection head) {
-        val mouse = Room.room.getMouse();
+        val mouse = Room.getRoom().getMouse();
 
         if (head.getX() == mouse.getX() && head.getY() == mouse.getY()) {
-            Room.room.eatMouse();
+            Room.getRoom().eatMouse();
         } else {
             sections.remove(sections.size() - 1);
         }

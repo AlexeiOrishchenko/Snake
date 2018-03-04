@@ -19,6 +19,7 @@ import java.util.stream.IntStream;
 public class Layer extends JPanel {
 
     private final Setting setting = Setting.getInstance();
+    private final Room room = Room.getRoom();
 
     private final int size = setting.getSizeOfGame();
     private final int width = setting.getRoomWidth() + 2;
@@ -45,8 +46,8 @@ public class Layer extends JPanel {
     private void printMouse(@NotNull final Graphics g) {
         g.setColor(setting.getColorMouse());
         g.fillRect(
-                Room.room.getMouse().getX() * size,
-                Room.room.getMouse().getY() * size,
+                room.getMouse().getX() * size,
+                room.getMouse().getY() * size,
                 size,
                 size
         );
@@ -55,15 +56,15 @@ public class Layer extends JPanel {
     private void printHead(@NotNull final Graphics g) {
         g.setColor(setting.getColorHead());
         g.fillRect(
-                Room.room.getSnake().getHeadX() * size,
-                Room.room.getSnake().getHeadY() * size,
+                room.getSnake().getHeadX() * size,
+                room.getSnake().getHeadY() * size,
                 size,
                 size
         );
     }
 
     private void printSnake(@NotNull final Graphics g) {
-        final List<SnakeSection> snakeSection = Room.room.getSnake().getSections();
+        final List<SnakeSection> snakeSection = room.getSnake().getSections();
 
         g.setColor(setting.getColorSnake());
         IntStream.range(1, snakeSection.size())
