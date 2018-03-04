@@ -24,7 +24,7 @@ public class Layer extends JPanel {
     private final int height = setting.getRoomHeight() + 2;
 
     @Override
-    public void paintComponent(final Graphics g) {
+    public void paintComponent(@NonNull final Graphics g) {
         super.paintComponent(g);
 
         printFace(g);
