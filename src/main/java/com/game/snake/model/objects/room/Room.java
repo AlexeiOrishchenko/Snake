@@ -10,8 +10,9 @@ import com.game.snake.model.objects.snake.SnakeSection;
 import com.game.snake.model.setting.Setting;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
-import org.jetbrains.annotations.NotNull;
+import lombok.val;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -27,9 +28,9 @@ public class Room implements Runnable {
 
     private final Setting setting = Setting.getInstance();
 
-    private final JFrame jFrame;
+    private final JFrame jFrame; // FIXME: MainMenuGUI DO DEPENDENCY
 
-    private final PlayGUI playGUI = new PlayGUI();
+    private final PlayGUI playGUI = new PlayGUI(); // FIXME: DELETE DEPENDENCY
 
     @Getter @Setter private Snake snake;
     @Getter @Setter private Mouse mouse;
@@ -37,19 +38,23 @@ public class Room implements Runnable {
     @Getter @Setter private int width = setting.getRoomWidth(); //TODO: edit setting
     @Getter @Setter private int height = setting.getRoomHeight(); //TODO: edit setting
 
-    public Room(final JFrame jFrame) {
+    public Room(@NonNull final JFrame jFrame) {
         this.jFrame = jFrame;
         this.snake = new Snake();
         createMouse();
     }
 
+    public void eatMouse() {
+        createMouse();
+    }
+
     @Override
     public void run() {
-        Executors.newSingleThreadExecutor().execute(playGUI); // FIXME: shutdown
+        startKeyListener();
 
         while (snake.isAlive()) {
-            if (playGUI.hasKeyEvents()) {
-                final KeyEvent event = playGUI.getEventFromTop();
+            if (playGUI.hasKeyEvents()) { // FIXME: DELEGATE TO CONTROLLER
+                val event = playGUI.getEventFromTop();
 
                 checkPause(event);
 
@@ -67,14 +72,16 @@ public class Room implements Runnable {
         gameOver();
     }
 
-    public void eatMouse() {
-        createMouse();
+    private void startKeyListener() { // FIXME: DELEGATE TO CONTROLLER
+        val executor = Executors.newSingleThreadExecutor();
+        executor.execute(playGUI);
+        executor.shutdown();
     }
 
-    private void checkPause(@NotNull final KeyEvent event) {
+    private void checkPause(@NonNull final KeyEvent event) {
         if (event.getKeyChar() == 'p') {
             while (true) {
-                sleep(1000);
+                sleep();
                 if (playGUI.hasKeyEvents()) {
                     KeyEvent eventNew = playGUI.getEventFromTop();
                     if (eventNew.getKeyChar() == 'p') {
@@ -85,12 +92,12 @@ public class Room implements Runnable {
         }
     }
 
-    private boolean isExit(@NotNull final KeyEvent event) {
+    private boolean isExit(@NonNull final KeyEvent event) {
         return event.getKeyChar() == KeyEvent.VK_ESCAPE;
     }
 
-    private void checkDirection(@NotNull final KeyEvent event) {
-        final int i = event.getKeyCode();
+    private void checkDirection(@NonNull final KeyEvent event) {
+        val i = event.getKeyCode();
 
         if (i == KeyEvent.VK_LEFT) {
             if (snake.getDirection() != SnakeDirection.RIGHT) {
@@ -127,7 +134,24 @@ public class Room implements Runnable {
         }
     }
 
-    private void gameOver() {
+    private void print() { // FIXME: DELETE DEPENDENCY FROM JFRAME - DELEGATE TO CONTROLLER
+        if (playGUI != null) {
+            playGUI.getJFrame().setContentPane(new Layer());
+            playGUI.onVisible();
+        }
+    }
+
+    private void sleep() {
+        try {
+            val level = snake.getSections().size();
+            val delay = level <= 16 ? (300 - 10 * level - 1) : 150;
+            Thread.sleep(delay);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void gameOver() { // FIXME: DELEGATE TO CONTROLLER
         playGUI.offVisible();
         ChangeColor.setMainMenuWaitThread(false);
         jFrame.setVisible(true);
@@ -139,31 +163,6 @@ public class Room implements Runnable {
             if (snakeSection.getX() == mouse.getX() && snakeSection.getY() == mouse.getY()) {
                 createMouse();
             }
-        }
-    }
-
-    private void print() {
-        if (playGUI != null) {
-            playGUI.getJFrame().setContentPane(new Layer());
-            playGUI.onVisible();
-        }
-    }
-
-    private void sleep() {
-        try {
-            int level = snake.getSections().size();
-            int delay = level <= 16 ? (300 - 10 * level - 1) : 150;
-            Thread.sleep(delay);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void sleep(final long ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
     }
 }
