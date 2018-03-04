@@ -1,52 +1,32 @@
 package com.game.snake.model.objects.snake;
 
-import com.game.snake.model.objects.mouse.Mouse;
 import com.game.snake.model.objects.room.Room;
 import com.game.snake.model.setting.Setting;
 
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
+import lombok.val;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.10
+ * @version 1.13
  */
 public final class Snake {
 
-    private final Setting setting = Setting.getInstance();
+    @Getter private final List<SnakeSection> sections = new ArrayList<>();
 
-    private final List<SnakeSection> sections = new ArrayList<>();
+    @Getter @Setter private SnakeDirection direction;
 
-    private SnakeDirection direction;
-
-    private boolean isAlive;
+    @Getter private boolean alive;
 
     public Snake() {
         sections.add(new SnakeSection(1, 1));
         direction = SnakeDirection.DOWN;
-        isAlive = true;
-    }
-
-    @Contract(pure = true)
-    public boolean isAlive() {
-        return isAlive;
-    }
-
-    @Contract(pure = true)
-    public SnakeDirection getDirection() {
-        return direction;
-    }
-
-    public void setDirection(SnakeDirection direction) {
-        this.direction = direction;
-    }
-
-    @Contract(pure = true)
-    public List<SnakeSection> getSections() {
-        return sections;
+        alive = true;
     }
 
     public int getHeadX() {
@@ -58,7 +38,7 @@ public final class Snake {
     }
 
     public void move() {
-        if (!isAlive) {
+        if (!alive) {
             return;
         }
 
@@ -74,40 +54,45 @@ public final class Snake {
     }
 
     private void move(final int dx, final int dy) {
-        final SnakeSection head = new SnakeSection(getHeadX() + dx, getHeadY() + dy);
+        val head = new SnakeSection(getHeadX() + dx, getHeadY() + dy);
 
         checkBorders(head);
-        if (!isAlive) {
+        if (!alive) {
             return;
         }
 
         checkBody(head);
-        if (!isAlive) {
+        if (!alive) {
             return;
         }
 
         checkEatMouse(head);
     }
 
-    private void checkBorders(@NotNull final SnakeSection head) {
-        isAlive = (head.getX() >= 1 && head.getX() < setting.getRoomWidth() + 2)
-                && (head.getY() >= 1 && head.getY() < setting.getRoomHeight() + 2);
+    private void checkBorders(@NonNull final SnakeSection head) {
+        val headX = head.getX();
+        val headY = head.getY();
+
+        val setting = Setting.getInstance(); // FIXME: DELETE DEPENDENCY
+
+        alive = (headX >= 1 && headX < setting.getRoomWidth() + 2)
+                && (headY >= 1 && headY < setting.getRoomHeight() + 2);
     }
 
-    private void checkBody(@NotNull final SnakeSection head) {
+    private void checkBody(@NonNull final SnakeSection head) {
         if (sections.contains(head)) {
-            isAlive = false;
+            alive = false;
         }
     }
 
-    private void checkEatMouse(@NotNull final SnakeSection head) {
-        final Mouse mouse = Room.room.getMouse();
+    private void checkEatMouse(@NonNull final SnakeSection head) {
+        val mouse = Room.room.getMouse();
+
+        sections.add(0, head);
 
         if (head.getX() == mouse.getX() && head.getY() == mouse.getY()) {
-            sections.add(0, head);
             Room.room.eatMouse();
         } else {
-            sections.add(0, head);
             sections.remove(sections.size() - 1);
         }
     }
