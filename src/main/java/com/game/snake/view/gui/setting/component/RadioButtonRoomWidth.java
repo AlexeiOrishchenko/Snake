@@ -36,7 +36,7 @@ public class RadioButtonRoomWidth extends AbstractComponent {
 
     @Override
     public void update() {
-        setting.setRoomWidth(jRadioButtonRoomWidthList.stream()
+        setting.setRoomWidth(jRadioButtonRoomWidthList.stream() // FIXME: DELEGATE TO CONTROLLER
                 .filter(AbstractButton::isSelected)
                 .findFirst()
                 .map(JRadioButton::getText)
