@@ -66,6 +66,7 @@ public final class Snake {
             return;
         }
 
+        nextStep(head);
         checkEatMouse(head);
     }
 
@@ -85,10 +86,12 @@ public final class Snake {
         }
     }
 
+    private void nextStep(@NonNull final SnakeSection head) {
+        sections.add(0, head);
+    }
+
     private void checkEatMouse(@NonNull final SnakeSection head) {
         val mouse = Room.room.getMouse();
-
-        sections.add(0, head);
 
         if (head.getX() == mouse.getX() && head.getY() == mouse.getY()) {
             Room.room.eatMouse();
