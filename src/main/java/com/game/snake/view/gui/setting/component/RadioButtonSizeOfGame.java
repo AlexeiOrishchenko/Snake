@@ -42,7 +42,7 @@ public class RadioButtonSizeOfGame extends AbstractComponent {
 
     @Override
     public void update() {
-        setting.setSizeOfGame(sizeOfGameForSelectList.stream()
+        setting.setSizeOfGame(sizeOfGameForSelectList.stream() // FIXME: DELEGATE TO CONTROLLER
                 .filter(AbstractButton::isSelected)
                 .findFirst()
                 .map(JRadioButton::getText)
