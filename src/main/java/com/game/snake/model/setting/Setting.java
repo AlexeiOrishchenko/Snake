@@ -26,17 +26,17 @@ public class Setting {
     @Getter @Setter private String sizeListValue4 = "40";
     @Getter @Setter private String sizeListValue5 = "50";
 
-    @Getter @Setter private int sizeOfGame = 15;
+    @Getter @Setter private int sizeOfGame = 15; // FIXME: MOVE TO view PACKAGE
 
-    @Getter @Setter private int roomWidth = 20;
-    @Getter @Setter private int roomHeight = 20;
+    @Getter @Setter private int roomWidth = 20; // FIXME: MOVE TO Room
+    @Getter @Setter private int roomHeight = 20; // FIXME: MOVE TO Room
 
     @Getter @Setter private Color colorFace = Color.RED;
     @Getter @Setter private Color colorMouse = Color.GRAY;
     @Getter @Setter private Color colorSnake = Color.GREEN;
     @Getter @Setter private Color colorHead = Color.BLACK;
 
-    @Getter @Setter private boolean changeColor = true;
+    @Getter @Setter private boolean changeColor = true; // FIXME: MOVE TO ChangeColor
 
     private Setting() {
     }
