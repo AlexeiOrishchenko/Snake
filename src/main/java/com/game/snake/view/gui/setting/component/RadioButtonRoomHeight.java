@@ -36,7 +36,7 @@ public class RadioButtonRoomHeight extends AbstractComponent {
 
     @Override
     public void update() {
-        setting.setRoomHeight(jRadioButtonRoomHeightList.stream()
+        setting.setRoomHeight(jRadioButtonRoomHeightList.stream() // FIXME: DELEGATE TO CONTROLLER
                 .filter(AbstractButton::isSelected)
                 .findFirst()
                 .map(JRadioButton::getText)
