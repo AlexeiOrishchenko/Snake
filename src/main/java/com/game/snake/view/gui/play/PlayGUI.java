@@ -1,4 +1,4 @@
-package com.game.snake.controller;
+package com.game.snake.view.gui.play;
 
 import com.game.snake.model.setting.Setting;
 
@@ -16,7 +16,7 @@ import java.util.concurrent.ArrayBlockingQueue;
  * @author Koliadin Nikita
  * @version 1.13
  */
-public class KeyboardObserver implements Runnable { // TODO: MOVE TO VIEW
+public class PlayGUI implements Runnable {
 
     @Getter private final JFrame jFrame = new JFrame();
 
@@ -26,7 +26,7 @@ public class KeyboardObserver implements Runnable { // TODO: MOVE TO VIEW
 
     @Getter @Setter private String titleName = String.valueOf("Snake - PLAY");
 
-    public KeyboardObserver() {
+    public PlayGUI() {
         initJFrame();
     }
 

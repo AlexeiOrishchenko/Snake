@@ -1,6 +1,6 @@
 package com.game.snake.model.objects.room;
 
-import com.game.snake.controller.KeyboardObserver;
+import com.game.snake.view.gui.play.PlayGUI;
 import com.game.snake.model.objects.mouse.Mouse;
 import com.game.snake.view.graphics.ChangeColor;
 import com.game.snake.view.graphics.Layer;
@@ -29,7 +29,7 @@ public class Room implements Runnable {
 
     private final JFrame jFrame;
 
-    private final KeyboardObserver keyboardObserver = new KeyboardObserver();
+    private final PlayGUI playGUI = new PlayGUI();
 
     @Getter @Setter private Snake snake;
     @Getter @Setter private Mouse mouse;
@@ -45,11 +45,11 @@ public class Room implements Runnable {
 
     @Override
     public void run() {
-        Executors.newSingleThreadExecutor().execute(keyboardObserver); // FIXME: shutdown
+        Executors.newSingleThreadExecutor().execute(playGUI); // FIXME: shutdown
 
         while (snake.isAlive()) {
-            if (keyboardObserver.hasKeyEvents()) {
-                final KeyEvent event = keyboardObserver.getEventFromTop();
+            if (playGUI.hasKeyEvents()) {
+                final KeyEvent event = playGUI.getEventFromTop();
 
                 checkPause(event);
 
@@ -75,8 +75,8 @@ public class Room implements Runnable {
         if (event.getKeyChar() == 'p') {
             while (true) {
                 sleep(1000);
-                if (keyboardObserver.hasKeyEvents()) {
-                    KeyEvent eventNew = keyboardObserver.getEventFromTop();
+                if (playGUI.hasKeyEvents()) {
+                    KeyEvent eventNew = playGUI.getEventFromTop();
                     if (eventNew.getKeyChar() == 'p') {
                         break;
                     }
@@ -128,7 +128,7 @@ public class Room implements Runnable {
     }
 
     private void gameOver() {
-        keyboardObserver.offVisible();
+        playGUI.offVisible();
         ChangeColor.setMainMenuWaitThread(false);
         jFrame.setVisible(true);
     }
@@ -143,9 +143,9 @@ public class Room implements Runnable {
     }
 
     private void print() {
-        if (keyboardObserver != null) {
-            keyboardObserver.getJFrame().setContentPane(new Layer());
-            keyboardObserver.onVisible();
+        if (playGUI != null) {
+            playGUI.getJFrame().setContentPane(new Layer());
+            playGUI.onVisible();
         }
     }
 
