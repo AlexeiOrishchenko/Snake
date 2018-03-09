@@ -36,8 +36,7 @@ public class ButtonInfo implements MainMenuComponent {
     @Override
     public void init() {
         jButtonInfo.setText(text);
-        jButtonInfo.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
-        jButtonInfo.setMinimumSize(new Dimension(buttonWidth, buttonHeight));
+        setJButtonSize();
         gridBagConstraints.gridy++;
         container.add(jButtonInfo, gridBagConstraints);
     }
@@ -54,5 +53,16 @@ public class ButtonInfo implements MainMenuComponent {
                 infoGUI.onVisible();
             }
         });
+    }
+
+    private void setJButtonSize() {
+        jButtonInfo.setPreferredSize(new Dimension(
+                buttonWidth,
+                buttonHeight
+        ));
+        jButtonInfo.setMinimumSize(new Dimension(
+                buttonWidth,
+                buttonHeight
+        ));
     }
 }
