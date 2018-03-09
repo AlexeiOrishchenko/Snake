@@ -37,8 +37,7 @@ public class ButtonExit implements MainMenuComponent {
     @Override
     public void init() {
         jButtonExit.setText(text);
-        jButtonExit.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
-        jButtonExit.setMinimumSize(new Dimension(buttonWidth, buttonHeight));
+        setJButtonSize();
         gridBagConstraints.gridy++;
         container.add(jButtonExit, gridBagConstraints);
     }
@@ -56,5 +55,16 @@ public class ButtonExit implements MainMenuComponent {
                 exitGUI.onVisible();
             }
         });
+    }
+
+    private void setJButtonSize() {
+        jButtonExit.setPreferredSize(new Dimension(
+                buttonWidth,
+                buttonHeight
+        ));
+        jButtonExit.setMinimumSize(new Dimension(
+                buttonWidth,
+                buttonHeight
+        ));
     }
 }
