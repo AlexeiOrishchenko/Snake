@@ -33,8 +33,6 @@ public class Setting {
     @Getter @Setter private Color colorSnake = Color.GREEN;
     @Getter @Setter private Color colorHead = Color.BLACK;
 
-    @Getter @Setter private boolean changeColor = true; // FIXME: MOVE TO ChangeColor
-
     private Setting() {
     }
 
