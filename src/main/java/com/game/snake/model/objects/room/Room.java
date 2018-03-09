@@ -36,8 +36,6 @@ public class Room implements Runnable {
     @Getter @Setter private int height = setting.getRoomHeight(); //TODO: edit setting
 
     public Room() {
-        this.snake = new Snake();
-        createMouse();
     }
 
     public void eatMouse() {
@@ -46,6 +44,7 @@ public class Room implements Runnable {
 
     @Override
     public void run() {
+        initStart();
         startKeyListener();
 
         while (snake.isAlive()) {
@@ -66,6 +65,11 @@ public class Room implements Runnable {
             sleep();
         }
         gameOver();
+    }
+
+    private void initStart() {
+        this.snake = new Snake();
+        createMouse();
     }
 
     private void startKeyListener() { // FIXME: DELEGATE TO CONTROLLER
