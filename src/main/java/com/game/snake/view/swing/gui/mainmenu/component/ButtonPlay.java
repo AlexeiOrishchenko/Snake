@@ -1,16 +1,14 @@
 package com.game.snake.view.swing.gui.mainmenu.component;
 
-import com.game.snake.model.objects.room.Room;
+import com.game.snake.controller.Controller;
 import com.game.snake.view.swing.graphics.ChangeColor;
 
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.val;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.concurrent.Executors;
 
 /**
  * @author Koliadin Nikita
@@ -43,9 +41,7 @@ public class ButtonPlay implements MainMenuComponent {
     public void setAction() {
         jButtonPlay.addActionListener(e -> {
             ChangeColor.setMainMenuWaitThread(true);
-            val executor = Executors.newSingleThreadExecutor();
-            executor.execute(Room.getInstance());  // FIXME: DELEGATE TO CONTROLLER
-            executor.shutdown();
+            Controller.getInstance().startGame();
         });
     }
 }
