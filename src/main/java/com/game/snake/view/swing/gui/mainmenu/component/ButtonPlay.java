@@ -34,8 +34,7 @@ public class ButtonPlay implements MainMenuComponent {
     @Override
     public void init() {
         jButtonPlay.setText(text);
-        jButtonPlay.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
-        jButtonPlay.setMinimumSize(new Dimension(buttonWidth, buttonHeight));
+        setJButtonSize();
         gridBagConstraints.gridy++;
         gridBagConstraints.insets = new Insets(10, 0, 0, 0);
         container.add(jButtonPlay, gridBagConstraints);
@@ -44,5 +43,16 @@ public class ButtonPlay implements MainMenuComponent {
     @Override
     public void setAction() {
         jButtonPlay.addActionListener(e -> Controller.getInstance().startGame());
+    }
+
+    private void setJButtonSize() {
+        jButtonPlay.setPreferredSize(new Dimension(
+                buttonWidth,
+                buttonHeight
+        ));
+        jButtonPlay.setMinimumSize(new Dimension(
+                buttonWidth,
+                buttonHeight
+        ));
     }
 }
