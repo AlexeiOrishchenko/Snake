@@ -23,7 +23,7 @@ public class ButtonPlay implements MainMenuComponent {
     @Getter @Setter private String text = String.valueOf("PLAY");
 
     @Getter @Setter private int buttonWidth = 150;
-    @Getter @Setter private int buttonHeight = 150;
+    @Getter @Setter private int buttonHeight = 25;
 
     public ButtonPlay(@NonNull final Container container,
                       @NonNull final GridBagConstraints gridBagConstraints) {
