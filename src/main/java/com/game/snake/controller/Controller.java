@@ -1,10 +1,15 @@
 package com.game.snake.controller;
 
 import com.game.snake.model.objects.room.Room;
+
 import lombok.val;
 
 import java.util.concurrent.Executors;
 
+/**
+ * @author Koliadin Nikita
+ * @version 1.14
+ */
 public class Controller {
 
     private static volatile Controller instance;
