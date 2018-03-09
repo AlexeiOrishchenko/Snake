@@ -19,25 +19,47 @@ import java.util.List;
  */
 public class MainMenuGUI implements Runnable {
 
+    private static volatile MainMenuGUI instance;
+
     private final JFrame jFrame = new JFrame();
 
     private final Container container = jFrame.getContentPane();
     private final GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
-    @Getter @Setter private LabelWelcome labelWelcome = new LabelWelcome(container, gridBagConstraints);
+    @Getter @Setter private LabelTop labelTop = new LabelTop(container, gridBagConstraints);
     @Getter @Setter private ButtonPlay buttonPlay = new ButtonPlay(container, gridBagConstraints);
     @Getter @Setter private ButtonSetting buttonSetting = new ButtonSetting(container, gridBagConstraints);
     @Getter @Setter private ButtonInfo buttonInfo = new ButtonInfo(container, gridBagConstraints);
-    @Getter @Setter private ButtonExit buttonExit = new ButtonExit(container, gridBagConstraints, jFrame);
-    @Getter @Setter private LabelAuthor labelAuthor =  new LabelAuthor(container, gridBagConstraints);
+    @Getter @Setter private ButtonExit buttonExit = new ButtonExit(container, gridBagConstraints);
+    @Getter @Setter private LabelButton labelButton =  new LabelButton(container, gridBagConstraints);
 
     @Getter @Setter private String titleName = String.valueOf("Snake - MAIN MENU");
 
-    @Getter @Setter private int minWidth = 350;
-    @Getter @Setter private int minHeight = 350;
+    @Getter @Setter private int minWidth = 800;
+    @Getter @Setter private int minHeight = 600;
 
-    public MainMenuGUI() {
+    private MainMenuGUI() {
         container.setLayout(new GridBagLayout());
+        gridBagConstraints.gridx = 1;
+    }
+
+    public static MainMenuGUI getInstance() {
+        if (MainMenuGUI.instance == null) {
+            synchronized (MainMenuGUI.class) {
+                if (MainMenuGUI.instance == null) {
+                    MainMenuGUI.instance = new MainMenuGUI();
+                }
+            }
+        }
+        return MainMenuGUI.instance;
+    }
+
+    public void onVisible() {
+        jFrame.setVisible(true);
+    }
+
+    public void offVisible() {
+        jFrame.dispose();
     }
 
     @Override
@@ -55,12 +77,12 @@ public class MainMenuGUI implements Runnable {
     @NotNull
     private List<MainMenuComponent> loadMainMenuComponentList() {
         return new ArrayList<>(Arrays.asList(
-                labelWelcome,
+                labelTop,
                 buttonPlay,
                 buttonSetting,
                 buttonInfo,
                 buttonExit,
-                labelAuthor
+                labelButton
         ));
     }
 
