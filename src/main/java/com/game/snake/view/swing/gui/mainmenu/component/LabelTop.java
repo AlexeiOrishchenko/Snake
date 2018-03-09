@@ -11,17 +11,17 @@ import java.awt.*;
  * @author Koliadin Nikita
  * @version 1.14
  */
-public class LabelWelcome implements MainMenuComponent {
+public class LabelTop implements MainMenuComponent {
 
     private final Container container;
     private final GridBagConstraints gridBagConstraints;
 
-    private JLabel jLabelWithIcon;
+    private JLabel jLabelTop;
 
-    @Getter @Setter private String resourceName = String.valueOf("/MainMenuWelcome.gif");
+    @Getter @Setter private String resourceName = String.valueOf("/MainMenuLabelTop.gif");
 
-    public LabelWelcome(@NonNull final Container container,
-                        @NonNull final GridBagConstraints gridBagConstraints) {
+    public LabelTop(@NonNull final Container container,
+                    @NonNull final GridBagConstraints gridBagConstraints) {
         this.container = container;
         this.gridBagConstraints = gridBagConstraints;
     }
@@ -30,8 +30,8 @@ public class LabelWelcome implements MainMenuComponent {
     public void init() {
         loadResource();
         gridBagConstraints.gridy++;
-        gridBagConstraints.insets = new Insets(-250, 0, 0, 0);
-        container.add(jLabelWithIcon, gridBagConstraints);
+        gridBagConstraints.insets = new Insets(50, 0, 0, 0);
+        container.add(jLabelTop, gridBagConstraints);
     }
 
     @Override
@@ -40,8 +40,8 @@ public class LabelWelcome implements MainMenuComponent {
     }
 
     private void loadResource() {
-        if (jLabelWithIcon == null) {
-            jLabelWithIcon = new JLabel(new ImageIcon(getClass().getResource(resourceName)));
+        if (jLabelTop == null) {
+            jLabelTop = new JLabel(new ImageIcon(getClass().getResource(resourceName)));
         }
     }
 }
