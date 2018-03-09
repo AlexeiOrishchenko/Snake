@@ -14,21 +14,18 @@ import lombok.NonNull;
 import lombok.Setter;
 import lombok.val;
 
-import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.util.concurrent.Executors;
 
 /**
  * @author Koliadin Nikita
- * @version 1.13
+ * @version 1.14
  */
 public class Room implements Runnable {
 
     @Getter @Setter private static Room room;
 
     private final Setting setting = Setting.getInstance();
-
-    private final JFrame jFrame; // FIXME: MainMenuGUI DO DEPENDENCY
 
     private final PlayGUI playGUI = new PlayGUI(); // FIXME: DELETE DEPENDENCY
 
@@ -38,8 +35,7 @@ public class Room implements Runnable {
     @Getter @Setter private int width = setting.getRoomWidth(); //TODO: edit setting
     @Getter @Setter private int height = setting.getRoomHeight(); //TODO: edit setting
 
-    public Room(@NonNull final JFrame jFrame) {
-        this.jFrame = jFrame;
+    public Room() {
         this.snake = new Snake();
         createMouse();
     }
@@ -154,7 +150,6 @@ public class Room implements Runnable {
     private void gameOver() { // FIXME: DELEGATE TO CONTROLLER
         playGUI.offVisible();
         ChangeColor.setMainMenuWaitThread(false);
-        jFrame.setVisible(true);
     }
 
     private void createMouse() {

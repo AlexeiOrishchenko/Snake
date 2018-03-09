@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.13
+ * @version 1.14
  */
 public class MainMenuGUI implements Runnable {
 
@@ -25,7 +25,7 @@ public class MainMenuGUI implements Runnable {
     private final GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
     @Getter @Setter private LabelWelcome labelWelcome = new LabelWelcome(container, gridBagConstraints);
-    @Getter @Setter private ButtonPlay buttonPlay = new ButtonPlay(container, gridBagConstraints, jFrame);
+    @Getter @Setter private ButtonPlay buttonPlay = new ButtonPlay(container, gridBagConstraints);
     @Getter @Setter private ButtonSetting buttonSetting = new ButtonSetting(container, gridBagConstraints);
     @Getter @Setter private ButtonInfo buttonInfo = new ButtonInfo(container, gridBagConstraints);
     @Getter @Setter private ButtonExit buttonExit = new ButtonExit(container, gridBagConstraints, jFrame);

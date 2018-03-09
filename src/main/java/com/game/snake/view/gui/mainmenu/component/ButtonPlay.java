@@ -14,11 +14,9 @@ import java.util.concurrent.Executors;
 
 /**
  * @author Koliadin Nikita
- * @version 1.13
+ * @version 1.14
  */
 public class ButtonPlay implements MainMenuComponent {
-
-    private final JFrame jFrame;
 
     private final JButton jButtonPlay = new JButton();
 
@@ -28,11 +26,9 @@ public class ButtonPlay implements MainMenuComponent {
     @Getter @Setter private String text = String.valueOf("PLAY");
 
     public ButtonPlay(@NonNull final Container container,
-                      @NonNull final GridBagConstraints gridBagConstraints,
-                      @NonNull final JFrame jFrame) {
+                      @NonNull final GridBagConstraints gridBagConstraints) {
         this.container = container;
         this.gridBagConstraints = gridBagConstraints;
-        this.jFrame = jFrame;
     }
 
     @Override
@@ -46,9 +42,8 @@ public class ButtonPlay implements MainMenuComponent {
     @Override
     public void setAction() {
         jButtonPlay.addActionListener(e -> {
-            jFrame.dispose();
             ChangeColor.setMainMenuWaitThread(true);
-            Room.setRoom(new Room(jFrame)); // FIXME: DELEGATE TO CONTROLLER
+            Room.setRoom(new Room()); // FIXME: DELEGATE TO CONTROLLER
             val executor = Executors.newSingleThreadExecutor();
             executor.execute(Room.getRoom());  // FIXME: DELEGATE TO CONTROLLER
             executor.shutdown();
