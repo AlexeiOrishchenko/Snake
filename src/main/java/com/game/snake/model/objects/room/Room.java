@@ -2,7 +2,6 @@ package com.game.snake.model.objects.room;
 
 import com.game.snake.view.swing.gui.play.PlayGUI;
 import com.game.snake.model.objects.mouse.Mouse;
-import com.game.snake.view.swing.graphics.ChangeColor;
 import com.game.snake.view.swing.graphics.Layer;
 import com.game.snake.model.objects.snake.Snake;
 import com.game.snake.model.objects.snake.SnakeDirection;
@@ -162,7 +161,6 @@ public class Room implements Runnable {
 
     private void gameOver() { // FIXME: DELEGATE TO CONTROLLER
         playGUI.offVisible();
-        ChangeColor.setMainMenuWaitThread(false);
     }
 
     private void createMouse() {
