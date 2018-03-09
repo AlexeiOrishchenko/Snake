@@ -32,7 +32,6 @@ public final class SettingGUI implements Runnable {
     @Getter @Setter private RadioButtonColorSnake radioButtonColorSnake = new RadioButtonColorSnake(container, gridBagConstraints);
     @Getter @Setter private RadioButtonColorMouse radioButtonColorMouse = new RadioButtonColorMouse(container, gridBagConstraints);
     @Getter @Setter private RadioButtonColorFace radioButtonColorFace = new RadioButtonColorFace(container, gridBagConstraints);
-    @Getter @Setter private RadioButtonChangeColor radioButtonChangeColor = new RadioButtonChangeColor(container, gridBagConstraints);
     @Getter @Setter private RadioButtonSizeOfGame radioButtonSizeOfGame = new RadioButtonSizeOfGame(container, gridBagConstraints);
     @Getter @Setter private RadioButtonRoomWidth radioButtonRoomWidth = new RadioButtonRoomWidth(container, gridBagConstraints);
     @Getter @Setter private RadioButtonRoomHeight radioButtonRoomHeight = new RadioButtonRoomHeight(container, gridBagConstraints);
@@ -79,7 +78,6 @@ public final class SettingGUI implements Runnable {
                 radioButtonColorSnake,
                 radioButtonColorMouse,
                 radioButtonColorFace,
-                radioButtonChangeColor,
                 radioButtonSizeOfGame,
                 radioButtonRoomWidth,
                 radioButtonRoomHeight
