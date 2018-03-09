@@ -1,7 +1,6 @@
 package com.game.snake.model.objects.snake;
 
 import com.game.snake.model.objects.room.Room;
-import com.game.snake.model.setting.Setting;
 
 import lombok.Getter;
 import lombok.NonNull;
@@ -13,7 +12,7 @@ import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.13
+ * @version 1.14
  */
 public final class Snake {
 
@@ -73,11 +72,10 @@ public final class Snake {
     private void checkBorders(@NonNull final SnakeSection head) {
         val headX = head.getX();
         val headY = head.getY();
+        val room = Room.getInstance();
 
-        val setting = Setting.getInstance(); // FIXME: DELETE DEPENDENCY
-
-        alive = (headX >= 1 && headX < setting.getRoomWidth() + 2)
-                && (headY >= 1 && headY < setting.getRoomHeight() + 2);
+        alive = (headX >= 1 && headX < room.getWidth() + 2)
+                && (headY >= 1 && headY < room.getHeight() + 2);
     }
 
     private void checkBody(@NonNull final SnakeSection head) {
@@ -91,7 +89,7 @@ public final class Snake {
     }
 
     private void checkEatMouse(@NonNull final SnakeSection head) {
-        val room = Room.getRoom();
+        val room = Room.getInstance();
         val mouse = room.getMouse();
 
         if (head.getX() == mouse.getX() && head.getY() == mouse.getY()) {

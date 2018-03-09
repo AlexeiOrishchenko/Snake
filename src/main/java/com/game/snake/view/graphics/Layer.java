@@ -12,16 +12,14 @@ import java.util.stream.IntStream;
 
 /**
  * @author Koliadin Nikita
- * @version 1.13
+ * @version 1.14
  */
 public class Layer extends JPanel {
 
     private final Setting setting = Setting.getInstance();
-    private final Room room = Room.getRoom();
+    private final Room room = Room.getInstance(); // TODO: DELEGATE TO CONTROLLER
 
     private final int size = setting.getSizeOfGame();
-    private final int width = setting.getRoomWidth() + 2;
-    private final int height = setting.getRoomHeight() + 2;
 
     @Override
     public void paintComponent(@NonNull final Graphics g) {
@@ -34,6 +32,9 @@ public class Layer extends JPanel {
     }
 
     private void printFace(@NonNull final Graphics g) {
+        val width = room.getWidth() + 2; // TODO: DELEGATE TO CONTROLLER
+        val height = room.getHeight() + 2; // TODO: DELEGATE TO CONTROLLER
+
         g.setColor(setting.getColorFace());
         g.fillRect(width * size, 0, size, (height * size)); /* Right */
         g.fillRect(0, height * size, (width * size) + size, size); /* Down */
@@ -62,7 +63,7 @@ public class Layer extends JPanel {
     }
 
     private void printSnake(@NonNull final Graphics g) {
-        val snakeSection = room.getSnake().getSections();
+        val snakeSection = room.getSnake().getSections(); // TODO: DELEGATE TO CONTROLLER
 
         g.setColor(setting.getColorSnake());
         IntStream.range(1, snakeSection.size())

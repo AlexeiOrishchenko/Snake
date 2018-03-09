@@ -43,9 +43,8 @@ public class ButtonPlay implements MainMenuComponent {
     public void setAction() {
         jButtonPlay.addActionListener(e -> {
             ChangeColor.setMainMenuWaitThread(true);
-            Room.setRoom(new Room()); // FIXME: DELEGATE TO CONTROLLER
             val executor = Executors.newSingleThreadExecutor();
-            executor.execute(Room.getRoom());  // FIXME: DELEGATE TO CONTROLLER
+            executor.execute(Room.getInstance());  // FIXME: DELEGATE TO CONTROLLER
             executor.shutdown();
         });
     }

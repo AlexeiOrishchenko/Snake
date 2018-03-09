@@ -7,7 +7,6 @@ import com.game.snake.view.graphics.Layer;
 import com.game.snake.model.objects.snake.Snake;
 import com.game.snake.model.objects.snake.SnakeDirection;
 import com.game.snake.model.objects.snake.SnakeSection;
-import com.game.snake.model.setting.Setting;
 
 import lombok.Getter;
 import lombok.NonNull;
@@ -23,19 +22,28 @@ import java.util.concurrent.Executors;
  */
 public class Room implements Runnable {
 
-    @Getter @Setter private static Room room;
+    private static volatile Room instance = new Room();
 
-    private final Setting setting = Setting.getInstance();
-
-    private final PlayGUI playGUI = new PlayGUI(); // FIXME: DELETE DEPENDENCY
+    private PlayGUI playGUI; // FIXME: DELETE DEPENDENCY
 
     @Getter @Setter private Snake snake;
     @Getter @Setter private Mouse mouse;
 
-    @Getter @Setter private int width = setting.getRoomWidth(); //TODO: edit setting
-    @Getter @Setter private int height = setting.getRoomHeight(); //TODO: edit setting
+    @Getter @Setter private int width = 20;
+    @Getter @Setter private int height = 20;
 
-    public Room() {
+    private Room() {
+    }
+
+    public static Room getInstance() {
+        if (Room.instance == null) {
+            synchronized (Room.class) {
+                if (Room.instance == null) {
+                    Room.instance = new Room();
+                }
+            }
+        }
+        return Room.instance;
     }
 
     public void eatMouse() {
@@ -68,6 +76,7 @@ public class Room implements Runnable {
     }
 
     private void initStart() {
+        this.playGUI = new PlayGUI();
         this.snake = new Snake();
         createMouse();
     }
