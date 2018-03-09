@@ -1,28 +1,24 @@
 package com.game.snake.view.swing.gui.mainmenu.component;
 
-import com.game.snake.view.swing.graphics.ChangeColor;
-
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.val;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.concurrent.Executors;
 
 /**
  * @author Koliadin Nikita
  * @version 1.14
  */
-public class LabelWelcome implements MainMenuComponent{
-
-    private final JLabel jLabelWelcome = new JLabel();
+public class LabelWelcome implements MainMenuComponent {
 
     private final Container container;
     private final GridBagConstraints gridBagConstraints;
 
-    @Getter @Setter private String text = String.valueOf("Welcome to the game \"SNAKE\"");
+    private JLabel jLabelWithIcon;
+
+    @Getter @Setter private String resourceName = String.valueOf("/MainMenuWelcome.gif");
 
     public LabelWelcome(@NonNull final Container container,
                         @NonNull final GridBagConstraints gridBagConstraints) {
@@ -32,16 +28,20 @@ public class LabelWelcome implements MainMenuComponent{
 
     @Override
     public void init() {
-        jLabelWelcome.setText(text);
+        loadResource();
         gridBagConstraints.gridy++;
-        gridBagConstraints.insets = new Insets(0, 0, 50, 0);
-        container.add(jLabelWelcome, gridBagConstraints);
+        gridBagConstraints.insets = new Insets(-250, 0, 0, 0);
+        container.add(jLabelWithIcon, gridBagConstraints);
     }
 
     @Override
     public void setAction() {
-        val executor = Executors.newSingleThreadExecutor();
-        executor.execute(new ChangeColor(jLabelWelcome));
-        executor.shutdown();
+        /* Do nothing */
+    }
+
+    private void loadResource() {
+        if (jLabelWithIcon == null) {
+            jLabelWithIcon = new JLabel(new ImageIcon(getClass().getResource(resourceName)));
+        }
     }
 }
