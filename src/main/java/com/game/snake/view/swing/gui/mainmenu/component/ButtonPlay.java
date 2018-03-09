@@ -1,7 +1,6 @@
 package com.game.snake.view.swing.gui.mainmenu.component;
 
 import com.game.snake.controller.Controller;
-import com.game.snake.view.swing.graphics.ChangeColor;
 
 import lombok.Getter;
 import lombok.NonNull;
@@ -32,6 +31,8 @@ public class ButtonPlay implements MainMenuComponent {
     @Override
     public void init() {
         jButtonPlay.setText(text);
+        jButtonPlay.setPreferredSize(new Dimension(150, 25));
+        jButtonPlay.setMinimumSize(new Dimension(150, 25));
         gridBagConstraints.gridy++;
         gridBagConstraints.insets = new Insets(10, 0, 0, 0);
         container.add(jButtonPlay, gridBagConstraints);
@@ -39,9 +40,6 @@ public class ButtonPlay implements MainMenuComponent {
 
     @Override
     public void setAction() {
-        jButtonPlay.addActionListener(e -> {
-            ChangeColor.setMainMenuWaitThread(true);
-            Controller.getInstance().startGame();
-        });
+        jButtonPlay.addActionListener(e -> Controller.getInstance().startGame());
     }
 }
