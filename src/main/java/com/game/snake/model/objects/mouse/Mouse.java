@@ -1,15 +1,14 @@
 package com.game.snake.model.objects.mouse;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.Data;
 
 /**
  * @author Koliadin Nikita
- * @version 1.13
+ * @version 1.14
  */
 
-@RequiredArgsConstructor public final class Mouse {
+@Data public final class Mouse {
 
-    @Getter private final int x;
-    @Getter private final int y;
+    private final int x;
+    private final int y;
 }
