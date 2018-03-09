@@ -18,7 +18,7 @@ public class LabelTop implements MainMenuComponent {
 
     private JLabel jLabelTop;
 
-    @Getter @Setter private String resourceName = String.valueOf("/MainMenuLabelTop.gif");
+    @Getter @Setter private String resourceName = String.valueOf("/MainMenuTop.gif");
 
     public LabelTop(@NonNull final Container container,
                     @NonNull final GridBagConstraints gridBagConstraints) {
