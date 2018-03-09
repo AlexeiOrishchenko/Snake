@@ -36,8 +36,7 @@ public class ButtonSetting implements MainMenuComponent {
     @Override
     public void init() {
         jButtonSetting.setText(text);
-        jButtonSetting.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
-        jButtonSetting.setMinimumSize(new Dimension(buttonWidth, buttonHeight));
+        setJButtonSize();
         gridBagConstraints.gridy++;
         container.add(jButtonSetting, gridBagConstraints);
     }
@@ -54,5 +53,16 @@ public class ButtonSetting implements MainMenuComponent {
                 settingGUI.onVisible();
             }
         });
+    }
+
+    private void setJButtonSize() {
+        jButtonSetting.setPreferredSize(new Dimension(
+                buttonWidth,
+                buttonHeight
+        ));
+        jButtonSetting.setMinimumSize(new Dimension(
+                buttonWidth,
+                buttonHeight
+        ));
     }
 }
