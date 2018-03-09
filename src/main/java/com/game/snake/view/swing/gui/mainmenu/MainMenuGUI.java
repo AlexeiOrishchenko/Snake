@@ -38,7 +38,6 @@ public class MainMenuGUI implements Runnable {
 
     public MainMenuGUI() {
         container.setLayout(new GridBagLayout());
-        gridBagConstraints.fill = GridBagConstraints.BOTH;
     }
 
     @Override
