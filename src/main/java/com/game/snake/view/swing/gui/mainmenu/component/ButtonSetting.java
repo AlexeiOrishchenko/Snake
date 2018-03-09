@@ -25,7 +25,7 @@ public class ButtonSetting implements MainMenuComponent {
     @Getter @Setter private String text = String.valueOf("SETTING");
 
     @Getter @Setter private int buttonWidth = 150;
-    @Getter @Setter private int buttonHeight = 150;
+    @Getter @Setter private int buttonHeight = 25;
 
     public ButtonSetting(@NonNull final Container container,
                          @NonNull final GridBagConstraints gridBagConstraints) {
