@@ -24,6 +24,9 @@ public class ButtonSetting implements MainMenuComponent {
 
     @Getter @Setter private String text = String.valueOf("SETTING");
 
+    @Getter @Setter private int buttonWidth = 150;
+    @Getter @Setter private int buttonHeight = 150;
+
     public ButtonSetting(@NonNull final Container container,
                          @NonNull final GridBagConstraints gridBagConstraints) {
         this.container = container;
@@ -33,6 +36,8 @@ public class ButtonSetting implements MainMenuComponent {
     @Override
     public void init() {
         jButtonSetting.setText(text);
+        jButtonSetting.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+        jButtonSetting.setMinimumSize(new Dimension(buttonWidth, buttonHeight));
         gridBagConstraints.gridy++;
         container.add(jButtonSetting, gridBagConstraints);
     }
