@@ -8,6 +8,6 @@ import com.game.snake.view.swing.gui.mainmenu.MainMenuGUI;
  */
 public class Main {
     public static void main(String[] args) {
-        new MainMenuGUI().run();
+        MainMenuGUI.getInstance().run();
     }
 }
