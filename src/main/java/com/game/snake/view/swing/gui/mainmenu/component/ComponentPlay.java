@@ -15,7 +15,7 @@ import java.awt.event.MouseEvent;
  * @author Koliadin Nikita
  * @version 1.14
  */
-public class LabelPlay implements MainMenuComponent {
+public class ComponentPlay implements MainMenuComponent {
 
     private final Container container;
     private final GridBagConstraints gridBagConstraints;
@@ -27,8 +27,8 @@ public class LabelPlay implements MainMenuComponent {
     @Getter @Setter private int componentWidth = 350;
     @Getter @Setter private int componentHeight = 80;
 
-    public LabelPlay(@NonNull final Container container,
-                     @NonNull final GridBagConstraints gridBagConstraints) {
+    public ComponentPlay(@NonNull final Container container,
+                         @NonNull final GridBagConstraints gridBagConstraints) {
         this.container = container;
         this.gridBagConstraints = gridBagConstraints;
     }
@@ -39,8 +39,7 @@ public class LabelPlay implements MainMenuComponent {
         setJComponentSize();
         jLabelPlay.setFocusable(false);
         jLabelPlay.setOpaque(true);
-        gridBagConstraints.gridy++;
-        gridBagConstraints.insets = new Insets(10, 0, 0, 0);
+        setGridBagConstraints();
         container.add(jLabelPlay, gridBagConstraints);
     }
 
@@ -84,5 +83,13 @@ public class LabelPlay implements MainMenuComponent {
                 componentWidth,
                 componentHeight
         ));
+    }
+
+    private void setGridBagConstraints() {
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridheight = 1;
+        gridBagConstraints.gridwidth = 1;
+        gridBagConstraints.insets = new Insets(10, 0, 0, 0);
     }
 }
