@@ -74,7 +74,6 @@ public class ComponentSetting implements MainMenuComponent {
                 jLabelSetting.setBackground(new Color(238,238,238));
             }
         });
-
     }
 
     private void loadResource() {
