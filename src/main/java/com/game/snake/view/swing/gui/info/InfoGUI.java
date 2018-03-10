@@ -21,7 +21,7 @@ public final class InfoGUI implements Runnable {
 
     private JLabel jLabelWithIcon;
 
-    @Getter @Setter private String resourceName = String.valueOf("/InfoPicture.png");
+    @Getter @Setter private String resourceName = String.valueOf("/Info.png");
     @Getter @Setter private String titleName = String.valueOf("Snake - INFO");
 
     @Getter private boolean initialized = false;
