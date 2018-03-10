@@ -26,8 +26,8 @@ public class LabelInfo implements MainMenuComponent {
 
     @Getter @Setter private String resourceName = String.valueOf("/MainMenuInfo.gif");
 
-    @Getter @Setter private int buttonWidth = 350;
-    @Getter @Setter private int buttonHeight = 80;
+    @Getter @Setter private int componentWidth = 350;
+    @Getter @Setter private int componentHeight = 80;
 
     public LabelInfo(@NonNull final Container container,
                      @NonNull final GridBagConstraints gridBagConstraints) {
@@ -85,12 +85,12 @@ public class LabelInfo implements MainMenuComponent {
 
     private void setJButtonSize() {
         jLabelInfo.setPreferredSize(new Dimension(
-                buttonWidth,
-                buttonHeight
+                componentWidth,
+                componentHeight
         ));
         jLabelInfo.setMinimumSize(new Dimension(
-                buttonWidth,
-                buttonHeight
+                componentWidth,
+                componentHeight
         ));
     }
 }
