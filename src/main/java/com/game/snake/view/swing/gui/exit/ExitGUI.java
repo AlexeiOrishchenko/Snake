@@ -20,7 +20,7 @@ public final class ExitGUI implements Runnable {
 
     private JLabel jLabelWithIcon;
 
-    @Getter @Setter private String resourceName = String.valueOf("/ExitPicture.jpg");
+    @Getter @Setter private String resourceName = String.valueOf("/Exit.jpg");
     @Getter @Setter private String titleName = String.valueOf("Snake - EXIT");
 
     @Getter @Setter private long sleepTimeToExitMS = 10000L;
