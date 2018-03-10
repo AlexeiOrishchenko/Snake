@@ -50,6 +50,7 @@ public class PlayGUI implements Runnable {
     public void run() {
         setJFrameKeyEvent();
     }
+
     private void initJFrame() {
         jFrame.setTitle(titleName);
         setJFrameSize();
@@ -85,7 +86,11 @@ public class PlayGUI implements Runnable {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                keyEvents.add(e);
+                if (keyEvents.isEmpty()) {
+                    keyEvents.add(e);
+                } else if (!(keyEvents.peek().getKeyCode() == e.getKeyCode())) {
+                    keyEvents.add(e);
+                }
             }
 
             @Override
