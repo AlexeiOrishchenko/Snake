@@ -26,12 +26,13 @@ public class MainMenuGUI implements Runnable {
     private final Container container = jFrame.getContentPane();
     private final GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
-    @Getter @Setter private LabelTop labelTop = new LabelTop(container, gridBagConstraints);
-    @Getter @Setter private ButtonPlay buttonPlay = new ButtonPlay(container, gridBagConstraints);
-    @Getter @Setter private ButtonSetting buttonSetting = new ButtonSetting(container, gridBagConstraints);
-    @Getter @Setter private ButtonInfo buttonInfo = new ButtonInfo(container, gridBagConstraints);
-    @Getter @Setter private ButtonExit buttonExit = new ButtonExit(container, gridBagConstraints);
-    @Getter @Setter private LabelButton labelButton =  new LabelButton(container, gridBagConstraints);
+    @Getter @Setter private ComponentTopLeft componentTopLeft = new ComponentTopLeft(container, gridBagConstraints);
+    @Getter @Setter private ComponentTopRight componentTopRight = new ComponentTopRight(container, gridBagConstraints);
+    @Getter @Setter private ComponentBottomRight componentBottomRight =  new ComponentBottomRight(container, gridBagConstraints);
+    @Getter @Setter private ComponentPlay componentPlay = new ComponentPlay(container, gridBagConstraints);
+    @Getter @Setter private ComponentSetting componentSetting = new ComponentSetting(container, gridBagConstraints);
+    @Getter @Setter private ComponentInfo componentInfo = new ComponentInfo(container, gridBagConstraints);
+    @Getter @Setter private ComponentExit componentExit = new ComponentExit(container, gridBagConstraints);
 
     @Getter @Setter private String titleName = String.valueOf("Snake - MAIN MENU");
 
@@ -40,7 +41,6 @@ public class MainMenuGUI implements Runnable {
 
     private MainMenuGUI() {
         container.setLayout(new GridBagLayout());
-        gridBagConstraints.gridx = 1;
     }
 
     public static MainMenuGUI getInstance() {
@@ -77,12 +77,13 @@ public class MainMenuGUI implements Runnable {
     @NotNull
     private List<MainMenuComponent> loadMainMenuComponentList() {
         return new ArrayList<>(Arrays.asList(
-                labelTop,
-                buttonPlay,
-                buttonSetting,
-                buttonInfo,
-                buttonExit,
-                labelButton
+                componentTopLeft,
+                componentTopRight,
+                componentBottomRight,
+                componentPlay,
+                componentSetting,
+                componentInfo,
+                componentExit
         ));
     }
 
