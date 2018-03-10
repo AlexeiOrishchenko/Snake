@@ -37,10 +37,9 @@ public class ComponentPlay implements MainMenuComponent {
     public void init() {
         loadResource();
         setJComponentSize();
-        jLabelPlay.setFocusable(false);
-        jLabelPlay.setOpaque(true);
+        setJComponentOpaque();
         setGridBagConstraints();
-        container.add(jLabelPlay, gridBagConstraints);
+        addToContainer();
     }
 
     @Override
@@ -85,11 +84,20 @@ public class ComponentPlay implements MainMenuComponent {
         ));
     }
 
+    private void setJComponentOpaque() {
+        jLabelPlay.setFocusable(false);
+        jLabelPlay.setOpaque(true);
+    }
+
     private void setGridBagConstraints() {
         gridBagConstraints.gridy = 5;
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridheight = 1;
         gridBagConstraints.gridwidth = 1;
         gridBagConstraints.insets = new Insets(10, 0, 0, 0);
+    }
+
+    private void addToContainer() {
+        container.add(jLabelPlay, gridBagConstraints);
     }
 }
