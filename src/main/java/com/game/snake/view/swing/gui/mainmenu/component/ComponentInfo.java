@@ -38,7 +38,7 @@ public class ComponentInfo implements MainMenuComponent {
     @Override
     public void init() {
         loadResource();
-        setJButtonSize();
+        setJComponentSize();
         setJComponentOpaque();
         setGridBagConstraints();
         addToContainer();
@@ -82,7 +82,7 @@ public class ComponentInfo implements MainMenuComponent {
         }
     }
 
-    private void setJButtonSize() {
+    private void setJComponentSize() {
         jLabelInfo.setPreferredSize(new Dimension(
                 componentWidth,
                 componentHeight
