@@ -26,7 +26,7 @@ public class ComponentTopLeft implements MainMenuComponent {
     public void init() {
         loadResource();
         setGridBagConstraints();
-        container.add(jLabelTopLeft, gridBagConstraints);
+        addToContainer();
     }
 
     @Override
@@ -46,5 +46,9 @@ public class ComponentTopLeft implements MainMenuComponent {
         gridBagConstraints.gridheight = 4;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.insets = new Insets(0, 0, 0, 0);
+    }
+
+    private void addToContainer() {
+        container.add(jLabelTopLeft, gridBagConstraints);
     }
 }
