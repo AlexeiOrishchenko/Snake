@@ -17,7 +17,7 @@ import java.util.concurrent.Executors;
  * @author Koliadin Nikita
  * @version 1.14
  */
-public class LabelInfo implements MainMenuComponent {
+public class ComponentInfo implements MainMenuComponent {
 
     private final Container container;
     private final GridBagConstraints gridBagConstraints;
@@ -29,8 +29,8 @@ public class LabelInfo implements MainMenuComponent {
     @Getter @Setter private int componentWidth = 350;
     @Getter @Setter private int componentHeight = 80;
 
-    public LabelInfo(@NonNull final Container container,
-                     @NonNull final GridBagConstraints gridBagConstraints) {
+    public ComponentInfo(@NonNull final Container container,
+                         @NonNull final GridBagConstraints gridBagConstraints) {
         this.container = container;
         this.gridBagConstraints = gridBagConstraints;
     }
@@ -39,10 +39,9 @@ public class LabelInfo implements MainMenuComponent {
     public void init() {
         loadResource();
         setJButtonSize();
-        jLabelInfo.setFocusable(false);
-        jLabelInfo.setOpaque(true);
-        gridBagConstraints.gridy++;
-        container.add(jLabelInfo, gridBagConstraints);
+        setJComponentOpaque();
+        setGridBagConstraints();
+        addToContainer();
     }
 
     @Override
@@ -92,5 +91,22 @@ public class LabelInfo implements MainMenuComponent {
                 componentWidth,
                 componentHeight
         ));
+    }
+
+    private void setJComponentOpaque() {
+        jLabelInfo.setFocusable(false);
+        jLabelInfo.setOpaque(true);
+    }
+
+    private void setGridBagConstraints() {
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridheight = 1;
+        gridBagConstraints.gridwidth = 1;
+        gridBagConstraints.insets = new Insets(10, 0, 0, 0);
+    }
+
+    private void addToContainer() {
+        container.add(jLabelInfo, gridBagConstraints);
     }
 }
