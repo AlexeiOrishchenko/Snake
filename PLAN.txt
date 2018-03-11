@@ -163,3 +163,4 @@ Next version:
 14) RadioButtonRoomWidth.class - 4) Имя класса переделать на ComponentRoomWidth;
 15) RadioButtonSizeOfGame.class - 2) Имя класса переделать на ComponentSizeOfGame;
 16) SettingComponent.class - 2) Имя класса переделать на ComponentSetting;
+17) resources - разбить по папкам;
