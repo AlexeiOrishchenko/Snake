@@ -36,8 +36,8 @@ public class MainMenuGUI implements Runnable {
 
     @Getter @Setter private String titleName = String.valueOf("Snake - MAIN MENU");
 
-    @Getter @Setter private int minWidth = 800;
-    @Getter @Setter private int minHeight = 600;
+    @Getter @Setter private int minWidth = 1000;
+    @Getter @Setter private int minHeight = 750;
 
     private MainMenuGUI() {
         container.setLayout(new GridBagLayout());
