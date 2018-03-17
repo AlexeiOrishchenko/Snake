@@ -6,12 +6,12 @@ import lombok.val;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 /**
  * @author Koliadin Nikita
- * @version 1.14
+ * @version 1.15
  */
 public final class InfoGUI implements Runnable {
 
@@ -88,22 +88,13 @@ public final class InfoGUI implements Runnable {
     }
 
     private void setJFrameKeyEvent() {
-        jFrame.addKeyListener(new KeyListener() {
+        jFrame.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyTyped(final KeyEvent e) {
-                /* Do nothing */
-            }
-
-            @Override
-            public void keyPressed(final KeyEvent e) {
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
                 if (e.getKeyChar() == KeyEvent.VK_ESCAPE) {
                     jFrame.dispose();
                 }
-            }
-
-            @Override
-            public void keyReleased(final KeyEvent e) {
-                /* Do nothing */
             }
         });
     }
