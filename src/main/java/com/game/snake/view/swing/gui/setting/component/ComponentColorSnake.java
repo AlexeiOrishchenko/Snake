@@ -11,16 +11,16 @@ import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.14
+ * @version 1.15
  */
-public class RadioButtonColorSnake extends AbstractComponent {
+public class ComponentColorSnake extends AbstractComponent {
 
     private final List<JRadioButton> jRadioButtonColorSnakeList = createColorList();
 
     @Getter @Setter private String text = String.valueOf("Color of the snake: ");
 
-    public RadioButtonColorSnake(@NonNull final Container container,
-                                 @NonNull final GridBagConstraints gridBagConstraints) {
+    public ComponentColorSnake(@NonNull final Container container,
+                               @NonNull final GridBagConstraints gridBagConstraints) {
         super(container, gridBagConstraints);
     }
 
