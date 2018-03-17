@@ -28,13 +28,13 @@ public final class SettingGUI implements Runnable {
     private final Container container = jFrame.getContentPane();
     private final GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
-    @Getter @Setter private RadioButtonColorHead radioButtonColorHead = new RadioButtonColorHead(container, gridBagConstraints);
-    @Getter @Setter private RadioButtonColorSnake radioButtonColorSnake = new RadioButtonColorSnake(container, gridBagConstraints);
-    @Getter @Setter private RadioButtonColorMouse radioButtonColorMouse = new RadioButtonColorMouse(container, gridBagConstraints);
-    @Getter @Setter private RadioButtonColorFace radioButtonColorFace = new RadioButtonColorFace(container, gridBagConstraints);
-    @Getter @Setter private RadioButtonSizeOfGame radioButtonSizeOfGame = new RadioButtonSizeOfGame(container, gridBagConstraints);
-    @Getter @Setter private RadioButtonRoomWidth radioButtonRoomWidth = new RadioButtonRoomWidth(container, gridBagConstraints);
-    @Getter @Setter private RadioButtonRoomHeight radioButtonRoomHeight = new RadioButtonRoomHeight(container, gridBagConstraints);
+    @Getter @Setter private ComponentColorHead componentColorHead = new ComponentColorHead(container, gridBagConstraints);
+    @Getter @Setter private ComponentColorSnake componentColorSnake = new ComponentColorSnake(container, gridBagConstraints);
+    @Getter @Setter private ComponentColorMouse componentColorMouse = new ComponentColorMouse(container, gridBagConstraints);
+    @Getter @Setter private ComponentColorFace componentColorFace = new ComponentColorFace(container, gridBagConstraints);
+    @Getter @Setter private ComponentSizeOfGame componentSizeOfGame = new ComponentSizeOfGame(container, gridBagConstraints);
+    @Getter @Setter private ComponentRoomWidth componentRoomWidth = new ComponentRoomWidth(container, gridBagConstraints);
+    @Getter @Setter private ComponentRoomHeight componentRoomHeight = new ComponentRoomHeight(container, gridBagConstraints);
 
     @Getter @Setter private String titleName = String.valueOf("Snake - SETTING");
 
@@ -65,22 +65,22 @@ public final class SettingGUI implements Runnable {
 
     @Override
     public void run() {
-        val settingComponentList = loadSettingComponentList();
-        settingComponentList.forEach(SettingComponent::init);
-        new ButtonEnter(jFrame, container, gridBagConstraints, settingComponentList).init();
+        val componentSettingList = loadComponentSettingList();
+        componentSettingList.forEach(ComponentSetting::init);
+        new ComponentEnter(jFrame, container, gridBagConstraints, componentSettingList).init();
         initJFrame();
     }
 
     @NotNull
-    private List<SettingComponent> loadSettingComponentList() {
+    private List<ComponentSetting> loadComponentSettingList() {
         return new ArrayList<>(Arrays.asList(
-                radioButtonColorHead,
-                radioButtonColorSnake,
-                radioButtonColorMouse,
-                radioButtonColorFace,
-                radioButtonSizeOfGame,
-                radioButtonRoomWidth,
-                radioButtonRoomHeight
+                componentColorHead,
+                componentColorSnake,
+                componentColorMouse,
+                componentColorFace,
+                componentSizeOfGame,
+                componentRoomWidth,
+                componentRoomHeight
         ));
     }
 
