@@ -15,17 +15,17 @@ public class ComponentEnter extends AbstractComponent {
 
     private final JFrame jFrame;
 
-    private final List<SettingComponent> settingComponentList;
+    private final List<ComponentSetting> componentSettingList;
 
     private final String text = String.valueOf("Enter");
 
     public ComponentEnter(@NonNull final JFrame jFrame,
                           @NonNull final Container container,
                           @NonNull final GridBagConstraints gridBagConstraints,
-                          @NonNull final List<SettingComponent> settingComponentList) {
+                          @NonNull final List<ComponentSetting> componentSettingList) {
         super(container, gridBagConstraints);
         this.jFrame = jFrame;
-        this.settingComponentList = settingComponentList;
+        this.componentSettingList = componentSettingList;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class ComponentEnter extends AbstractComponent {
         jButtonEnter.setFocusable(false);
 
         jButtonEnter.addActionListener(e -> {
-            settingComponentList.forEach(SettingComponent::update);
+            componentSettingList.forEach(ComponentSetting::update);
             jFrame.dispose();
         });
     }

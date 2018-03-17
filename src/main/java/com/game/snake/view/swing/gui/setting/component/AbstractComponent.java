@@ -16,7 +16,7 @@ import java.util.List;
  * @author Koliadin Nikita
  * @version 1.14
  */
-public abstract class AbstractComponent implements SettingComponent {
+public abstract class AbstractComponent implements ComponentSetting {
 
     final Setting setting = Setting.getInstance();
 
