@@ -16,8 +16,8 @@ model -> objects -> snake -> Snake.class -> no dependency -> 1,2,3
 model -> objects -> room -> Room.class -> PlayGUI.class, Layer.class dependencies -> 1,2,3,4,5
 
 view -> swing -> graphics -> Layer.class -> Room.class dependency -> 1,2,3
-view -> swing -> gui -> exit -> ExitGUI.class -> no dependency -> 1
-view -> swing -> gui -> info -> InfoGUI.class -> no dependency -> 1
+view -> swing -> gui -> exit -> ExitGUI.class -> no dependency ->
+view -> swing -> gui -> info -> InfoGUI.class -> no dependency ->
 view -> swing -> gui -> mainmenu -> MainMenuGUI.class -> no dependency -> 1
 view -> swing -> gui -> mainmenu -> component -> ComponentBottomRight.class -> no dependency -> finally done
 view -> swing -> gui -> mainmenu -> component -> ComponentExit.class -> no dependency -> finally done
@@ -26,7 +26,7 @@ view -> swing -> gui -> mainmenu -> component -> ComponentPlay.class -> no depen
 view -> swing -> gui -> mainmenu -> component -> ComponentSetting.class -> no dependency - finally done
 view -> swing -> gui -> mainmenu -> component -> ComponentTopLeft.class -> no dependency -> finally done
 view -> swing -> gui -> mainmenu -> component -> ComponentTopRight.class -> no dependency -> finally done
-view -> swing -> gui -> mainmenu -> component -> MainMenuComponent.class -> no dependency -> 1,2
+view -> swing -> gui -> mainmenu -> component -> MainMenuComponent.class -> no dependency -> 1
 view -> swing -> gui -> play -> PlayGUI.class -> Room.class dependency -> 1,2,3,4,5
 view -> swing -> gui -> setting -> SettingGUI.class -> no dependency -> 1,2
 view -> swing -> gui -> setting -> component -> AbstractComponent.class -> no dependency -> 1
@@ -65,10 +65,8 @@ Layer.class
 3) Рефактор класса;
 
 ExitGUI.class
-1) Поменять листенер на адаптер;
 
 InfoGUI.class
-1) Поменять листенер на адаптер;
 
 MainMenuGUI.class
 1) Может допилю всякие паскалки на кликание по анимашкам;
@@ -78,7 +76,6 @@ ComponentPlay.class
 
 MainMenuComponent.class
 1) Добавить более подробное описание методов интерфейса для реализации;
-2) Имя класса переделать на ComponentMainMenu;
 
 PlayGUI.class
 1) Разобратся что сделать с Observer методами, и куда их деть;
@@ -148,9 +145,7 @@ Setting.class
 Next version:
 1) Controller.class - 1) Засунуть класс в пакет swing;
 2) Snake.class - 1) Несколько кусков змеи в начале игры;
-3) ExitGUI.class - 1) Поменять листенер на адаптер;
-4) InfoGUI.class - 1) Поменять листенер на адаптер;
-5) MainMenuComponent.class - 2) Имя класса переделать на ComponentMainMenu;
+
 6) PlayGUI.class - 2) Поменять листенер на адаптер;
 7) SettingGUI.class - 1) Поменять листенер на адаптер;
                       2) Сделать по аналогии с MainMenuGUI.class;

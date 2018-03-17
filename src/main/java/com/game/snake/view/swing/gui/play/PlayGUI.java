@@ -9,14 +9,14 @@ import lombok.val;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * @author Koliadin Nikita
- * @version 1.14
+ * @version 1.15
  */
 public class PlayGUI implements Runnable {
 
@@ -78,24 +78,15 @@ public class PlayGUI implements Runnable {
     }
 
     private void setJFrameKeyEvent() {
-        jFrame.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                /* Do nothing */
-            }
-
+        jFrame.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
                 if (keyEvents.isEmpty()) {
                     keyEvents.add(e);
                 } else if (!(keyEvents.peek().getKeyCode() == e.getKeyCode())) {
                     keyEvents.add(e);
                 }
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                /* Do nothing */
             }
         });
     }
