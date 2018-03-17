@@ -11,16 +11,16 @@ import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.14
+ * @version 1.15
  */
-public class RadioButtonColorMouse extends AbstractComponent {
+public class ComponentColorMouse extends AbstractComponent {
 
     private final List<JRadioButton> jRadioButtonColorMouseList = createColorList();
 
     @Getter @Setter private String text = String.valueOf("Color of the mouse: ");
 
-    public RadioButtonColorMouse(@NonNull final Container container,
-                                 @NonNull final GridBagConstraints gridBagConstraints) {
+    public ComponentColorMouse(@NonNull final Container container,
+                               @NonNull final GridBagConstraints gridBagConstraints) {
         super(container, gridBagConstraints);
     }
 
