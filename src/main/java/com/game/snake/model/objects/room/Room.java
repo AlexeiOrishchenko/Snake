@@ -87,12 +87,12 @@ public class Room implements Runnable {
     }
 
     private void checkPause(@NonNull final KeyEvent event) {
-        if (event.getKeyChar() == 'p') {
+        if (event.getKeyCode() == KeyEvent.VK_P) {
             while (true) {
                 sleep();
                 if (playGUI.hasKeyEvents()) {
-                    KeyEvent eventNew = playGUI.getEventFromTop();
-                    if (eventNew.getKeyChar() == 'p') {
+                    val eventNew = playGUI.getEventFromTop();
+                    if (eventNew.getKeyCode() == KeyEvent.VK_P) {
                         break;
                     }
                 }
