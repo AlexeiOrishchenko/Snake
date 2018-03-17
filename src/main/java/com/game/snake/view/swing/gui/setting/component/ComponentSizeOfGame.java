@@ -13,9 +13,9 @@ import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.14
+ * @version 1.15
  */
-public class RadioButtonSizeOfGame extends AbstractComponent {
+public class ComponentSizeOfGame extends AbstractComponent {
 
     private final List<JRadioButton> sizeOfGameForSelectList = new ArrayList<>(Arrays.asList(
             new JRadioButton("10"),
@@ -25,8 +25,8 @@ public class RadioButtonSizeOfGame extends AbstractComponent {
 
     @Getter @Setter private String text = String.valueOf("Size of the game: ");
 
-    public RadioButtonSizeOfGame(@NonNull final Container container,
-                                 @NonNull final GridBagConstraints gridBagConstraints) {
+    public ComponentSizeOfGame(@NonNull final Container container,
+                               @NonNull final GridBagConstraints gridBagConstraints) {
         super(container, gridBagConstraints);
     }
 
