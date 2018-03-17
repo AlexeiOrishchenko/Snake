@@ -11,16 +11,16 @@ import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.14
+ * @version 1.15
  */
-public class RadioButtonColorFace extends AbstractComponent {
+public class ComponentColorFace extends AbstractComponent {
 
     private final List<JRadioButton> jRadioButtonColorFaceList = createColorList();
 
     @Getter @Setter private String text = String.valueOf("Color of the face: ");
 
-    public RadioButtonColorFace(@NonNull final Container container,
-                                @NonNull final GridBagConstraints gridBagConstraints) {
+    public ComponentColorFace(@NonNull final Container container,
+                              @NonNull final GridBagConstraints gridBagConstraints) {
         super(container, gridBagConstraints);
     }
 
