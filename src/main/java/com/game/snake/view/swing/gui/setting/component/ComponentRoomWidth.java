@@ -13,16 +13,16 @@ import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.14
+ * @version 1.15
  */
-public class RadioButtonRoomWidth extends AbstractComponent {
+public class ComponentRoomWidth extends AbstractComponent {
 
     private final List<JRadioButton> jRadioButtonRoomWidthList = createSizeList();
 
     @Getter @Setter private String text = String.valueOf("Room width: ");
 
-    public RadioButtonRoomWidth(@NonNull final Container container,
-                                @NonNull final GridBagConstraints gridBagConstraints) {
+    public ComponentRoomWidth(@NonNull final Container container,
+                              @NonNull final GridBagConstraints gridBagConstraints) {
         super(container, gridBagConstraints);
     }
 
