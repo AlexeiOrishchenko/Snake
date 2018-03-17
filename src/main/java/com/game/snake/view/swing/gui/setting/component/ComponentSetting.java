@@ -7,18 +7,21 @@ package com.game.snake.view.swing.gui.setting.component;
 public interface ComponentSetting {
 
     /**
-     * This method must implement the initialization of the component,
-     * giving it a name and a position.
+     * This method must implement the initialization of the component.
+     * It should load resources, set the size of the component, set the opaque,
+     * give it coordinates on the panel and add it to the container.
+     * Implementing this method, you need to consider all these factors.
      *
-     * This method should be called when all components are in
-     * the initialization process.
+     * This method must be called when you want to initialize a component,
+     * or form components.
      */
     void init();
 
     /**
-     * This method should implement updating settings from each component.
+     * Этот метод должен быть вызван после инициализации компонента или компонентов
+     * и после того, как пользователь приймет все изменения которые он сделал.
      *
-     * This method should be called when the Enter button is pressed.
+     * This method must be called for all components when the button is pressed
      */
     void update();
 }
