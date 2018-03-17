@@ -11,16 +11,16 @@ import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.14
+ * @version 1.15
  */
-public class RadioButtonColorHead extends AbstractComponent {
+public class ComponentColorHead extends AbstractComponent {
 
     private final List<JRadioButton> jRadioButtonColorHeadList = createColorList();
 
     @Getter @Setter private String text = String.valueOf("Color of the head: ");
 
-    public RadioButtonColorHead(@NonNull final Container container,
-                                @NonNull final GridBagConstraints gridBagConstraints) {
+    public ComponentColorHead(@NonNull final Container container,
+                              @NonNull final GridBagConstraints gridBagConstraints) {
         super(container, gridBagConstraints);
     }
 
