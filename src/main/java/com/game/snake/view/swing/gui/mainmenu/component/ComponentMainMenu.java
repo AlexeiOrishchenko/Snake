@@ -22,7 +22,7 @@ public interface ComponentMainMenu {
      * It can be implemented by any listener or adapter.
      *
      * This method should be called when the component or component initialization
-     * was successful and you want to assign to each component an action
+     * was successful and you want to assign to each component an action.
      */
     void setAction();
 }
