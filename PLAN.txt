@@ -4,53 +4,54 @@
 - Дописать README (Пока впадлу);
 - jUnit (В ближайшем будущем все покрою тестами);
 - Сделать все поля настраевыми в игре через гетеры и сетеры;
+- Сделать все резиновым - изменение размера окон влечет за собой изменения внутрених размеров компонентов;
+- MVC - сделать внедряемым - в controller - model & view, в view - controller;
 
 
 ---===MVC===---
-controller -> Controller.class -> no dependency -> 1,2,3
+controller -> Controller.class -> no dependency -> 1,2,3,4;
 
 model -> objects -> mouse -> Mouse.class -> no dependency -> finally done
-model -> objects -> snake -> SnakeSection.class ->  no dependency -> finally done
-model -> objects -> snake -> SnakeDirection.class ->  no dependency -> finally done
-model -> objects -> snake -> Snake.class -> no dependency -> 1,2,3
 model -> objects -> room -> Room.class -> PlayGUI.class, Layer.class dependencies -> 1,2,3,4,5
+model -> objects -> snake -> Snake.class -> no dependency -> 1,2
+model -> objects -> snake -> SnakeDirection.class ->  no dependency -> finally done
+model -> objects -> snake -> SnakeSection.class ->  no dependency -> finally done
 
 view -> swing -> graphics -> Layer.class -> Room.class dependency -> 1,2,3
-view -> swing -> gui -> exit -> ExitGUI.class -> no dependency ->
-view -> swing -> gui -> info -> InfoGUI.class -> no dependency ->
+view -> swing -> gui -> exit -> ExitGUI.class -> no dependency -> 1
+view -> swing -> gui -> info -> InfoGUI.class -> no dependency -> finally done
 view -> swing -> gui -> mainmenu -> MainMenuGUI.class -> no dependency -> 1
 view -> swing -> gui -> mainmenu -> component -> ComponentBottomRight.class -> no dependency -> finally done
 view -> swing -> gui -> mainmenu -> component -> ComponentExit.class -> no dependency -> finally done
 view -> swing -> gui -> mainmenu -> component -> ComponentInfo.class -> no dependency -> finally done
+view -> swing -> gui -> mainmenu -> component -> ComponentMainMenu.class -> no dependency -> finally done
 view -> swing -> gui -> mainmenu -> component -> ComponentPlay.class -> no dependency -> 1
 view -> swing -> gui -> mainmenu -> component -> ComponentSetting.class -> no dependency - finally done
 view -> swing -> gui -> mainmenu -> component -> ComponentTopLeft.class -> no dependency -> finally done
 view -> swing -> gui -> mainmenu -> component -> ComponentTopRight.class -> no dependency -> finally done
-view -> swing -> gui -> mainmenu -> component -> MainMenuComponent.class -> no dependency -> 1
-view -> swing -> gui -> play -> PlayGUI.class -> Room.class dependency -> 1,2,3,4,5
-view -> swing -> gui -> setting -> SettingGUI.class -> no dependency -> 1,2
+view -> swing -> gui -> play -> PlayGUI.class -> Room.class dependency -> 1,2,3,4
+view -> swing -> gui -> setting -> SettingGUI.class -> no dependency -> finally done
 view -> swing -> gui -> setting -> component -> AbstractComponent.class -> no dependency -> 1
-view -> swing -> gui -> setting -> component -> ButtonEnter.class -> no dependency -> 1
-view -> swing -> gui -> setting -> component -> RadioButtonColorFace.class -> no dependency -> 1,2,3
-view -> swing -> gui -> setting -> component -> RadioButtonColorHead.class -> no dependency -> 1,2,3
-view -> swing -> gui -> setting -> component -> RadioButtonColorMouse.class -> no dependency -> 1,2,3
-view -> swing -> gui -> setting -> component -> RadioButtonColorSnake.class -> no dependency -> 1,2,3
-view -> swing -> gui -> setting -> component -> RadioButtonRoomHeight.class -> Room.class dependency -> 1,2,3,4
-view -> swing -> gui -> setting -> component -> RadioButtonRoomWidth.class -> Room.class dependency -> 1,2,3,4
-view -> swing -> gui -> setting -> component -> RadioButtonSizeOfGame.class -> no dependency -> 1,2
-view -> swing -> gui -> setting -> component -> SettingComponent.class -> no dependency -> 1,2
+view -> swing -> gui -> setting -> component -> ComponentColorFace.class -> no dependency -> 1,2
+view -> swing -> gui -> setting -> component -> ComponentColorHead.class -> no dependency -> 1,2
+view -> swing -> gui -> setting -> component -> ComponentColorMouse.class -> no dependency -> 1,2
+view -> swing -> gui -> setting -> component -> ComponentColorSnake.class -> no dependency -> 1,2
+view -> swing -> gui -> setting -> component -> ComponentEnter.class -> no dependency -> 1
+view -> swing -> gui -> setting -> component -> ComponentRoomHeight.class -> Room.class dependency -> 1,2,3
+view -> swing -> gui -> setting -> component -> ComponentRoomWidth.class -> Room.class dependency -> 1,2,3
+view -> swing -> gui -> setting -> component -> ComponentSetting.class -> no dependency -> finally done
+view -> swing -> gui -> setting -> component -> ComponentSizeOfGame.class -> no dependency -> 1
 view -> swing -> setting -> Setting.class -> no dependency -> 1,2,3,4
 
 
 Controller.class
-1) Засунуть класс в пакет swing;
+1) Засунуть класс в пакет swing (Еще подумаю, может будет общий контроллер независимо от view);
 2) Реализовать контроллер для связи отображения(свинга в моем случае) и модели;
 3) Добавить через контроллер закрытие главного меню при нажатии Play и открытие при завершении игры;
+4) Сделать поле view и model присваемые через геттер;
 
-Snake.class
-1) Несколько кусков змеи в начале игры;
-2) Разобраться и допилить roomWidth и roomHeight с учетом рамки (пока реализовано Индусами);
-3) Подумать, можно ли разорвать зависимость от Room;
+Mouse.class
+- finally done;
 
 Room.class
 1) Условие победы;
@@ -59,103 +60,111 @@ Room.class
 4) Refactor Room класс, много методов нужно делегировать в CONTROLLER (Они должны вызыватся из контроллера точнее);
 5) Разорвать зависимости из Room;
 
+Snake.class
+1) Разобраться и допилить roomWidth и roomHeight с учетом рамки (пока реализовано Индусами);
+2) Подумать, можно ли разорвать зависимость от Room;
+
+SnakeDirection.class
+- finally done;
+
+SnakeSection.class
+- finally done;
+
 Layer.class
 1) Пометь голову ( на задницу );
 2) Налипить графику;
-3) Рефактор класса;
+3) Рефактор класса - разорвать зависимости от модели;
 
 ExitGUI.class
+1) Сделать нормальный выход вместо выход "рубильником";
 
 InfoGUI.class
+- finally done;
 
 MainMenuGUI.class
 1) Может допилю всякие паскалки на кликание по анимашкам;
 
+ComponentBottomRight.class
+- finally done;
+
+ComponentExit.class
+- finally done;
+
+ComponentInfo.class
+- finally done;
+
+ComponentMainMenu.class
+- finally done;
+
 ComponentPlay.class
 1) Вызывать PlayGUI.class в котором будет реализация анимашек старта, проиграша или победы;
 
-MainMenuComponent.class
-1) Добавить более подробное описание методов интерфейса для реализации;
+ComponentSetting.class
+- finally done;
+
+ComponentTopLeft.class
+- finally done;
+
+ComponentTopRight.class
+- finally done;
 
 PlayGUI.class
 1) Разобратся что сделать с Observer методами, и куда их деть;
-2) Поменять листенер на адаптер;
-3) Перенести методы получания размеров комнаты в контроллер и получать из него, эим же мы и разорвем;
+2) Перенести методы получания размеров комнаты в контроллер и получать из него, эим же мы и разорвем
     зависимость от Room;
-4) Реализация анимашек старта, проиграша или победы;
-5) Допилить закрывалку на крестик в игре;
+3) Реализация анимашек старта, проиграша или победы;
+4) Допилить закрывалку на крестик в игре;
 
 SettingGUI.class
-1) Поменять листенер на адаптер;
-2) Сделать по аналогии с MainMenuGUI.class;
+- finally done;
 
-AbstractComponent.class
+ComponentAbstract.class
 1) Удалить, перенести все методы в соответствующие классы;
 
-ButtonEnter.class
+ComponentColorFace.class
+1) Переделать класс, либо будет наложена графика либо сделать в выкатывающемся меню с выбором цвета, либо палитра;
+2) Автоопределение цвета (Пока это проблема);
+
+ComponentColorHead.class
+1) Переделать класс, либо будет наложена графика либо сделать в выкатывающемся меню с выбором цвета, либо палитра;
+2) Автоопределение цвета (Пока это проблема);
+
+ComponentColorMouse.class
+1) Переделать класс, либо будет наложена графика либо сделать в выкатывающемся меню с выбором цвета, либо палитра;
+2) Автоопределение цвета (Пока это проблема);
+
+ComponentColorSnake.class
+1) Переделать класс, либо будет наложена графика либо сделать в выкатывающемся меню с выбором цвета, либо палитра;
+2) Автоопределение цвета (Пока это проблема);
+
+ComponentEnter.class
 1) Изменить после рефакта всех компонентов Setting;
 
-RadioButtonColorFace.class
-1) Переделать класс, либо будет наложена графика либо сделать в выкатывающемся меню с выбором цвета, либо палитра;
-2) Имя класса переделать на ComponentColorFace;
-3) Автоопределение цвета (Пока это проблема);
-
-RadioButtonColorHead.class
-1) Переделать класс, либо будет наложена графика либо сделать в выкатывающемся меню с выбором цвета, либо палитра;
-2) Имя класса переделать на ComponentColorHead;
-3) Автоопределение цвета (Пока это проблема);
-
-RadioButtonColorMouse.class
-1) Переделать класс, либо будет наложена графика либо сделать в выкатывающемся меню с выбором цвета, либо палитра;
-2) Имя класса переделать на ComponentColorMouse;
-3) Автоопределение цвета (Пока это проблема);
-
-RadioButtonColorSnake.class
-1) Переделать класс, либо будет наложена графика либо сделать в выкатывающемся меню с выбором цвета, либо палитра;
-2) Имя класса переделать на ComponentColorSnake;
-3) Автоопределение цвета (Пока это проблема);
-
-RadioButtonRoomHeight.class
+ComponentRoomHeight.class
 1) Разорвать зависимость от Room;
 2) Деллегировать метод настройки высоты в controller;
 3) Рефакторинг класса;
-4) Имя класса переделать на ComponentRoomHeight;
 
-RadioButtonRoomWidth.class
+ComponentRoomWidth.class
 1) Разорвать зависимость от Room;
 2) Деллегировать метод настройки ширины в controller;
 3) Рефакторинг класса;
-4) Имя класса переделать на ComponentRoomWidth;
+
+ComponentSetting.class
+- finally done;
 
 RadioButtonSizeOfGame.class
 1) Рефакторинг класса;
-2) Имя класса переделать на ComponentSizeOfGame;
-
-SettingComponent.class
-1) Добавить более подробное описание методов интерфейса для реализации;
-2) Имя класса переделать на ComponentSetting;
 
 Setting.class
 1) ЦВЕТА в enum ( Пока думаю над этим, ибо парсинг цвета затратный увы );
 2) Сетеры для цветов настроить в вехний регистр (Если небудет графики либо Enum то это как вариант);
-3) Сериализация и десириализация(К самому концу проекта буду думать нужно ли это)
-4) Экран при перезаходе в игру полный или не полный ( После сериализации только возможно )
+3) Сериализация и десириализация(К самому концу проекта буду думать нужно ли это);
+4) Экран при перезаходе в игру полный или не полный ( После сериализации только возможно );
 
 
 Next version:
-1) Controller.class - 1) Засунуть класс в пакет swing;
-2) Snake.class - 1) Несколько кусков змеи в начале игры;
-
-6) PlayGUI.class - 2) Поменять листенер на адаптер;
-7) SettingGUI.class - 1) Поменять листенер на адаптер;
-                      2) Сделать по аналогии с MainMenuGUI.class;
-8) AbstractComponent.class - 1) Удалить, перенести все методы в соответствующие классы;
-9) RadioButtonColorFace.class - 2) Имя класса переделать на ComponentColorFace;
-10) RadioButtonColorHead.class - 2) Имя класса переделать на ComponentColorHead;
-11) RadioButtonColorMouse.class - 2) Имя класса переделать на ComponentColorMouse;
-12) RadioButtonColorSnake.class - 2) Имя класса переделать на ComponentColorSnake;
-13) RadioButtonRoomHeight.class - 4) Имя класса переделать на ComponentRoomHeight;
-14) RadioButtonRoomWidth.class - 4) Имя класса переделать на ComponentRoomWidth;
-15) RadioButtonSizeOfGame.class - 2) Имя класса переделать на ComponentSizeOfGame;
-16) SettingComponent.class - 2) Имя класса переделать на ComponentSetting;
-17) resources - разбить по папкам;
+1) setting package весь сделать по аналогии с mainmenu либо наоборот. Еще подумаю об абстрктных классах;
+2) AbstractComponent.class - 1) Удалить, перенести все методы в соответствующие классы;
+3) resources - разбить по папкам;
+4) Реализовывать контроллер начать;
