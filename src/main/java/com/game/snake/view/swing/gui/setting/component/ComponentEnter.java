@@ -9,9 +9,9 @@ import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.14
+ * @version 1.15
  */
-public class ButtonEnter extends AbstractComponent {
+public class ComponentEnter extends AbstractComponent {
 
     private final JFrame jFrame;
 
@@ -19,10 +19,10 @@ public class ButtonEnter extends AbstractComponent {
 
     private final String text = String.valueOf("Enter");
 
-    public ButtonEnter(@NonNull final JFrame jFrame,
-                       @NonNull final Container container,
-                       @NonNull final GridBagConstraints gridBagConstraints,
-                       @NonNull final List<SettingComponent> settingComponentList) {
+    public ComponentEnter(@NonNull final JFrame jFrame,
+                          @NonNull final Container container,
+                          @NonNull final GridBagConstraints gridBagConstraints,
+                          @NonNull final List<SettingComponent> settingComponentList) {
         super(container, gridBagConstraints);
         this.jFrame = jFrame;
         this.settingComponentList = settingComponentList;
