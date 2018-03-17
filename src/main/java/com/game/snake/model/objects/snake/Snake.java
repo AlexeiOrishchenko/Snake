@@ -12,9 +12,9 @@ import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.14
+ * @version 1.15
  */
-public final class Snake {
+public class Snake {
 
     @Getter private final List<SnakeSection> sections = new ArrayList<>();
 
@@ -23,7 +23,9 @@ public final class Snake {
     @Getter private boolean alive;
 
     public Snake() {
-        sections.add(new SnakeSection(1, 1));
+        sections.add(0, new SnakeSection(1, 1));
+        sections.add(0, new SnakeSection(1, 2));
+        sections.add(0, new SnakeSection(1, 3));
         direction = SnakeDirection.DOWN;
         alive = true;
     }
