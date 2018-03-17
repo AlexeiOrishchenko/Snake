@@ -2,9 +2,9 @@ package com.game.snake.view.swing.gui.mainmenu.component;
 
 /**
  * @author Koliadin Nikita
- * @version 1.14
+ * @version 1.15
  */
-public interface MainMenuComponent {
+public interface ComponentMainMenu {
 
     /**
      * This method must implement the initialization of the component,

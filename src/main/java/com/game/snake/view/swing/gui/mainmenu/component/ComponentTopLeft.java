@@ -7,7 +7,11 @@ import lombok.Setter;
 import javax.swing.*;
 import java.awt.*;
 
-public class ComponentTopLeft implements MainMenuComponent {
+/**
+ * @author Koliadin Nikita
+ * @version 1.15
+ */
+public class ComponentTopLeft implements ComponentMainMenu {
 
     private final Container container;
     private final GridBagConstraints gridBagConstraints;

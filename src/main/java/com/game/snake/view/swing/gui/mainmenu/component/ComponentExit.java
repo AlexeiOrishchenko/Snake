@@ -16,9 +16,9 @@ import java.util.concurrent.Executors;
 
 /**
  * @author Koliadin Nikita
- * @version 1.14
+ * @version 1.15
  */
-public class ComponentExit implements MainMenuComponent {
+public class ComponentExit implements ComponentMainMenu {
 
     private final Container container;
     private final GridBagConstraints gridBagConstraints;

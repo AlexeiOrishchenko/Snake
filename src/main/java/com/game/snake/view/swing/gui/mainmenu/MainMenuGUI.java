@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.14
+ * @version 1.15
  */
 public class MainMenuGUI implements Runnable {
 
@@ -75,7 +75,7 @@ public class MainMenuGUI implements Runnable {
     }
 
     @NotNull
-    private List<MainMenuComponent> loadMainMenuComponentList() {
+    private List<ComponentMainMenu> loadMainMenuComponentList() {
         return new ArrayList<>(Arrays.asList(
                 componentTopLeft,
                 componentTopRight,

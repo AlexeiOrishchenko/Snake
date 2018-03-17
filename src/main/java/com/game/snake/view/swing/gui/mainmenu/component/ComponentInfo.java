@@ -15,9 +15,9 @@ import java.util.concurrent.Executors;
 
 /**
  * @author Koliadin Nikita
- * @version 1.14
+ * @version 1.15
  */
-public class ComponentInfo implements MainMenuComponent {
+public class ComponentInfo implements ComponentMainMenu {
 
     private final Container container;
     private final GridBagConstraints gridBagConstraints;

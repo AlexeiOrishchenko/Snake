@@ -13,9 +13,9 @@ import java.awt.event.MouseEvent;
 
 /**
  * @author Koliadin Nikita
- * @version 1.14
+ * @version 1.15
  */
-public class ComponentPlay implements MainMenuComponent {
+public class ComponentPlay implements ComponentMainMenu {
 
     private final Container container;
     private final GridBagConstraints gridBagConstraints;

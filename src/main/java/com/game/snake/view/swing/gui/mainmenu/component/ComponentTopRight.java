@@ -9,9 +9,9 @@ import java.awt.*;
 
 /**
  * @author Koliadin Nikita
- * @version 1.14
+ * @version 1.15
  */
-public class ComponentTopRight implements MainMenuComponent {
+public class ComponentTopRight implements ComponentMainMenu {
 
     private final Container container;
     private final GridBagConstraints gridBagConstraints;
