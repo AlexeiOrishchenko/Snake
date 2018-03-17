@@ -14,16 +14,16 @@ import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.14
+ * @version 1.15
  */
-public abstract class AbstractComponent implements ComponentSetting {
+public abstract class ComponentAbstract implements ComponentSetting {
 
     final Setting setting = Setting.getInstance();
 
     private final Container container;
     private final GridBagConstraints gridBagConstraints;
 
-    AbstractComponent(@NonNull final Container container,
+    ComponentAbstract(@NonNull final Container container,
                       @NonNull final GridBagConstraints gridBagConstraints) {
         this.container = container;
         this.gridBagConstraints = gridBagConstraints;
@@ -66,14 +66,6 @@ public abstract class AbstractComponent implements ComponentSetting {
                 new JRadioButton(setting.getSizeListValue3()),
                 new JRadioButton(setting.getSizeListValue4()),
                 new JRadioButton(setting.getSizeListValue5())
-        ));
-    }
-
-    @NotNull
-    ArrayList<JRadioButton> createTrueFalseList() {
-        return new ArrayList<>(Arrays.asList(
-                new JRadioButton("true"),
-                new JRadioButton("false")
         ));
     }
 

@@ -15,7 +15,7 @@ import java.util.List;
  * @author Koliadin Nikita
  * @version 1.15
  */
-public class ComponentRoomHeight extends AbstractComponent {
+public class ComponentRoomHeight extends ComponentAbstract {
 
     private final List<JRadioButton> jRadioButtonRoomHeightList = createSizeList();
 

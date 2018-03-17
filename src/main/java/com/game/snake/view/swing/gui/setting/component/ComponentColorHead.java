@@ -13,7 +13,7 @@ import java.util.List;
  * @author Koliadin Nikita
  * @version 1.15
  */
-public class ComponentColorHead extends AbstractComponent {
+public class ComponentColorHead extends ComponentAbstract {
 
     private final List<JRadioButton> jRadioButtonColorHeadList = createColorList();
 

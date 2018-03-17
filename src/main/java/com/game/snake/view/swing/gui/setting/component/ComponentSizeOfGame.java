@@ -15,7 +15,7 @@ import java.util.List;
  * @author Koliadin Nikita
  * @version 1.15
  */
-public class ComponentSizeOfGame extends AbstractComponent {
+public class ComponentSizeOfGame extends ComponentAbstract {
 
     private final List<JRadioButton> sizeOfGameForSelectList = new ArrayList<>(Arrays.asList(
             new JRadioButton("10"),
