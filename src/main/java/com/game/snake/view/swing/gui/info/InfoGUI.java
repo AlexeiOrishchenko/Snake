@@ -4,10 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.val;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 /**
  * @author Koliadin Nikita
@@ -17,17 +19,21 @@ public final class InfoGUI implements Runnable {
 
     private static volatile InfoGUI instance;
 
-    private final JFrame jFrame;
+    private final JFrame jFrame = new JFrame();
 
-    private JLabel jLabelWithIcon;
+    @Getter @Setter private Image image;
 
     @Getter @Setter private String resourceName = String.valueOf("/Info.png");
     @Getter @Setter private String titleName = String.valueOf("Snake - INFO");
 
+    @Getter @Setter private int imagePreferenceWidth = 1000;
+    @Getter @Setter private int imagePreferenceHeight = 625;
+    @Getter @Setter private int imageMinWidth = 400;
+    @Getter @Setter private int imageMinHeight = 250;
+
     @Getter private boolean initialized = false;
 
     private InfoGUI() {
-        jFrame = new JFrame();
     }
 
     public static InfoGUI getInstance() {
@@ -47,26 +53,44 @@ public final class InfoGUI implements Runnable {
 
     @Override
     public void run() {
-        initJLabel();
+        initImage();
         initJFrame();
     }
 
-    private void initJLabel() {
+    private void initImage() {
         loadResource();
-        jFrame.getContentPane().add(jLabelWithIcon);
+        setResources();
     }
 
     private void loadResource() {
-        if (jLabelWithIcon == null) {
-            jLabelWithIcon = new JLabel(new ImageIcon(getClass().getResource(resourceName)));
+        if (image == null) {
+            try {
+                image = ImageIO.read(getClass().getResource(resourceName));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+    }
+
+    private void setResources() {
+        val imagePanel = new JPanel() {
+            @Override
+            public void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                if (image != null){
+                    g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+                }
+            }
+        };
+        imagePanel.setLayout(new BorderLayout());
+        jFrame.add(new JScrollPane(imagePanel));
     }
 
     private void initJFrame() {
         jFrame.setTitle(titleName);
         setJFrameSize();
         jFrame.pack();
-        jFrame.setLocationRelativeTo(null); /* The center of the screen */
+        setCenterOfScreen();
         setJFrameKeyEvent();
         jFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         jFrame.setVisible(true);
@@ -74,17 +98,18 @@ public final class InfoGUI implements Runnable {
     }
 
     private void setJFrameSize() {
-        val iconWidth = jLabelWithIcon.getIcon().getIconWidth();
-        val iconHeight = jLabelWithIcon.getIcon().getIconHeight();
-
         jFrame.setPreferredSize(new Dimension(
-                iconWidth,
-                iconHeight
+                imagePreferenceWidth,
+                imagePreferenceHeight
         ));
         jFrame.setMinimumSize(new Dimension(
-                iconWidth,
-                iconHeight
+                imageMinWidth,
+                imageMinHeight
         ));
+    }
+
+    private void setCenterOfScreen() {
+        jFrame.setLocationRelativeTo(null);
     }
 
     private void setJFrameKeyEvent() {
