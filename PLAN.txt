@@ -157,7 +157,7 @@ ComponentRoomWidth.class
 ComponentSetting.class
 - finally done;
 
-RadioButtonSizeOfGame.class
+ComponentSizeOfGame.class
 1) Рефакторинг класса;
 
 Setting.class
