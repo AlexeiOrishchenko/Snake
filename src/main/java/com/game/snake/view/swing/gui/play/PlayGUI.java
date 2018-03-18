@@ -70,11 +70,7 @@ public class PlayGUI implements Runnable {
     }
 
     private void setCenterScreen() {
-        val roomWidth = Room.getInstance().getWidth(); // TODO: DELEGATE TO CONTROLLER
-        val roomHeight = Room.getInstance().getHeight(); // TODO: DELEGATE TO CONTROLLER
-        if (!((roomWidth > 20) || (roomHeight > 20))) {
-            jFrame.setLocationRelativeTo(null);
-        }
+        jFrame.setLocationRelativeTo(null);
     }
 
     private void setJFrameKeyEvent() {
