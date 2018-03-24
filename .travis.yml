@@ -12,7 +12,7 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
 
 notifications:
-  emal:
+  email:
     recipients:
       - qthegamep@gmail.com
     on_success: never # default: change
