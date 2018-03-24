@@ -1,0 +1,19 @@
+# https://docs.travis-ci.com/user/languages/java/
+language: java
+jdk: oraclejdk9
+
+# Improve Build Speed https://dzone.com/articles/travis-ci-tutorial-java-projects
+cache:
+  directories:
+  - $HOME/.m2
+
+# JaCoCo https://github.com/codecov/example-java
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+notifications:
+  emal:
+    recipients:
+      - qthegamep@gmail.com
+    on_success: never # default: change
+    on_failure: always # default: always
