@@ -3,13 +3,12 @@
 *This is a snake game. This game is a modification of the [task](https://javarush.ru/quests/lectures/questmultithreading.level02.lecture18) from [JavaRush](https://javarush.ru/). I decided to modify and decorate this game, and make a finished product. On all questions, wishes and messages about bugs, write to my contacts.*
 
 ## Continuous Integration Information
-[![Build Status](https://travis-ci.org/qThegamEp/Snake.svg?branch=master)](https://travis-ci.org/qThegamEp/Snake)
+ * **Travis CI:** [![Build Status](https://travis-ci.org/qThegamEp/Snake.svg?branch=master)](https://travis-ci.org/qThegamEp/Snake) 
+ * **Codecov:** [![codecov](https://codecov.io/gh/qThegamEp/Snake/branch/master/graph/badge.svg)](https://codecov.io/gh/qThegamEp/Snake)
 
 ## Import Information
 1. *You must "**clone**" on your GitHub or "**download**" this project*
-2. 	
-	* *If you choose to download the project then start your Intellij IDEA and choose the "**Import Project**" and then choose as "**Maven**" project* 
- 	* *Else choose the "**Check out from Version Control**" then choose "**GitHub**" and and select your repository in which you cloned this project*
+2. *If you choose to download the project then start your Intellij IDEA and choose the "**Import Project**" and then choose as "**Maven**" project else choose the "**Check out from Version Control**" then choose "**GitHub**" and and select your repository in which you cloned this project*
 3. *If your version is Java 9, then skip this item otherwise open the "**pom.xml**" file and look for the line* `<java.version>1.9</java.version>` *and change the value to your version of Java.*
 4. *Run the project*
 5. *If you want to package a jar file, then open the "**Lifecycle**" of the maven and choose "**package**"*
