@@ -68,8 +68,8 @@ public class Layer extends JPanel {
         g.setColor(setting.getColorSnake());
         IntStream.range(1, snakeSection.size())
                 .forEachOrdered(i -> g.fillRect(
-                        snakeSection.get(i).getX() * size,
-                        snakeSection.get(i).getY() * size,
+                        model.getSnakeSectionsX(i) * size,
+                        model.getSnakeSectionsY(i) * size,
                         size,
                         size
                 ));
