@@ -1,7 +1,7 @@
 package com.game.snake.view.swing.graphics;
 
+import com.game.snake.model.Model;
 import com.game.snake.view.swing.setting.Setting;
-import com.game.snake.model.objects.room.Room;
 
 import lombok.NonNull;
 import lombok.val;
@@ -17,7 +17,7 @@ import java.util.stream.IntStream;
 public class Layer extends JPanel {
 
     private final Setting setting = Setting.getInstance();
-    private final Room room = Room.getInstance(); // TODO: DELEGATE TO CONTROLLER
+    private final Model model = Model.getInstance();
 
     private final int size = setting.getSizeOfGame();
 
@@ -32,8 +32,8 @@ public class Layer extends JPanel {
     }
 
     private void printFace(@NonNull final Graphics g) {
-        val width = room.getWidth() + 1; // TODO: DELEGATE TO CONTROLLER
-        val height = room.getHeight() + 1; // TODO: DELEGATE TO CONTROLLER
+        val width = model.getRoom().getWidth() + 1;
+        val height = model.getRoom().getHeight() + 1;
 
         g.setColor(setting.getColorFace());
         g.fillRect(width * size, 0, size, (height * size)); /* Right */
@@ -45,8 +45,8 @@ public class Layer extends JPanel {
     private void printMouse(@NonNull final Graphics g) {
         g.setColor(setting.getColorMouse());
         g.fillRect(
-                room.getMouse().getX() * size,
-                room.getMouse().getY() * size,
+                model.getRoom().getMouse().getX() * size,
+                model.getRoom().getMouse().getY() * size,
                 size,
                 size
         );
@@ -55,15 +55,15 @@ public class Layer extends JPanel {
     private void printHead(@NonNull final Graphics g) {
         g.setColor(setting.getColorHead());
         g.fillRect(
-                room.getSnake().getHeadX() * size,
-                room.getSnake().getHeadY() * size,
+                model.getSnakeHeadX() * size,
+                model.getSnakeHeadY() * size,
                 size,
                 size
         );
     }
 
     private void printSnake(@NonNull final Graphics g) {
-        val snakeSection = room.getSnake().getSections(); // TODO: DELEGATE TO CONTROLLER
+        val snakeSection = model.getSnakeSections();
 
         g.setColor(setting.getColorSnake());
         IntStream.range(1, snakeSection.size())
