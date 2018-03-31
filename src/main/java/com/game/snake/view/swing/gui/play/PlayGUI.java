@@ -1,6 +1,6 @@
 package com.game.snake.view.swing.gui.play;
 
-import com.game.snake.model.objects.room.Room;
+import com.game.snake.model.Model;
 import com.game.snake.view.swing.setting.Setting;
 
 import lombok.Getter;
@@ -18,11 +18,11 @@ import java.util.concurrent.ArrayBlockingQueue;
  * @author Koliadin Nikita
  * @version 1.17
  */
-public class PlayGUI implements Runnable {
+public class PlayGUI implements Runnable { // TODO: refract in future
 
     @Getter private final JFrame jFrame = new JFrame();
 
-    private final Queue<KeyEvent> keyEvents = new ArrayBlockingQueue<>(1000); // FIXME: MOVE TO MODEL
+    private final Queue<KeyEvent> keyEvents = new ArrayBlockingQueue<>(1000);
 
     @Getter @Setter private String titleName = String.valueOf("Snake - PLAY");
 
@@ -30,11 +30,11 @@ public class PlayGUI implements Runnable {
         initJFrame();
     }
 
-    public boolean hasKeyEvents() { // FIXME: MOVE TO MODEL
+    public boolean hasKeyEvents() {
         return !keyEvents.isEmpty();
     }
 
-    public KeyEvent getEventFromTop() { // FIXME: MOVE TO MODEL
+    public KeyEvent getEventFromTop() {
         return keyEvents.poll();
     }
 
@@ -61,8 +61,8 @@ public class PlayGUI implements Runnable {
     private void setJFrameSize() {
         val setting = Setting.getInstance();
 
-        val roomWidth = Room.getInstance().getWidth(); // TODO: DELEGATE TO CONTROLLER
-        val roomHeight = Room.getInstance().getHeight(); // TODO: DELEGATE TO CONTROLLER
+        val roomWidth = Model.getInstance().getRoomWidth();
+        val roomHeight = Model.getInstance().getRoomHeight();
         jFrame.setMinimumSize(new Dimension(
                 ((roomWidth + 2) * setting.getSizeOfGame()) + 17,
                 ((roomHeight + 2) * setting.getSizeOfGame()) + 40
