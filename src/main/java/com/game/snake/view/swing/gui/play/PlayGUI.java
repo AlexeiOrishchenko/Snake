@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Objects;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
@@ -80,8 +81,10 @@ public class PlayGUI implements Runnable { // TODO: refract in future
                 super.keyPressed(e);
                 if (keyEvents.isEmpty()) {
                     keyEvents.add(e);
-                } else if (!(keyEvents.peek().getKeyCode() == e.getKeyCode())) {
-                    keyEvents.add(e);
+                } else {
+                    if (!(Objects.requireNonNull(keyEvents.peek()).getKeyCode() == e.getKeyCode())) {
+                        keyEvents.add(e);
+                    }
                 }
             }
         });
