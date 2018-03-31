@@ -46,7 +46,7 @@ public class Model implements ModelInterfaceExtended {
     }
 
     @Override
-    public void setSnake(Snake snake) {
+    public void setSnake(final Snake snake) {
         getRoom().setSnake(snake);
     }
 
@@ -106,7 +106,7 @@ public class Model implements ModelInterfaceExtended {
     }
 
     @Override
-    public void setMouse(Mouse mouse) {
+    public void setMouse(final Mouse mouse) {
         getRoom().setMouse(mouse);
     }
 
@@ -131,7 +131,7 @@ public class Model implements ModelInterfaceExtended {
     }
 
     @Override
-    public void setRoomWidth(int width) {
+    public void setRoomWidth(final int width) {
         getRoom().setWidth(width);
     }
 
@@ -141,7 +141,7 @@ public class Model implements ModelInterfaceExtended {
     }
 
     @Override
-    public void setRoomHeight(int height) {
+    public void setRoomHeight(final int height) {
         getRoom().setHeight(height);
     }
 }
