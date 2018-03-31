@@ -1,6 +1,6 @@
 package com.game.snake.view.swing.gui.setting.component;
 
-import com.game.snake.model.objects.room.Room;
+import com.game.snake.model.Model;
 
 import lombok.Getter;
 import lombok.NonNull;
@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.15
+ * @version 1.17
  */
 public class ComponentRoomWidth extends ComponentAbstract {
 
@@ -33,12 +33,12 @@ public class ComponentRoomWidth extends ComponentAbstract {
 
         setJComponentPlace(roomWidthLabel);
         setJRadioButtonPlace(roomWidthGroup, jRadioButtonRoomWidthList);
-        setVisibleJRadioButton(jRadioButtonRoomWidthList, Room.getInstance().getWidth() + ""); // TODO: DELEGATE TO CONTROLLER
+        setVisibleJRadioButton(jRadioButtonRoomWidthList, Model.getInstance().getRoomWidth() + "");
     }
 
     @Override
     public void update() {
-        Room.getInstance().setWidth(jRadioButtonRoomWidthList.stream() // FIXME: DELEGATE TO CONTROLLER
+        Model.getInstance().setRoomWidth(jRadioButtonRoomWidthList.stream()
                 .filter(AbstractButton::isSelected)
                 .findFirst()
                 .map(JRadioButton::getText)
