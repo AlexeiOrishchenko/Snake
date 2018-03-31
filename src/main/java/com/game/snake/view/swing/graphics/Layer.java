@@ -32,8 +32,8 @@ public class Layer extends JPanel {
     }
 
     private void printFace(@NonNull final Graphics g) {
-        val width = model.getRoom().getWidth() + 1;
-        val height = model.getRoom().getHeight() + 1;
+        val width = model.getRoomWidth() + 1;
+        val height = model.getRoomHeight() + 1;
 
         g.setColor(setting.getColorFace());
         g.fillRect(width * size, 0, size, (height * size)); /* Right */
@@ -45,8 +45,8 @@ public class Layer extends JPanel {
     private void printMouse(@NonNull final Graphics g) {
         g.setColor(setting.getColorMouse());
         g.fillRect(
-                model.getRoom().getMouse().getX() * size,
-                model.getRoom().getMouse().getY() * size,
+                model.getMouseX() * size,
+                model.getMouseY() * size,
                 size,
                 size
         );
