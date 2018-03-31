@@ -1,13 +1,18 @@
 package com.game.snake.model.objects.snake;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 /**
  * @author Koliadin Nikita
- * @version 1.13
+ * @version 1.17
  */
-@Data public final class SnakeSection {
+@Data @AllArgsConstructor @NoArgsConstructor
+public class SnakeSection implements Serializable {
 
-    private final int x;
-    private final int y;
+    private int x;
+    private int y;
 }
