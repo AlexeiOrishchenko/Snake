@@ -1,17 +1,12 @@
 package com.game.snake.model.objects.mouse;
 
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
-import java.io.Serializable;
+import lombok.Value;
 
 /**
  * @author Koliadin Nikita
  * @version 1.17
  */
-@Data @AllArgsConstructor @NoArgsConstructor
-public class Mouse implements Serializable {
+@Value public class Mouse {
 
     private int x;
     private int y;
