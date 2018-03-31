@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 
 /**
  * @author Koliadin Nikita
- * @version 1.14
+ * @version 1.17
  */
 public class Layer extends JPanel {
 
@@ -32,8 +32,8 @@ public class Layer extends JPanel {
     }
 
     private void printFace(@NonNull final Graphics g) {
-        val width = room.getWidth() + 2; // TODO: DELEGATE TO CONTROLLER
-        val height = room.getHeight() + 2; // TODO: DELEGATE TO CONTROLLER
+        val width = room.getWidth() + 1; // TODO: DELEGATE TO CONTROLLER
+        val height = room.getHeight() + 1; // TODO: DELEGATE TO CONTROLLER
 
         g.setColor(setting.getColorFace());
         g.fillRect(width * size, 0, size, (height * size)); /* Right */

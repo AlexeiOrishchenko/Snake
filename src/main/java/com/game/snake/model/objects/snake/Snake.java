@@ -12,15 +12,15 @@ import java.util.List;
 
 /**
  * @author Koliadin Nikita
- * @version 1.15
+ * @version 1.17
  */
 public class Snake {
 
-    @Getter private final List<SnakeSection> sections = new ArrayList<>();
+    @Getter @Setter private List<SnakeSection> sections = new ArrayList<>();
 
     @Getter @Setter private SnakeDirection direction;
 
-    @Getter private boolean alive;
+    @Getter @Setter private boolean alive;
 
     public Snake() {
         sections.add(0, new SnakeSection(1, 1));
@@ -74,10 +74,10 @@ public class Snake {
     private void checkBorders(@NonNull final SnakeSection head) {
         val headX = head.getX();
         val headY = head.getY();
-        val room = Room.getInstance(); //TODO: DEPENDENCY ROOM DELETE
+        val room = Room.getInstance();
 
-        alive = (headX >= 1 && headX < room.getWidth() + 2) //FIXME: I DON'T KNOW WTF IS IT
-                && (headY >= 1 && headY < room.getHeight() + 2); //FIXME: I DON'T KNOW WTF IS IT
+        alive = (headX > 0 && headX < room.getWidth() + 1)
+                && (headY > 0 && headY < room.getHeight() + 1);
     }
 
     private void checkBody(@NonNull final SnakeSection head) {
@@ -91,11 +91,11 @@ public class Snake {
     }
 
     private void checkEatMouse(@NonNull final SnakeSection head) {
-        val room = Room.getInstance(); //TODO: DEPENDENCY ROOM DELETE
-        val mouse = room.getMouse(); //TODO: DEPENDENCY ROOM DELETE
+        val room = Room.getInstance();
+        val mouse = room.getMouse();
 
         if (head.getX() == mouse.getX() && head.getY() == mouse.getY()) {
-            room.eatMouse(); //TODO: DEPENDENCY ROOM DELETE
+            room.eatMouse();
         } else {
             sections.remove(sections.size() - 1);
         }

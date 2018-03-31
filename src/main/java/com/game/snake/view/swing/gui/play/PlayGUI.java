@@ -16,7 +16,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * @author Koliadin Nikita
- * @version 1.15
+ * @version 1.17
  */
 public class PlayGUI implements Runnable {
 
@@ -64,8 +64,8 @@ public class PlayGUI implements Runnable {
         val roomWidth = Room.getInstance().getWidth(); // TODO: DELEGATE TO CONTROLLER
         val roomHeight = Room.getInstance().getHeight(); // TODO: DELEGATE TO CONTROLLER
         jFrame.setMinimumSize(new Dimension(
-                ((roomWidth + 3) * setting.getSizeOfGame()) + 17,
-                ((roomHeight + 3) * setting.getSizeOfGame()) + 40
+                ((roomWidth + 2) * setting.getSizeOfGame()) + 17,
+                ((roomHeight + 2) * setting.getSizeOfGame()) + 40
         ));
     }
 
