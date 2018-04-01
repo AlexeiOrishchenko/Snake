@@ -1,18 +1,19 @@
 package com.game.snake.controller;
 
-import com.game.snake.model.objects.room.Room;
+import com.game.snake.model.ModelInterface;
 
-import lombok.val;
-
-import java.util.concurrent.Executors;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author Koliadin Nikita
- * @version 1.14
+ * @version 1.17
  */
 public class Controller {
 
     private static volatile Controller instance;
+
+    @Getter @Setter private ModelInterface model;
 
     private Controller() {
     }
@@ -29,8 +30,6 @@ public class Controller {
     }
 
     public void startGame() {
-        val executor = Executors.newSingleThreadExecutor();
-        executor.execute(Room.getInstance());
-        executor.shutdown();
+        model.startGame();
     }
 }
