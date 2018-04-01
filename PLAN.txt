@@ -8,7 +8,9 @@ Next version:
 6) Controller.class : Все запросы из view к model шли через controller; 3
 7) Controller.class : Интерфейс для Controller; 2
 8) Controller.class : Недоступность кнопки Play когда игра начата; 4
-9) resources - разбить по папкам;
+9) ModelInterfaceExtended : После реализации Controller удалить. Доступ будет через Controller только;
+10) resources - разбить по папкам;
+
 
 In Future:
 1) ExitGUI.class - 1) Сделать резиновым изменение картинки;
