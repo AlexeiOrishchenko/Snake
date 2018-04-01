@@ -1,3 +1,30 @@
+Next version:
+1) Room.class : Разорвать зависимость от View; 5
+2) Room.class : Добавить условие победы; 1
+3) Room.class : Добавить счет; 2
+4) Room.class : Смена скорости; 3
+
+5) Controller.class : Реализовать Controller;
+6) Controller.class : Все запросы из view к model шли через controller; 3
+7) Controller.class : Интерфейс для Controller; 2
+8) Controller.class : Недоступность кнопки Play когда игра начата; 4
+9) resources - разбить по папкам;
+
+In Future:
+1) ExitGUI.class - 1) Сделать резиновым изменение картинки;
+2) MainMenuGUI.class - 1) Сделать резиновым изменение картинки;
+3) jUnit
+4) setting package весь сделать по аналогии с mainmenu либо наоборот. Еще подумаю об абстрктных классах;
+5) AbstractComponent.class - 1) Удалить, перенести все методы в соответствующие классы;
+6) Реализовывать контроллер начать;
+7) При нажатии на наклейку и сдвиге что бы все равно срабатывало действие;
+8) При нажании на ENTER в setting сохранялись изменения;
+9) Проверку на sizeOfGame к ширине экрана;
+10) Сделать менеджен для включения-выключения окон;
+11) SwingUtilities;
+12) Разобраться как оформить все в 1 окне;
+
+
 По игре:
 - Многопоточность: Либо перейду на Flow, либо модернизирую concurrent свой;
 - Общий класс для старта (ближе к финальной версии игры сделаю);
@@ -5,18 +32,22 @@
 - Сделать все поля настраевыми в игре через гетеры и сетеры;
 - Сделать все резиновым - изменение размера окон влечет за собой изменения внутрених размеров компонентов;
 - MVC - сделать внедряемым - в controller - model & view, в view - controller;
+- Сделать PlayGUI не JForm, внедрять его в окно (как JPanel или типа того), передават, его в Model через Controller ( чтото типо Observer);
 
 
 ---===MVC===---
-controller -> Controller.class -> no dependency -> 1,2,3,4;
+controller -> Controller.class -> no dependency -> 1,2,3,4
 
 model -> objects -> mouse -> Mouse.class -> no dependency -> finally done
 model -> objects -> room -> Room.class -> PlayGUI.class, Layer.class dependencies -> 1,2,3,4,5
-model -> objects -> snake -> Snake.class -> no dependency -> 1,2
+model -> objects -> snake -> Snake.class -> no dependency -> finally done
 model -> objects -> snake -> SnakeDirection.class ->  no dependency -> finally done
 model -> objects -> snake -> SnakeSection.class ->  no dependency -> finally done
+model -> Model.class -> no dependency -> finally done
+model -> ModelInterface.class -> no dependency -> finally done
+model -> ModelInterfaceExtended.class -> no dependency -> finally done
 
-view -> swing -> graphics -> Layer.class -> Room.class dependency -> 1,2,3
+view -> swing -> graphics -> Layer.class -> Room.class dependency -> 1,2
 view -> swing -> gui -> exit -> ExitGUI.class -> no dependency -> 1,2,3
 view -> swing -> gui -> info -> InfoGUI.class -> no dependency -> 1
 view -> swing -> gui -> mainmenu -> MainMenuGUI.class -> no dependency -> 1,2,3
@@ -44,10 +75,10 @@ view -> swing -> setting -> Setting.class -> no dependency -> 1,2,3,4
 
 
 Controller.class
-1) Засунуть класс в пакет swing (Еще подумаю, может будет общий контроллер независимо от view);
-2) Реализовать контроллер для связи отображения(свинга в моем случае) и модели;
-3) Добавить через контроллер закрытие главного меню при нажатии Play и открытие при завершении игры;
-4) Сделать поле view и model присваемые через геттер;
+1) Добавить через контроллер закрытие главного меню при нажатии Play и открытие при завершении игры;
+2) Сделать интерфейс для контроллера;
+3) Все запросы из view к model шли через controller;
+4) Недоступность кнопки Play когда игра начата;
 
 Mouse.class
 - finally done;
@@ -60,8 +91,7 @@ Room.class
 5) Разорвать зависимости из Room;
 
 Snake.class
-1) Разобраться и допилить roomWidth и roomHeight с учетом рамки (пока реализовано Индусами);
-2) Подумать, можно ли разорвать зависимость от Room;
+- finally done;
 
 SnakeDirection.class
 - finally done;
@@ -69,10 +99,18 @@ SnakeDirection.class
 SnakeSection.class
 - finally done;
 
+Model.class
+- finally done;
+
+ModelInterface.class
+- finally done;
+
+ModelInterfaceExtended.class
+- finally done;
+
 Layer.class
 1) Пометь голову ( на задницу );
 2) Налипить графику;
-3) Рефактор класса - разорвать зависимости от модели;
 
 ExitGUI.class
 1) Сделать резиновым изменение картинки;
@@ -164,20 +202,3 @@ Setting.class
 2) Сетеры для цветов настроить в вехний регистр (Если небудет графики либо Enum то это как вариант);
 3) Сериализация и десириализация(К самому концу проекта буду думать нужно ли это);
 4) Экран при перезаходе в игру полный или не полный ( После сериализации только возможно );
-
-
-Next version:
-1) ExitGUI.class - 1) Сделать резиновым изменение картинки;
-2) MainMenuGUI.class - 1) Сделать резиновым изменение картинки;
-3) resources - разбить по папкам;
-4) jUnit
-
-5) setting package весь сделать по аналогии с mainmenu либо наоборот. Еще подумаю об абстрктных классах;
-6) AbstractComponent.class - 1) Удалить, перенести все методы в соответствующие классы;
-7) Реализовывать контроллер начать;
-8) При нажатии на наклейку и сдвиге что бы все равно срабатывало действие;
-9) При нажании на ENTER в setting сохранялись изменения;
-10) Проверку на sizeOfGame к ширине экрана;
-11) Сделать менеджен для включения-выключения окон;
-12) SwingUtilities;
-13) Разобраться как оформить все в 1 окне;
