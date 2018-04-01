@@ -21,7 +21,7 @@ import java.util.concurrent.Executors;
  */
 public class Room implements Runnable {
 
-    private static volatile Room instance = new Room();
+    private static volatile Room instance;
 
     private PlayGUI playGUI; // FIXME: DELETE DEPENDENCY
 
