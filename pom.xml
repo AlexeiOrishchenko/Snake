@@ -14,7 +14,7 @@
 
     <properties>
         <!-- Java -->
-        <java.version>1.9</java.version>
+        <java.version>1.10</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -22,10 +22,10 @@
         <compilerplugin.version>3.7.0</compilerplugin.version>
 
         <!-- JetBrains -->
-        <jetbrains.version>16.0.1</jetbrains.version>
+        <jetbrains.version>16.0.2</jetbrains.version>
 
         <!-- Lombok -->
-        <projectlombok.version>1.16.20</projectlombok.version>
+        <projectlombok.version>1.18.0</projectlombok.version>
 
         <!-- JUnit -->
         <junit.version>4.12</junit.version>
