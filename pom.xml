@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>qthegamep.production</groupId>
+    <groupId>com.qthegamep</groupId>
     <artifactId>snake</artifactId>
     <version>1.17</version>
     <packaging>jar</packaging>
@@ -53,7 +53,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.game.snake.Main</mainClass>
+                            <mainClass>com.qthegamep.snake.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
